@@ -1,2 +1,2 @@
 # Pendata
-Mata Kuliah Penambangan Data
+## Mata Kuliah Penambangan Data Kelas A
