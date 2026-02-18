@@ -1,10 +1,10 @@
-# Pendahuluan
+# HALLO, PENAMBANGAN DATA
 
 Selamat datang di buku materi **Penambangan Data (Pendat)**. Buku ini disusun sebagai rangkuman materi perkuliahan Penambanagan Data selama satu semester.
 
 ---
 
-### Identitas Mahasiswa
+### About Me :
 
 | | |
 |---|---|
@@ -12,7 +12,3 @@ Selamat datang di buku materi **Penambangan Data (Pendat)**. Buku ini disusun se
 | **NIM** | 240411100217 |
 | **Mata Kuliah** | Penambangan Data kelas A |
 
----
-
-```{tableofcontents}
-```
