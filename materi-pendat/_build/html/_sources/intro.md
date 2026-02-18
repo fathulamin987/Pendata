@@ -5,6 +5,7 @@ Selamat datang di repository materi **Penambangan Data**. Repository ini disusun
 ---
 
 ### About Me :
+Halo! Saya **Fathul Amin**, mahasiswa Teknik Informatika, Universitas Trunodjoyo Madura yang sedang mendalami dunia data. Melalui repository ini, saya membagikan perjalanan belajar saya dalam mata kuliah **Penambangan Data**.
 
 | | |
 |---|---|
