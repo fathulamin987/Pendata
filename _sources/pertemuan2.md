@@ -1,3 +1,3 @@
-# Pertemuan 2
+# Memahami Data
 
 *Materi akan diperbarui.*
