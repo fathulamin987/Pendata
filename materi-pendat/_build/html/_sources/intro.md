@@ -1,4 +1,4 @@
-# Pendahuluan
+# My Intro
 ## Halo, Penambangan Data
 Selamat datang di repository materi **Penambangan Data**. Repository ini disusun sebagai rangkuman materi perkuliahan Penambanagan Data selama satu semester.
 
