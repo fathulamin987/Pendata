@@ -1,9 +1,9 @@
 # Book settings
 # Learn more at https://jupyterbook.org/customize/config.html
 
-title: Materi Pengantar Data
+title: Materi Penambangan Data
 author: Fathul Amin (240411100217)
-logo: logo.png
+logo: Amin.png
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
