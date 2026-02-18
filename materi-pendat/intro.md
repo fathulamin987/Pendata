@@ -10,7 +10,7 @@ Selamat datang di buku materi **Penambangan Data (Pendat)**. Buku ini disusun se
 |---|---|
 | **Nama** | Fathul Amin |
 | **NIM** | 240411100217 |
-| **Mata Kuliah** | Penambangan Data |
+| **Mata Kuliah** | Penambangan Data kelas A |
 
 ---
 
