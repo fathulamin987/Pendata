@@ -1,6 +1,6 @@
 # Pendahuluan
 ## Halo, Penambangan Data
-Selamat datang di buku materi **Penambangan Data (Pendat)**. Buku ini disusun sebagai rangkuman materi perkuliahan Penambanagan Data selama satu semester.
+Selamat datang di  matreposirory materi **Penambangan Data**. Buku ini disusun sebagai rangkuman materi perkuliahan Penambanagan Data selama satu semester.
 
 ---
 
