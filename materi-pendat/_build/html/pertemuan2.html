@@ -57,10 +57,12 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'pertemuan2';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Data Iris Flower" href="DataIris.html" />
+    <link rel="next" title="Eksplorasi Data Iris" href="datairis.html" />
     <link rel="prev" title="Pengantar Data Mining" href="pertemuan1.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -182,7 +184,7 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="pertemuan1.html">Pengantar Data Mining</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Memahami Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="DataIris.html">Data Iris Flower</a></li>
+<li class="toctree-l1"><a class="reference internal" href="datairis.html">Eksplorasi Data Iris</a></li>
 </ul>
 
     </div>
@@ -355,7 +357,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -371,6 +375,30 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jenis-data">1. Jenis Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jenis-atribut-fitur">2. Jenis Atribut (Fitur)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistik-deskriptif">3. Statistik Deskriptif</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-ukuran-pemusatan">A. Ukuran Pemusatan</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-ukuran-penyebaran">B. Ukuran Penyebaran</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-distribusi-normal">C. Distribusi Normal</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pengukuran-jarak-distance-measurement">4. Pengukuran Jarak (Distance Measurement)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#euclidean-distance">Euclidean Distance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manhattan-distance">Manhattan Distance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minkowski-distance">Minkowski Distance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cosine-similarity">Cosine Similarity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mahalanobis-distance">Mahalanobis Distance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jaccard-similarity">Jaccard Similarity</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -382,7 +410,153 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="memahami-data">
 <h1>Memahami Data<a class="headerlink" href="#memahami-data" title="Link to this heading">#</a></h1>
-<p><em>Materi akan diperbarui.</em></p>
+<section id="jenis-data">
+<h2>1. Jenis Data<a class="headerlink" href="#jenis-data" title="Link to this heading">#</a></h2>
+<p>Dalam data mining, data dibagi menjadi beberapa jenis:</p>
+<ul class="simple">
+<li><p><strong>Data Terstruktur</strong><br />
+Data yang tersusun dalam bentuk tabel (baris dan kolom), seperti data di Excel atau database.</p></li>
+<li><p><strong>Data Tidak Terstruktur</strong><br />
+Data yang tidak memiliki format tetap, seperti email, dokumen, atau teks bebas.</p></li>
+<li><p><strong>Data Bahasa Alami</strong><br />
+Data berupa bahasa manusia (contoh: Bahasa Indonesia, Inggris) yang biasanya diproses dengan NLP.</p></li>
+<li><p><strong>Data Machine-Generated</strong><br />
+Data yang dihasilkan oleh mesin atau sensor, seperti log server dan data IoT.</p></li>
+<li><p><strong>Data Multimedia (Audio, Video, Citra)</strong><br />
+Data berupa gambar, suara, atau video.</p></li>
+<li><p><strong>Data Streaming</strong><br />
+Data yang terus mengalir secara real-time, seperti transaksi online atau media sosial.</p></li>
+<li><p><strong>Data Graph</strong><br />
+Data yang berbentuk hubungan atau jaringan, seperti relasi pertemanan di media sosial.</p></li>
+</ul>
+<hr class="docutils" />
+</section>
+<section id="jenis-atribut-fitur">
+<h2>2. Jenis Atribut (Fitur)<a class="headerlink" href="#jenis-atribut-fitur" title="Link to this heading">#</a></h2>
+<p>Atribut adalah karakteristik atau ciri dari suatu data.</p>
+<ul class="simple">
+<li><p><strong>Nominal</strong><br />
+Data kategori tanpa urutan.<br />
+Contoh: warna rambut, jenis kelamin.</p></li>
+<li><p><strong>Biner</strong><br />
+Data dengan dua kemungkinan nilai (0 dan 1).<br />
+Contoh: Ya/Tidak, Lulus/Tidak.</p></li>
+<li><p><strong>Ordinal</strong><br />
+Data yang memiliki urutan, tetapi jarak antar nilai tidak pasti.<br />
+Contoh: kecil, sedang, besar.</p></li>
+<li><p><strong>Numerik</strong><br />
+Data berupa angka yang bisa dihitung.</p>
+<ul>
+<li><p>Interval (tidak memiliki nol mutlak, contoh: suhu °C)</p></li>
+<li><p>Rasio (memiliki nol mutlak, contoh: berat badan)</p></li>
+</ul>
+</li>
+</ul>
+<hr class="docutils" />
+</section>
+<section id="statistik-deskriptif">
+<h2>3. Statistik Deskriptif<a class="headerlink" href="#statistik-deskriptif" title="Link to this heading">#</a></h2>
+<p>Statistik deskriptif digunakan untuk memahami isi data.</p>
+<section id="a-ukuran-pemusatan">
+<h3>A. Ukuran Pemusatan<a class="headerlink" href="#a-ukuran-pemusatan" title="Link to this heading">#</a></h3>
+<p><strong>Mean (Rata-rata)</strong><br />
+Digunakan untuk mengetahui nilai rata-rata suatu data.</p>
+<div class="math notranslate nohighlight">
+\[
+\bar{x} = \frac{\sum_{i=1}^{N} x_i}{N}
+\]</div>
+<p><strong>Median</strong><br />
+Nilai tengah setelah data diurutkan.</p>
+<p><strong>Modus</strong><br />
+Nilai yang paling sering muncul.</p>
+</section>
+<hr class="docutils" />
+<section id="b-ukuran-penyebaran">
+<h3>B. Ukuran Penyebaran<a class="headerlink" href="#b-ukuran-penyebaran" title="Link to this heading">#</a></h3>
+<p>Digunakan untuk mengetahui seberapa menyebar data.</p>
+<p><strong>Variansi</strong></p>
+<div class="math notranslate nohighlight">
+\[
+\sigma^2 = \frac{1}{N}\sum_{i=1}^{N}(x_i - \bar{x})^2
+\]</div>
+<p><strong>Standar Deviasi</strong></p>
+<div class="math notranslate nohighlight">
+\[
+\sigma = \sqrt{\sigma^2}
+\]</div>
+<p>Semakin besar standar deviasi, semakin menyebar data tersebut.</p>
+</section>
+<hr class="docutils" />
+<section id="c-distribusi-normal">
+<h3>C. Distribusi Normal<a class="headerlink" href="#c-distribusi-normal" title="Link to this heading">#</a></h3>
+<p>Distribusi normal berbentuk seperti lonceng dan simetris.</p>
+<div class="math notranslate nohighlight">
+\[
+f(x)=\frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
+\]</div>
+<p>Keterangan:</p>
+<ul class="simple">
+<li><p>μ = rata-rata</p></li>
+<li><p>σ = standar deviasi</p></li>
+</ul>
+<hr class="docutils" />
+</section>
+</section>
+<section id="pengukuran-jarak-distance-measurement">
+<h2>4. Pengukuran Jarak (Distance Measurement)<a class="headerlink" href="#pengukuran-jarak-distance-measurement" title="Link to this heading">#</a></h2>
+<p>Digunakan untuk menghitung jarak atau kemiripan antar data, terutama dalam clustering.</p>
+<section id="euclidean-distance">
+<h3>Euclidean Distance<a class="headerlink" href="#euclidean-distance" title="Link to this heading">#</a></h3>
+<p>Jarak paling umum digunakan.</p>
+<div class="math notranslate nohighlight">
+\[
+d = \sqrt{\sum_{i=1}^{n}(x_i - y_i)^2}
+\]</div>
+</section>
+<hr class="docutils" />
+<section id="manhattan-distance">
+<h3>Manhattan Distance<a class="headerlink" href="#manhattan-distance" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[
+d = \sum_{i=1}^{n}|x_i - y_i|
+\]</div>
+</section>
+<hr class="docutils" />
+<section id="minkowski-distance">
+<h3>Minkowski Distance<a class="headerlink" href="#minkowski-distance" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[
+d = \left(\sum_{i=1}^{n}|x_i - y_i|^m \right)^{1/m}
+\]</div>
+</section>
+<hr class="docutils" />
+<section id="cosine-similarity">
+<h3>Cosine Similarity<a class="headerlink" href="#cosine-similarity" title="Link to this heading">#</a></h3>
+<p>Digunakan untuk mengukur kemiripan dokumen.</p>
+<div class="math notranslate nohighlight">
+\[
+Cosine(x,y)=\frac{\sum x_i y_i}{||x|| \; ||y||}
+\]</div>
+</section>
+<hr class="docutils" />
+<section id="mahalanobis-distance">
+<h3>Mahalanobis Distance<a class="headerlink" href="#mahalanobis-distance" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[
+d = \sqrt{(x-y)S^{-1}(x-y)^T}
+\]</div>
+</section>
+<hr class="docutils" />
+<section id="jaccard-similarity">
+<h3>Jaccard Similarity<a class="headerlink" href="#jaccard-similarity" title="Link to this heading">#</a></h3>
+<p>Digunakan untuk data biner.</p>
+<div class="math notranslate nohighlight">
+\[
+sim(i,j)=\frac{q}{q+r+s}
+\]</div>
+<hr class="docutils" />
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -425,11 +599,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="DataIris.html"
+       href="datairis.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Data Iris Flower</p>
+        <p class="prev-next-title">Eksplorasi Data Iris</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -439,6 +613,37 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jenis-data">1. Jenis Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jenis-atribut-fitur">2. Jenis Atribut (Fitur)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistik-deskriptif">3. Statistik Deskriptif</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-ukuran-pemusatan">A. Ukuran Pemusatan</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-ukuran-penyebaran">B. Ukuran Penyebaran</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-distribusi-normal">C. Distribusi Normal</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pengukuran-jarak-distance-measurement">4. Pengukuran Jarak (Distance Measurement)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#euclidean-distance">Euclidean Distance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manhattan-distance">Manhattan Distance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minkowski-distance">Minkowski Distance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cosine-similarity">Cosine Similarity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mahalanobis-distance">Mahalanobis Distance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jaccard-similarity">Jaccard Similarity</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
