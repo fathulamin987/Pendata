@@ -6,5 +6,7 @@ root: intro
 chapters:
 - file: pertemuan1
 - file: pertemuan2
+- file : Iris
+  title : Eksplorasi Data Iris
 
 
