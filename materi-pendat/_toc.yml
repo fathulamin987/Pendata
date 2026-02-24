@@ -6,6 +6,6 @@ root: intro
 chapters:
 - file: pertemuan1
 - file: pertemuan2
-- file : DataIris
+- file : Iris
 
 
