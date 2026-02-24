@@ -60,7 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'pertemuan3';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="pertemuan4.html" />
+    <link rel="next" title="Coming soon materi" href="pertemuan4.html" />
     <link rel="prev" title="Memahami Data" href="pertemuan2.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -183,6 +183,7 @@
 <li class="toctree-l1"><a class="reference internal" href="pertemuan1.html">Pengantar Data Mining</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pertemuan2.html">Memahami Data</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Eksplorasi Data Iris</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pertemuan4.html">Coming soon materi</a></li>
 </ul>
 
     </div>
@@ -446,216 +447,87 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;pandas&#39;
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">google.colab</span><span class="w"> </span><span class="kn">import</span> <span class="n">files</span>
-<span class="n">files</span><span class="o">.</span><span class="n">upload</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Membaca file dataset secara lokal</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;IRIS.csv&#39;</span><span class="p">)</span>
+
+<span class="c1"># Menampilkan 5 baris pertama untuk memastikan data berhasil dimuat</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html">
-     <input type="file" id="files-ff3c0a21-6887-4fc2-be43-22da00ead05b" name="files[]" multiple disabled
-        style="border:none" />
-     <output id="result-ff3c0a21-6887-4fc2-be43-22da00ead05b">
-      Upload widget is only available when the cell has been executed in the
-      current browser session. Please rerun this cell to enable.
-      </output>
-      <script>// Copyright 2017 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
-/**
- * @fileoverview Helpers for google.colab Python module.
- */
-(function(scope) {
-function span(text, styleAttributes = {}) {
-  const element = document.createElement('span');
-  element.textContent = text;
-  for (const key of Object.keys(styleAttributes)) {
-    element.style[key] = styleAttributes[key];
-  }
-  return element;
-}
-
-// Max number of bytes which will be uploaded at a time.
-const MAX_PAYLOAD_SIZE = 100 * 1024;
-
-function _uploadFiles(inputId, outputId) {
-  const steps = uploadFilesStep(inputId, outputId);
-  const outputElement = document.getElementById(outputId);
-  // Cache steps on the outputElement to make it available for the next call
-  // to uploadFilesContinue from Python.
-  outputElement.steps = steps;
-
-  return _uploadFilesContinue(outputId);
-}
-
-// This is roughly an async generator (not supported in the browser yet),
-// where there are multiple asynchronous steps and the Python side is going
-// to poll for completion of each step.
-// This uses a Promise to block the python side on completion of each step,
-// then passes the result of the previous step as the input to the next step.
-function _uploadFilesContinue(outputId) {
-  const outputElement = document.getElementById(outputId);
-  const steps = outputElement.steps;
-
-  const next = steps.next(outputElement.lastPromiseValue);
-  return Promise.resolve(next.value.promise).then((value) => {
-    // Cache the last promise value to make it available to the next
-    // step of the generator.
-    outputElement.lastPromiseValue = value;
-    return next.value.response;
-  });
-}
-
-/**
- * Generator function which is called between each async step of the upload
- * process.
- * @param {string} inputId Element ID of the input file picker element.
- * @param {string} outputId Element ID of the output display.
- * @return {!Iterable<!Object>} Iterable of next steps.
- */
-function* uploadFilesStep(inputId, outputId) {
-  const inputElement = document.getElementById(inputId);
-  inputElement.disabled = false;
-
-  const outputElement = document.getElementById(outputId);
-  outputElement.innerHTML = '';
-
-  const pickedPromise = new Promise((resolve) => {
-    inputElement.addEventListener('change', (e) => {
-      resolve(e.target.files);
-    });
-  });
-
-  const cancel = document.createElement('button');
-  inputElement.parentElement.appendChild(cancel);
-  cancel.textContent = 'Cancel upload';
-  const cancelPromise = new Promise((resolve) => {
-    cancel.onclick = () => {
-      resolve(null);
-    };
-  });
-
-  // Wait for the user to pick the files.
-  const files = yield {
-    promise: Promise.race([pickedPromise, cancelPromise]),
-    response: {
-      action: 'starting',
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
     }
-  };
 
-  cancel.remove();
-
-  // Disable the input element since further picks are not allowed.
-  inputElement.disabled = true;
-
-  if (!files) {
-    return {
-      response: {
-        action: 'complete',
-      }
-    };
-  }
-
-  for (const file of files) {
-    const li = document.createElement('li');
-    li.append(span(file.name, {fontWeight: 'bold'}));
-    li.append(span(
-        `(${file.type || 'n/a'}) - ${file.size} bytes, ` +
-        `last modified: ${
-            file.lastModifiedDate ? file.lastModifiedDate.toLocaleDateString() :
-                                    'n/a'} - `));
-    const percent = span('0% done');
-    li.appendChild(percent);
-
-    outputElement.appendChild(li);
-
-    const fileDataPromise = new Promise((resolve) => {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        resolve(e.target.result);
-      };
-      reader.readAsArrayBuffer(file);
-    });
-    // Wait for the data to be ready.
-    let fileData = yield {
-      promise: fileDataPromise,
-      response: {
-        action: 'continue',
-      }
-    };
-
-    // Use a chunked sending to avoid message size limits. See b/62115660.
-    let position = 0;
-    do {
-      const length = Math.min(fileData.byteLength - position, MAX_PAYLOAD_SIZE);
-      const chunk = new Uint8Array(fileData, position, length);
-      position += length;
-
-      const base64 = btoa(String.fromCharCode.apply(null, chunk));
-      yield {
-        response: {
-          action: 'append',
-          file: file.name,
-          data: base64,
-        },
-      };
-
-      let percentDone = fileData.byteLength === 0 ?
-          100 :
-          Math.round((position / fileData.byteLength) * 100);
-      percent.textContent = `${percentDone}% done`;
-
-    } while (position < fileData.byteLength);
-  }
-
-  // All done.
-  yield {
-    response: {
-      action: 'complete',
+    .dataframe tbody tr th {
+        vertical-align: top;
     }
-  };
-}
 
-scope.google = scope.google || {};
-scope.google.colab = scope.google.colab || {};
-scope.google.colab._files = {
-  _uploadFiles,
-  _uploadFilesContinue,
-};
-})(self);
-</script> </div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving IRIS.csv to IRIS (1).csv
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;IRIS (1).csv&#39;: b&#39;5.1,3.5,1.4,0.2,Iris-setosa\r\n4.9,3,1.4,0.2,Iris-setosa\r\n4.7,3.2,1.3,0.2,Iris-setosa\r\n4.6,3.1,1.5,0.2,Iris-setosa\r\n5,3.6,1.4,0.2,Iris-setosa\r\n5.4,3.9,1.7,0.4,Iris-setosa\r\n4.6,3.4,1.4,0.3,Iris-setosa\r\n5,3.4,1.5,0.2,Iris-setosa\r\n4.4,2.9,1.4,0.2,Iris-setosa\r\n4.9,3.1,1.5,0.1,Iris-setosa\r\n5.4,3.7,1.5,0.2,Iris-setosa\r\n4.8,3.4,1.6,0.2,Iris-setosa\r\n4.8,3,1.4,0.1,Iris-setosa\r\n4.3,3,1.1,0.1,Iris-setosa\r\n5.8,4,1.2,0.2,Iris-setosa\r\n5.7,4.4,1.5,0.4,Iris-setosa\r\n5.4,3.9,1.3,0.4,Iris-setosa\r\n5.1,3.5,1.4,0.3,Iris-setosa\r\n5.7,3.8,1.7,0.3,Iris-setosa\r\n5.1,3.8,1.5,0.3,Iris-setosa\r\n5.4,3.4,1.7,0.2,Iris-setosa\r\n5.1,3.7,1.5,0.4,Iris-setosa\r\n4.6,3.6,1,0.2,Iris-setosa\r\n5.1,3.3,1.7,0.5,Iris-setosa\r\n4.8,3.4,1.9,0.2,Iris-setosa\r\n5,3,1.6,0.2,Iris-setosa\r\n5,3.4,1.6,0.4,Iris-setosa\r\n5.2,3.5,1.5,0.2,Iris-setosa\r\n5.2,3.4,1.4,0.2,Iris-setosa\r\n4.7,3.2,1.6,0.2,Iris-setosa\r\n4.8,3.1,1.6,0.2,Iris-setosa\r\n5.4,3.4,1.5,0.4,Iris-setosa\r\n5.2,4.1,1.5,0.1,Iris-setosa\r\n5.5,4.2,1.4,0.2,Iris-setosa\r\n4.9,3.1,1.5,0.1,Iris-setosa\r\n5,3.2,1.2,0.2,Iris-setosa\r\n5.5,3.5,1.3,0.2,Iris-setosa\r\n4.9,3.1,1.5,0.1,Iris-setosa\r\n4.4,3,1.3,0.2,Iris-setosa\r\n5.1,3.4,1.5,0.2,Iris-setosa\r\n5,3.5,1.3,0.3,Iris-setosa\r\n4.5,2.3,1.3,0.3,Iris-setosa\r\n4.4,3.2,1.3,0.2,Iris-setosa\r\n5,3.5,1.6,0.6,Iris-setosa\r\n5.1,3.8,1.9,0.4,Iris-setosa\r\n4.8,3,1.4,0.3,Iris-setosa\r\n5.1,3.8,1.6,0.2,Iris-setosa\r\n4.6,3.2,1.4,0.2,Iris-setosa\r\n5.3,3.7,1.5,0.2,Iris-setosa\r\n5,3.3,1.4,0.2,Iris-setosa\r\n7,3.2,4.7,1.4,Iris-versicolor\r\n6.4,3.2,4.5,1.5,Iris-versicolor\r\n6.9,3.1,4.9,1.5,Iris-versicolor\r\n5.5,2.3,4,1.3,Iris-versicolor\r\n6.5,2.8,4.6,1.5,Iris-versicolor\r\n5.7,2.8,4.5,1.3,Iris-versicolor\r\n6.3,3.3,4.7,1.6,Iris-versicolor\r\n4.9,2.4,3.3,1,Iris-versicolor\r\n6.6,2.9,4.6,1.3,Iris-versicolor\r\n5.2,2.7,3.9,1.4,Iris-versicolor\r\n5,2,3.5,1,Iris-versicolor\r\n5.9,3,4.2,1.5,Iris-versicolor\r\n6,2.2,4,1,Iris-versicolor\r\n6.1,2.9,4.7,1.4,Iris-versicolor\r\n5.6,2.9,3.6,1.3,Iris-versicolor\r\n6.7,3.1,4.4,1.4,Iris-versicolor\r\n5.6,3,4.5,1.5,Iris-versicolor\r\n5.8,2.7,4.1,1,Iris-versicolor\r\n6.2,2.2,4.5,1.5,Iris-versicolor\r\n5.6,2.5,3.9,1.1,Iris-versicolor\r\n5.9,3.2,4.8,1.8,Iris-versicolor\r\n6.1,2.8,4,1.3,Iris-versicolor\r\n6.3,2.5,4.9,1.5,Iris-versicolor\r\n6.1,2.8,4.7,1.2,Iris-versicolor\r\n6.4,2.9,4.3,1.3,Iris-versicolor\r\n6.6,3,4.4,1.4,Iris-versicolor\r\n6.8,2.8,4.8,1.4,Iris-versicolor\r\n6.7,3,5,1.7,Iris-versicolor\r\n6,2.9,4.5,1.5,Iris-versicolor\r\n5.7,2.6,3.5,1,Iris-versicolor\r\n5.5,2.4,3.8,1.1,Iris-versicolor\r\n5.5,2.4,3.7,1,Iris-versicolor\r\n5.8,2.7,3.9,1.2,Iris-versicolor\r\n6,2.7,5.1,1.6,Iris-versicolor\r\n5.4,3,4.5,1.5,Iris-versicolor\r\n6,3.4,4.5,1.6,Iris-versicolor\r\n6.7,3.1,4.7,1.5,Iris-versicolor\r\n6.3,2.3,4.4,1.3,Iris-versicolor\r\n5.6,3,4.1,1.3,Iris-versicolor\r\n5.5,2.5,4,1.3,Iris-versicolor\r\n5.5,2.6,4.4,1.2,Iris-versicolor\r\n6.1,3,4.6,1.4,Iris-versicolor\r\n5.8,2.6,4,1.2,Iris-versicolor\r\n5,2.3,3.3,1,Iris-versicolor\r\n5.6,2.7,4.2,1.3,Iris-versicolor\r\n5.7,3,4.2,1.2,Iris-versicolor\r\n5.7,2.9,4.2,1.3,Iris-versicolor\r\n6.2,2.9,4.3,1.3,Iris-versicolor\r\n5.1,2.5,3,1.1,Iris-versicolor\r\n5.7,2.8,4.1,1.3,Iris-versicolor\r\n6.3,3.3,6,2.5,Iris-virginica\r\n5.8,2.7,5.1,1.9,Iris-virginica\r\n7.1,3,5.9,2.1,Iris-virginica\r\n6.3,2.9,5.6,1.8,Iris-virginica\r\n6.5,3,5.8,2.2,Iris-virginica\r\n7.6,3,6.6,2.1,Iris-virginica\r\n4.9,2.5,4.5,1.7,Iris-virginica\r\n7.3,2.9,6.3,1.8,Iris-virginica\r\n6.7,2.5,5.8,1.8,Iris-virginica\r\n7.2,3.6,6.1,2.5,Iris-virginica\r\n6.5,3.2,5.1,2,Iris-virginica\r\n6.4,2.7,5.3,1.9,Iris-virginica\r\n6.8,3,5.5,2.1,Iris-virginica\r\n5.7,2.5,5,2,Iris-virginica\r\n5.8,2.8,5.1,2.4,Iris-virginica\r\n6.4,3.2,5.3,2.3,Iris-virginica\r\n6.5,3,5.5,1.8,Iris-virginica\r\n7.7,3.8,6.7,2.2,Iris-virginica\r\n7.7,2.6,6.9,2.3,Iris-virginica\r\n6,2.2,5,1.5,Iris-virginica\r\n6.9,3.2,5.7,2.3,Iris-virginica\r\n5.6,2.8,4.9,2,Iris-virginica\r\n7.7,2.8,6.7,2,Iris-virginica\r\n6.3,2.7,4.9,1.8,Iris-virginica\r\n6.7,3.3,5.7,2.1,Iris-virginica\r\n7.2,3.2,6,1.8,Iris-virginica\r\n6.2,2.8,4.8,1.8,Iris-virginica\r\n6.1,3,4.9,1.8,Iris-virginica\r\n6.4,2.8,5.6,2.1,Iris-virginica\r\n7.2,3,5.8,1.6,Iris-virginica\r\n7.4,2.8,6.1,1.9,Iris-virginica\r\n7.9,3.8,6.4,2,Iris-virginica\r\n6.4,2.8,5.6,2.2,Iris-virginica\r\n6.3,2.8,5.1,1.5,Iris-virginica\r\n6.1,2.6,5.6,1.4,Iris-virginica\r\n7.7,3,6.1,2.3,Iris-virginica\r\n6.3,3.4,5.6,2.4,Iris-virginica\r\n6.4,3.1,5.5,1.8,Iris-virginica\r\n6,3,4.8,1.8,Iris-virginica\r\n6.9,3.1,5.4,2.1,Iris-virginica\r\n6.7,3.1,5.6,2.4,Iris-virginica\r\n6.9,3.1,5.1,2.3,Iris-virginica\r\n5.8,2.7,5.1,1.9,Iris-virginica\r\n6.8,3.2,5.9,2.3,Iris-virginica\r\n6.7,3.3,5.7,2.5,Iris-virginica\r\n6.7,3,5.2,2.3,Iris-virginica\r\n6.3,2.5,5,1.9,Iris-virginica\r\n6.5,3,5.2,2,Iris-virginica\r\n6.2,3.4,5.4,2.3,Iris-virginica\r\n5.9,3,5.1,1.8,Iris-virginica\r\n&#39;}
-</pre></div>
-</div>
-</div>
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>5.1</th>
+      <th>3.5</th>
+      <th>1.4</th>
+      <th>0.2</th>
+      <th>Iris-setosa</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>4.9</td>
+      <td>3.0</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>Iris-setosa</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4.7</td>
+      <td>3.2</td>
+      <td>1.3</td>
+      <td>0.2</td>
+      <td>Iris-setosa</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4.6</td>
+      <td>3.1</td>
+      <td>1.5</td>
+      <td>0.2</td>
+      <td>Iris-setosa</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>5.0</td>
+      <td>3.6</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>Iris-setosa</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5.4</td>
+      <td>3.9</td>
+      <td>1.7</td>
+      <td>0.4</td>
+      <td>Iris-setosa</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -665,9 +537,7 @@ scope.google.colab._files = {
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html">
-  <div id="df-b8bccf2f-d44a-4f9b-a8c8-977503aba326" class="colab-df-container">
-    <div>
+<div class="output text_html"><div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -775,90 +645,7 @@ scope.google.colab._files = {
     </tr>
   </tbody>
 </table>
-</div>
-    <div class="colab-df-buttons">
-
-  <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-b8bccf2f-d44a-4f9b-a8c8-977503aba326')"
-            title="Convert this dataframe to an interactive table."
-            style="display:none;">
-
-  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
-    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
-  </svg>
-    </button>
-
-  <style>
-    .colab-df-container {
-      display:flex;
-      gap: 12px;
-    }
-
-    .colab-df-convert {
-      background-color: #E8F0FE;
-      border: none;
-      border-radius: 50%;
-      cursor: pointer;
-      display: none;
-      fill: #1967D2;
-      height: 32px;
-      padding: 0 0 0 0;
-      width: 32px;
-    }
-
-    .colab-df-convert:hover {
-      background-color: #E2EBFA;
-      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
-      fill: #174EA6;
-    }
-
-    .colab-df-buttons div {
-      margin-bottom: 4px;
-    }
-
-    [theme=dark] .colab-df-convert {
-      background-color: #3B4455;
-      fill: #D2E3FC;
-    }
-
-    [theme=dark] .colab-df-convert:hover {
-      background-color: #434B5C;
-      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
-      fill: #FFFFFF;
-    }
-  </style>
-
-    <script>
-      const buttonEl =
-        document.querySelector('#df-b8bccf2f-d44a-4f9b-a8c8-977503aba326 button.colab-df-convert');
-      buttonEl.style.display =
-        google.colab.kernel.accessAllowed ? 'block' : 'none';
-
-      async function convertToInteractive(key) {
-        const element = document.querySelector('#df-b8bccf2f-d44a-4f9b-a8c8-977503aba326');
-        const dataTable =
-          await google.colab.kernel.invokeFunction('convertToInteractive',
-                                                    [key], {});
-        if (!dataTable) return;
-
-        const docLinkHtml = 'Like what you see? Visit the ' +
-          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
-          + ' to learn more about interactive tables.';
-        element.innerHTML = '';
-        dataTable['output_type'] = 'display_data';
-        await google.colab.output.renderOutput(dataTable, element);
-        const docLink = document.createElement('div');
-        docLink.innerHTML = docLinkHtml;
-        element.appendChild(docLink);
-      }
-    </script>
-  </div>
-
-
-    </div>
-  </div>
-</div></div>
+</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -867,7 +654,7 @@ scope.google.colab._files = {
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.DataFrame&#39;&gt;
 RangeIndex: 149 entries, 0 to 148
 Data columns (total 5 columns):
  #   Column       Non-Null Count  Dtype  
@@ -876,9 +663,9 @@ Data columns (total 5 columns):
  1   3.5          149 non-null    float64
  2   1.4          149 non-null    float64
  3   0.2          149 non-null    float64
- 4   Iris-setosa  149 non-null    object 
-dtypes: float64(4), object(1)
-memory usage: 5.9+ KB
+ 4   Iris-setosa  149 non-null    str    
+dtypes: float64(4), str(1)
+memory usage: 5.9 KB
 </pre></div>
 </div>
 </div>
@@ -892,9 +679,7 @@ memory usage: 5.9+ KB
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html">
-  <div id="df-be4c6061-98cf-4e59-b322-8a68f7561de2" class="colab-df-container">
-    <div>
+<div class="output text_html"><div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -949,145 +734,7 @@ memory usage: 5.9+ KB
     </tr>
   </tbody>
 </table>
-</div>
-    <div class="colab-df-buttons">
-
-  <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-be4c6061-98cf-4e59-b322-8a68f7561de2')"
-            title="Convert this dataframe to an interactive table."
-            style="display:none;">
-
-  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
-    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
-  </svg>
-    </button>
-
-  <style>
-    .colab-df-container {
-      display:flex;
-      gap: 12px;
-    }
-
-    .colab-df-convert {
-      background-color: #E8F0FE;
-      border: none;
-      border-radius: 50%;
-      cursor: pointer;
-      display: none;
-      fill: #1967D2;
-      height: 32px;
-      padding: 0 0 0 0;
-      width: 32px;
-    }
-
-    .colab-df-convert:hover {
-      background-color: #E2EBFA;
-      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
-      fill: #174EA6;
-    }
-
-    .colab-df-buttons div {
-      margin-bottom: 4px;
-    }
-
-    [theme=dark] .colab-df-convert {
-      background-color: #3B4455;
-      fill: #D2E3FC;
-    }
-
-    [theme=dark] .colab-df-convert:hover {
-      background-color: #434B5C;
-      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
-      fill: #FFFFFF;
-    }
-  </style>
-
-    <script>
-      const buttonEl =
-        document.querySelector('#df-be4c6061-98cf-4e59-b322-8a68f7561de2 button.colab-df-convert');
-      buttonEl.style.display =
-        google.colab.kernel.accessAllowed ? 'block' : 'none';
-
-      async function convertToInteractive(key) {
-        const element = document.querySelector('#df-be4c6061-98cf-4e59-b322-8a68f7561de2');
-        const dataTable =
-          await google.colab.kernel.invokeFunction('convertToInteractive',
-                                                    [key], {});
-        if (!dataTable) return;
-
-        const docLinkHtml = 'Like what you see? Visit the ' +
-          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
-          + ' to learn more about interactive tables.';
-        element.innerHTML = '';
-        dataTable['output_type'] = 'display_data';
-        await google.colab.output.renderOutput(dataTable, element);
-        const docLink = document.createElement('div');
-        docLink.innerHTML = docLinkHtml;
-        element.appendChild(docLink);
-      }
-    </script>
-  </div>
-
-
-  <div id="id_f6940a63-1939-423b-98f0-f36900e3ad0c">
-    <style>
-      .colab-df-generate {
-        background-color: #E8F0FE;
-        border: none;
-        border-radius: 50%;
-        cursor: pointer;
-        display: none;
-        fill: #1967D2;
-        height: 32px;
-        padding: 0 0 0 0;
-        width: 32px;
-      }
-
-      .colab-df-generate:hover {
-        background-color: #E2EBFA;
-        box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
-        fill: #174EA6;
-      }
-
-      [theme=dark] .colab-df-generate {
-        background-color: #3B4455;
-        fill: #D2E3FC;
-      }
-
-      [theme=dark] .colab-df-generate:hover {
-        background-color: #434B5C;
-        box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-        filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
-        fill: #FFFFFF;
-      }
-    </style>
-    <button class="colab-df-generate" onclick="generateWithVariable('corr_matrix')"
-            title="Generate code using this dataframe."
-            style="display:none;">
-
-  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
-       width="24px">
-    <path d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z"/>
-  </svg>
-    </button>
-    <script>
-      (() => {
-      const buttonEl =
-        document.querySelector('#id_f6940a63-1939-423b-98f0-f36900e3ad0c button.colab-df-generate');
-      buttonEl.style.display =
-        google.colab.kernel.accessAllowed ? 'block' : 'none';
-
-      buttonEl.onclick = () => {
-        google.colab.notebook.generateWithVariable('corr_matrix');
-      }
-      })();
-    </script>
-  </div>
-
-    </div>
-  </div>
-</div></div>
+</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1269,7 +916,7 @@ Di sini ditampilkan informasi seperti:</p>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">&lt;no title&gt;</p>
+        <p class="prev-next-title">Coming soon materi</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
