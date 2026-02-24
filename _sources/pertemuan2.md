@@ -3,7 +3,7 @@
 
 ---
 
-# 1. Pengertian Data
+### 1. Pengertian Data
 
 Data adalah sekumpulan fakta atau informasi mentah yang dapat diolah menjadi informasi yang lebih bermakna.  
 Dalam data mining, memahami jenis dan karakteristik data sangat penting sebelum melakukan analisis.
@@ -18,9 +18,9 @@ Data dapat berasal dari berbagai sumber seperti:
 
 ---
 
-# 2. Jenis-Jenis Data
+### 2. Jenis-Jenis Data
 
-## A. Data Terstruktur
+#### A. Data Terstruktur
 
 Data terstruktur adalah data yang tersusun rapi dalam bentuk tabel (baris dan kolom), seperti di Excel atau database.
 
@@ -55,7 +55,7 @@ Numerik dibagi menjadi:
 
 ---
 
-## B. Data Tidak Terstruktur
+#### B. Data Tidak Terstruktur
 
 Data yang tidak memiliki format tetap dan tidak tersusun dalam tabel.
 
@@ -69,7 +69,7 @@ Biasanya perlu diproses terlebih dahulu sebelum dianalisis.
 
 ---
 
-## C. Data Bahasa Alami
+#### C. Data Bahasa Alami
 
 Data berupa bahasa manusia.
 
@@ -82,7 +82,7 @@ Biasanya diolah menggunakan teknik **Natural Language Processing (NLP)**.
 
 ---
 
-## D. Data yang Dibuat oleh Mesin
+#### D. Data yang Dibuat oleh Mesin
 
 Data yang dihasilkan otomatis oleh mesin atau sensor.
 
@@ -92,7 +92,7 @@ Contoh:
 
 ---
 
-## E. Data Berbasis Graph
+#### E. Data Berbasis Graph
 
 Data yang menunjukkan hubungan antar objek.
 
@@ -102,13 +102,13 @@ Contoh:
 
 ---
 
-## F. Data Multimedia
+#### F. Data Multimedia
 
 Data berupa audio, video, dan gambar yang memerlukan teknik khusus untuk diproses.
 
 ---
 
-## G. Data Streaming
+#### G. Data Streaming
 
 Data yang terus mengalir secara real-time.
 
@@ -119,7 +119,7 @@ Contoh:
 
 ---
 
-# 3. Distribusi Data
+### 3. Distribusi Data
 
 Distribusi data menunjukkan bagaimana data tersebar.
 
@@ -147,15 +147,15 @@ Distribusi membantu mengetahui:
 
 ---
 
-# 4. Statistik Deskriptif
+### 4. Statistik Deskriptif
 
 Statistik deskriptif digunakan untuk merangkum data numerik.
 
 ---
 
-## A. Ukuran Pusat
+### A. Ukuran Pusat
 
-### 1. Mean (Rata-rata)
+#### 1. Mean (Rata-rata)
 
 $$
 \bar{x} = \frac{\sum x_i}{n}
@@ -168,7 +168,7 @@ Keterangan:
 
 ---
 
-### 2. Median
+#### 2. Median
 
 Jika jumlah data ganjil:
 
@@ -184,15 +184,15 @@ $$
 
 ---
 
-### 3. Modus
+#### 3. Modus
 
 Nilai yang paling sering muncul.
 
 ---
 
-## B. Ukuran Penyebaran
+### B. Ukuran Penyebaran
 
-### 1. Range (Rentang)
+#### 1. Range (Rentang)
 
 $$
 Range = X_{max} - X_{min}
@@ -200,7 +200,7 @@ $$
 
 ---
 
-### 2. Variansi
+#### 2. Variansi
 
 Populasi:
 
@@ -216,7 +216,7 @@ $$
 
 ---
 
-### 3. Standar Deviasi
+#### 3. Standar Deviasi
 
 Populasi:
 
@@ -234,23 +234,23 @@ Semakin besar standar deviasi → semakin menyebar data.
 
 ---
 
-# 5. Skewness (Kemencengan)
+## 5. Skewness (Kemencengan)
 
 Skewness menunjukkan arah kemiringan distribusi data.
 
-## Skewness Positif
+#### Skewness Positif
 - Ekor lebih panjang di kanan
 - Mean > Median
 
-## Skewness Negatif
+#### Skewness Negatif
 - Ekor lebih panjang di kiri
 - Mean < Median
 
-## Distribusi Simetris
+#### Distribusi Simetris
 - Kiri dan kanan sama
 - Mean ≈ Median
 
-### Rumus Skewness
+#### Rumus Skewness
 
 $$
 Sk = \frac{\sum (x_i - \mu)^3}{n \sigma^3}
@@ -263,11 +263,11 @@ Jika:
 
 ---
 
-# 6. Pengukuran Jarak (Distance Measurement)
+## 6. Pengukuran Jarak (Distance Measurement)
 
 Digunakan dalam clustering dan klasifikasi.
 
-## Euclidean Distance
+#### Euclidean Distance
 
 $$
 d = \sqrt{\sum_{i=1}^{n}(x_i - y_i)^2}
@@ -275,7 +275,7 @@ $$
 
 ---
 
-## Manhattan Distance
+#### Manhattan Distance
 
 $$
 d = \sum_{i=1}^{n}|x_i - y_i|
@@ -283,7 +283,7 @@ $$
 
 ---
 
-## Minkowski Distance
+#### Minkowski Distance
 
 $$
 d = \left(\sum_{i=1}^{n}|x_i - y_i|^m \right)^{1/m}
@@ -291,7 +291,7 @@ $$
 
 ---
 
-## Cosine Similarity
+#### Cosine Similarity
 
 $$
 Cosine(x,y)=\frac{\sum x_i y_i}{||x|| \; ||y||}
@@ -299,7 +299,7 @@ $$
 
 ---
 
-## Mahalanobis Distance
+#### Mahalanobis Distance
 
 $$
 d = \sqrt{(x-y)S^{-1}(x-y)^T}
@@ -307,7 +307,7 @@ $$
 
 ---
 
-## Jaccard Similarity
+#### Jaccard Similarity
 
 $$
 sim(i,j)=\frac{q}{q+r+s}
