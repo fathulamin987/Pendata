@@ -185,6 +185,7 @@
 <li class="toctree-l1"><a class="reference internal" href="pertemuan1.html">Pengantar Data Mining</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Memahami Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pertemuan3.html">Eksplorasi Data Iris</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pertemuan4.html">Coming soon materi</a></li>
 </ul>
 
     </div>
@@ -445,6 +446,7 @@ document.write(`
 <section id="pengertian-data">
 <h2>Pengertian Data<a class="headerlink" href="#pengertian-data" title="Link to this heading">#</a></h2>
 <p>Data adalah sekumpulan fakta atau informasi mentah yang dapat diolah menjadi informasi yang lebih bermakna. Dalam data mining, memahami jenis dan karakteristik data sangat penting sebelum melakukan analisis.</p>
+<p>Artinya, sebelum melakukan pemodelan atau perhitungan, kita harus mengetahui bentuk dan tipe data yang digunakan agar metode yang dipilih sesuai dan tidak menghasilkan kesalahan analisis.</p>
 <p>Data dapat berasal dari berbagai sumber seperti:</p>
 <ul class="simple">
 <li><p>Manusia</p></li>
@@ -461,24 +463,29 @@ document.write(`
 <section id="data-terstruktur">
 <h3>Data Terstruktur<a class="headerlink" href="#data-terstruktur" title="Link to this heading">#</a></h3>
 <p>Data terstruktur adalah data yang tersusun rapi dalam bentuk tabel (baris dan kolom), seperti di Excel atau database.</p>
+<p>Jenis data ini paling mudah dianalisis karena sudah memiliki format yang jelas dan konsisten.</p>
 <p>Contoh:</p>
 <ul class="simple">
 <li><p>Data nilai mahasiswa</p></li>
 <li><p>Data pelanggan</p></li>
 <li><p>Data transaksi penjualan</p></li>
 </ul>
-<p>Setiap kolom disebut <strong>atribut</strong> atau <strong>variabel</strong>.</p>
+<p>Setiap kolom disebut <strong>atribut</strong> atau <strong>variabel</strong>.<br />
+Setiap baris biasanya merepresentasikan satu objek atau satu entitas data.</p>
 <section id="jenis-atribut-pada-data-terstruktur">
 <h4>Jenis Atribut pada Data Terstruktur<a class="headerlink" href="#jenis-atribut-pada-data-terstruktur" title="Link to this heading">#</a></h4>
 <p><strong>1. Nominal</strong><br />
 Kategori tanpa urutan.<br />
 Contoh: jenis kelamin, warna, jurusan.</p>
+<p>Data nominal hanya berfungsi sebagai label dan tidak bisa dihitung secara matematis.</p>
 <p><strong>2. Biner</strong><br />
 Hanya memiliki dua nilai.<br />
 Contoh: Ya/Tidak, 0/1, Lulus/Tidak.</p>
+<p>Sering digunakan dalam klasifikasi dua kelas.</p>
 <p><strong>3. Ordinal</strong><br />
 Memiliki urutan tetapi jarak antar nilai tidak pasti.<br />
 Contoh: kecil – sedang – besar.</p>
+<p>Walaupun berurutan, selisih antar kategori tidak bisa diukur secara numerik.</p>
 <p><strong>4. Numerik</strong><br />
 Berupa angka dan bisa dihitung.<br />
 Contoh: umur, tinggi badan, nilai ujian.</p>
@@ -487,6 +494,7 @@ Contoh: umur, tinggi badan, nilai ujian.</p>
 <li><p>Interval (tidak memiliki nol mutlak, contoh: suhu °C)</p></li>
 <li><p>Rasio (memiliki nol mutlak, contoh: berat badan)</p></li>
 </ul>
+<p>Pada skala rasio, nilai nol berarti tidak ada sama sekali.</p>
 </section>
 </section>
 <hr class="docutils" />
@@ -500,7 +508,7 @@ Contoh: umur, tinggi badan, nilai ujian.</p>
 <li><p>Chat</p></li>
 <li><p>Dokumen teks</p></li>
 </ul>
-<p>Biasanya perlu diproses terlebih dahulu sebelum dianalisis.</p>
+<p>Biasanya perlu diproses terlebih dahulu sebelum dianalisis karena tidak langsung bisa dihitung.</p>
 </section>
 <hr class="docutils" />
 <section id="data-bahasa-alami">
@@ -512,7 +520,7 @@ Contoh: umur, tinggi badan, nilai ujian.</p>
 <li><p>Review produk</p></li>
 <li><p>Berita</p></li>
 </ul>
-<p>Biasanya diolah menggunakan teknik <strong>Natural Language Processing (NLP)</strong>.</p>
+<p>Biasanya diolah menggunakan teknik <strong>Natural Language Processing (NLP)</strong> karena teks perlu diubah menjadi representasi numerik.</p>
 </section>
 <hr class="docutils" />
 <section id="data-yang-dibuat-oleh-mesin">
@@ -523,6 +531,7 @@ Contoh: umur, tinggi badan, nilai ujian.</p>
 <li><p>Log server</p></li>
 <li><p>Sensor Internet of Things (IoT)</p></li>
 </ul>
+<p>Data ini biasanya berukuran besar dan bisa berbentuk real-time.</p>
 </section>
 <hr class="docutils" />
 <section id="data-berbasis-graph">
@@ -533,6 +542,7 @@ Contoh: umur, tinggi badan, nilai ujian.</p>
 <li><p>Jaringan pertemanan media sosial</p></li>
 <li><p>Relasi antar pengguna</p></li>
 </ul>
+<p>Biasanya terdiri dari node (objek) dan edge (hubungan).</p>
 </section>
 <hr class="docutils" />
 <section id="data-multimedia">
@@ -549,18 +559,23 @@ Contoh: umur, tinggi badan, nilai ujian.</p>
 <li><p>Transaksi online</p></li>
 <li><p>Aktivitas media sosial</p></li>
 </ul>
+<p>Biasanya diproses langsung tanpa menunggu semua data terkumpul.</p>
 </section>
 </section>
 <hr class="docutils" />
 <section id="distribusi-data">
 <h2>Distribusi Data<a class="headerlink" href="#distribusi-data" title="Link to this heading">#</a></h2>
 <p>Distribusi data menunjukkan bagaimana data tersebar. Distribusi yang paling umum adalah distribusi normal yang berbentuk kurva lonceng.</p>
+<p>Distribusi membantu memahami apakah data terkonsentrasi di sekitar rata-rata atau menyebar jauh.</p>
 <section id="rumus-distribusi-normal">
 <h3>Rumus Distribusi Normal<a class="headerlink" href="#rumus-distribusi-normal" title="Link to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[
 f(x)=\frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 \]</div>
+<p>Rumus ini adalah fungsi kepadatan probabilitas distribusi normal.<br />
+Nilai <span class="math notranslate nohighlight">\(\mu\)</span> menentukan pusat distribusi, sedangkan <span class="math notranslate nohighlight">\(\sigma\)</span> menentukan tingkat penyebaran data.<br />
+Semakin besar <span class="math notranslate nohighlight">\(\sigma\)</span>, kurva semakin melebar.</p>
 <p>Keterangan:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\mu\)</span> = mean (rata-rata)</p></li>
@@ -581,6 +596,7 @@ f(x)=\frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 <section id="statistik-deskriptif">
 <h2>Statistik Deskriptif<a class="headerlink" href="#statistik-deskriptif" title="Link to this heading">#</a></h2>
 <p>Statistik deskriptif digunakan untuk merangkum data numerik.</p>
+<p>Statistik ini hanya menjelaskan kondisi data, bukan membuat prediksi.</p>
 <section id="ukuran-pusat">
 <h3>Ukuran Pusat<a class="headerlink" href="#ukuran-pusat" title="Link to this heading">#</a></h3>
 <section id="mean-rata-rata">
@@ -589,6 +605,8 @@ f(x)=\frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 \[
 \bar{x} = \frac{\sum x_i}{n}
 \]</div>
+<p>Mean diperoleh dengan menjumlahkan seluruh nilai lalu dibagi jumlah data.<br />
+Mean sensitif terhadap outlier sehingga bisa berubah signifikan jika ada nilai ekstrem.</p>
 <p>Keterangan:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\bar{x}\)</span> = rata-rata</p></li>
@@ -596,6 +614,7 @@ f(x)=\frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 <li><p><span class="math notranslate nohighlight">\(n\)</span> = jumlah data</p></li>
 </ul>
 </section>
+<hr class="docutils" />
 <section id="median">
 <h4>Median<a class="headerlink" href="#median" title="Link to this heading">#</a></h4>
 <p>Jika jumlah data ganjil:</p>
@@ -608,10 +627,14 @@ Me = x_{\frac{n+1}{2}}
 \[
 Me = \frac{x_{\frac{n}{2}} + x_{\frac{n}{2}+1}}{2}
 \]</div>
+<p>Median adalah nilai tengah setelah data diurutkan.<br />
+Median lebih stabil dibanding mean ketika terdapat outlier.</p>
 </section>
+<hr class="docutils" />
 <section id="modus">
 <h4>Modus<a class="headerlink" href="#modus" title="Link to this heading">#</a></h4>
-<p>Nilai yang paling sering muncul.</p>
+<p>Nilai yang paling sering muncul.<br />
+Modus berguna untuk melihat nilai atau kategori yang dominan.</p>
 </section>
 </section>
 <hr class="docutils" />
@@ -623,7 +646,10 @@ Me = \frac{x_{\frac{n}{2}} + x_{\frac{n}{2}+1}}{2}
 \[
 Range = X_{max} - X_{min}
 \]</div>
+<p>Range menunjukkan selisih antara nilai terbesar dan terkecil.<br />
+Namun range hanya melihat dua nilai ekstrem.</p>
 </section>
+<hr class="docutils" />
 <section id="variansi">
 <h4>Variansi<a class="headerlink" href="#variansi" title="Link to this heading">#</a></h4>
 <p>Populasi:</p>
@@ -636,7 +662,10 @@ Range = X_{max} - X_{min}
 \[
 s^2 = \frac{\sum (x_i - \bar{x})^2}{n-1}
 \]</div>
+<p>Variansi mengukur rata-rata kuadrat jarak data terhadap rata-rata.<br />
+Semakin besar variansi, semakin besar penyebaran data.</p>
 </section>
+<hr class="docutils" />
 <section id="standar-deviasi">
 <h4>Standar Deviasi<a class="headerlink" href="#standar-deviasi" title="Link to this heading">#</a></h4>
 <p>Populasi:</p>
@@ -649,6 +678,7 @@ s^2 = \frac{\sum (x_i - \bar{x})^2}{n-1}
 \[
 s = \sqrt{s^2}
 \]</div>
+<p>Standar deviasi adalah akar dari variansi dan memiliki satuan yang sama dengan data asli sehingga lebih mudah diinterpretasikan.</p>
 <p>Semakin besar standar deviasi → semakin menyebar data.</p>
 </section>
 </section>
@@ -684,6 +714,8 @@ s = \sqrt{s^2}
 \[
 Sk = \frac{\sum (x_i - \mu)^3}{n \sigma^3}
 \]</div>
+<p>Rumus ini mengukur tingkat kemencengan distribusi secara matematis.<br />
+Jika nilai <span class="math notranslate nohighlight">\(Sk\)</span> semakin besar (positif atau negatif), distribusi semakin tidak simetris.</p>
 <p>Jika:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(Sk &gt; 0\)</span> → miring ke kanan</p></li>
@@ -695,48 +727,60 @@ Sk = \frac{\sum (x_i - \mu)^3}{n \sigma^3}
 <hr class="docutils" />
 <section id="pengukuran-jarak-distance-measurement">
 <h2>Pengukuran Jarak (Distance Measurement)<a class="headerlink" href="#pengukuran-jarak-distance-measurement" title="Link to this heading">#</a></h2>
-<p>Digunakan dalam clustering dan klasifikasi.</p>
+<p>Digunakan dalam clustering dan klasifikasi untuk mengukur tingkat kemiripan antar data.</p>
 <section id="euclidean-distance">
 <h3>Euclidean Distance<a class="headerlink" href="#euclidean-distance" title="Link to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[
 d = \sqrt{\sum_{i=1}^{n}(x_i - y_i)^2}
 \]</div>
+<p>Mengukur jarak lurus antara dua titik dalam ruang multidimensi.</p>
 </section>
+<hr class="docutils" />
 <section id="manhattan-distance">
 <h3>Manhattan Distance<a class="headerlink" href="#manhattan-distance" title="Link to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[
 d = \sum_{i=1}^{n}|x_i - y_i|
 \]</div>
+<p>Mengukur jarak berdasarkan jumlah selisih absolut tiap dimensi.</p>
 </section>
+<hr class="docutils" />
 <section id="minkowski-distance">
 <h3>Minkowski Distance<a class="headerlink" href="#minkowski-distance" title="Link to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[
 d = \left(\sum_{i=1}^{n}|x_i - y_i|^m \right)^{1/m}
 \]</div>
+<p>Merupakan bentuk umum dari Euclidean dan Manhattan.<br />
+Jika <span class="math notranslate nohighlight">\(m=1\)</span> maka menjadi Manhattan, jika <span class="math notranslate nohighlight">\(m=2\)</span> maka menjadi Euclidean.</p>
 </section>
+<hr class="docutils" />
 <section id="cosine-similarity">
 <h3>Cosine Similarity<a class="headerlink" href="#cosine-similarity" title="Link to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[
 Cosine(x,y)=\frac{\sum x_i y_i}{||x|| \; ||y||}
 \]</div>
+<p>Mengukur kemiripan berdasarkan sudut antar vektor, bukan jarak absolut.</p>
 </section>
+<hr class="docutils" />
 <section id="mahalanobis-distance">
 <h3>Mahalanobis Distance<a class="headerlink" href="#mahalanobis-distance" title="Link to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[
 d = \sqrt{(x-y)S^{-1}(x-y)^T}
 \]</div>
+<p>Mempertimbangkan korelasi antar variabel melalui matriks kovarians <span class="math notranslate nohighlight">\(S\)</span>.</p>
 </section>
+<hr class="docutils" />
 <section id="jaccard-similarity">
 <h3>Jaccard Similarity<a class="headerlink" href="#jaccard-similarity" title="Link to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[
 sim(i,j)=\frac{q}{q+r+s}
 \]</div>
+<p>Mengukur kemiripan berdasarkan jumlah elemen yang sama dibanding total elemen unik.</p>
 </section>
 </section>
 </section>
