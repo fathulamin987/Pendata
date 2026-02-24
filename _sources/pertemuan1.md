@@ -59,8 +59,12 @@ Kelebihan data mining antara lain:
 ---
 
 ## Proses Data Mining (CRISP-DM)
+Dalam data mining terdapat tahapan proses yang disebut CRISP-DM. CRISP-DM merupakan metode standar yang digunakan di berbagai industri untuk melakukan proses penambangan data. Metode ini dibuat oleh konsorsium sebagai pedoman umum bagi para praktisi data mining.
 
+CRISP-DM menjelaskan langkah-langkah yang dilakukan dalam suatu proyek data mining dari awal hingga akhir. Model ini memberikan gambaran tentang alur atau siklus kerja proyek data mining. Di dalamnya terdapat beberapa tahapan, tugas yang harus dikerjakan pada setiap tahap.
 CRISP-DM merupakan standar tahapan dalam proses data mining, yaitu:
+
+![alt text](prosesdatamining.png)
 
 1. **Business Understanding**  
    Memahami tujuan dan permasalahan yang akan diselesaikan.
