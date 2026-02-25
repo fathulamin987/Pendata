@@ -1,3 +1,3 @@
 # Coming soon materi
 
-*akan diperbarui*
+*akan diperbarui ditunggu ya brohhh*
