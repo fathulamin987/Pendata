@@ -459,14 +459,17 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+
+<span class="c1"># ----------------------------------</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Membaca file dataset secara lokal</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;IRIS.csv&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Membaca file dataset secara lokal dan menambahkan nama kolom</span>
+<span class="n">nama_kolom</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;sepal_length&#39;</span><span class="p">,</span> <span class="s1">&#39;sepal_width&#39;</span><span class="p">,</span> <span class="s1">&#39;petal_length&#39;</span><span class="p">,</span> <span class="s1">&#39;petal_width&#39;</span><span class="p">,</span> <span class="s1">&#39;species&#39;</span><span class="p">]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;IRIS.csv&#39;</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">nama_kolom</span><span class="p">)</span>
 
 <span class="c1"># Menampilkan 5 baris pertama untuk memastikan data berhasil dimuat</span>
 <span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
@@ -492,16 +495,24 @@ document.write(`
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>5.1</th>
-      <th>3.5</th>
-      <th>1.4</th>
-      <th>0.2</th>
-      <th>Iris-setosa</th>
+      <th>sepal_length</th>
+      <th>sepal_width</th>
+      <th>petal_length</th>
+      <th>petal_width</th>
+      <th>species</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
+      <td>5.1</td>
+      <td>3.5</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>Iris-setosa</td>
+    </tr>
+    <tr>
+      <th>1</th>
       <td>4.9</td>
       <td>3.0</td>
       <td>1.4</td>
@@ -509,7 +520,7 @@ document.write(`
       <td>Iris-setosa</td>
     </tr>
     <tr>
-      <th>1</th>
+      <th>2</th>
       <td>4.7</td>
       <td>3.2</td>
       <td>1.3</td>
@@ -517,7 +528,7 @@ document.write(`
       <td>Iris-setosa</td>
     </tr>
     <tr>
-      <th>2</th>
+      <th>3</th>
       <td>4.6</td>
       <td>3.1</td>
       <td>1.5</td>
@@ -525,19 +536,11 @@ document.write(`
       <td>Iris-setosa</td>
     </tr>
     <tr>
-      <th>3</th>
+      <th>4</th>
       <td>5.0</td>
       <td>3.6</td>
       <td>1.4</td>
       <td>0.2</td>
-      <td>Iris-setosa</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5.4</td>
-      <td>3.9</td>
-      <td>1.7</td>
-      <td>0.4</td>
       <td>Iris-setosa</td>
     </tr>
   </tbody>
@@ -546,7 +549,13 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;IRIS.csv&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Membuat daftar nama kolom</span>
+<span class="n">nama_kolom</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;sepal_length&#39;</span><span class="p">,</span> <span class="s1">&#39;sepal_width&#39;</span><span class="p">,</span> <span class="s1">&#39;petal_length&#39;</span><span class="p">,</span> <span class="s1">&#39;petal_width&#39;</span><span class="p">,</span> <span class="s1">&#39;species&#39;</span><span class="p">]</span>
+
+<span class="c1"># Membaca file dataset dan memasukkan nama kolomnya</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;IRIS.csv&#39;</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">nama_kolom</span><span class="p">)</span>
+
+<span class="c1"># Menampilkan 10 baris pertama untuk memastikan data dan judulnya sudah benar</span>
 <span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -570,16 +579,24 @@ document.write(`
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>5.1</th>
-      <th>3.5</th>
-      <th>1.4</th>
-      <th>0.2</th>
-      <th>Iris-setosa</th>
+      <th>sepal_length</th>
+      <th>sepal_width</th>
+      <th>petal_length</th>
+      <th>petal_width</th>
+      <th>species</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
+      <td>5.1</td>
+      <td>3.5</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>Iris-setosa</td>
+    </tr>
+    <tr>
+      <th>1</th>
       <td>4.9</td>
       <td>3.0</td>
       <td>1.4</td>
@@ -587,7 +604,7 @@ document.write(`
       <td>Iris-setosa</td>
     </tr>
     <tr>
-      <th>1</th>
+      <th>2</th>
       <td>4.7</td>
       <td>3.2</td>
       <td>1.3</td>
@@ -595,7 +612,7 @@ document.write(`
       <td>Iris-setosa</td>
     </tr>
     <tr>
-      <th>2</th>
+      <th>3</th>
       <td>4.6</td>
       <td>3.1</td>
       <td>1.5</td>
@@ -603,7 +620,7 @@ document.write(`
       <td>Iris-setosa</td>
     </tr>
     <tr>
-      <th>3</th>
+      <th>4</th>
       <td>5.0</td>
       <td>3.6</td>
       <td>1.4</td>
@@ -611,7 +628,7 @@ document.write(`
       <td>Iris-setosa</td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>5</th>
       <td>5.4</td>
       <td>3.9</td>
       <td>1.7</td>
@@ -619,7 +636,7 @@ document.write(`
       <td>Iris-setosa</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>6</th>
       <td>4.6</td>
       <td>3.4</td>
       <td>1.4</td>
@@ -627,7 +644,7 @@ document.write(`
       <td>Iris-setosa</td>
     </tr>
     <tr>
-      <th>6</th>
+      <th>7</th>
       <td>5.0</td>
       <td>3.4</td>
       <td>1.5</td>
@@ -635,7 +652,7 @@ document.write(`
       <td>Iris-setosa</td>
     </tr>
     <tr>
-      <th>7</th>
+      <th>8</th>
       <td>4.4</td>
       <td>2.9</td>
       <td>1.4</td>
@@ -643,19 +660,11 @@ document.write(`
       <td>Iris-setosa</td>
     </tr>
     <tr>
-      <th>8</th>
+      <th>9</th>
       <td>4.9</td>
       <td>3.1</td>
       <td>1.5</td>
       <td>0.1</td>
-      <td>Iris-setosa</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>5.4</td>
-      <td>3.7</td>
-      <td>1.5</td>
-      <td>0.2</td>
       <td>Iris-setosa</td>
     </tr>
   </tbody>
@@ -670,17 +679,17 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.DataFrame&#39;&gt;
-RangeIndex: 149 entries, 0 to 148
+RangeIndex: 150 entries, 0 to 149
 Data columns (total 5 columns):
- #   Column       Non-Null Count  Dtype  
----  ------       --------------  -----  
- 0   5.1          149 non-null    float64
- 1   3.5          149 non-null    float64
- 2   1.4          149 non-null    float64
- 3   0.2          149 non-null    float64
- 4   Iris-setosa  149 non-null    str    
+ #   Column        Non-Null Count  Dtype  
+---  ------        --------------  -----  
+ 0   sepal_length  150 non-null    float64
+ 1   sepal_width   150 non-null    float64
+ 2   petal_length  150 non-null    float64
+ 3   petal_width   150 non-null    float64
+ 4   species       150 non-null    str    
 dtypes: float64(4), str(1)
-memory usage: 5.9 KB
+memory usage: 6.0 KB
 </pre></div>
 </div>
 </div>
@@ -712,39 +721,39 @@ memory usage: 5.9 KB
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>5.1</th>
-      <th>3.5</th>
-      <th>1.4</th>
-      <th>0.2</th>
+      <th>sepal_length</th>
+      <th>sepal_width</th>
+      <th>petal_length</th>
+      <th>petal_width</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>5.1</th>
+      <th>sepal_length</th>
       <td>1.000000</td>
-      <td>-0.103784</td>
-      <td>0.871283</td>
-      <td>0.816971</td>
+      <td>-0.109369</td>
+      <td>0.871754</td>
+      <td>0.817954</td>
     </tr>
     <tr>
-      <th>3.5</th>
-      <td>-0.103784</td>
+      <th>sepal_width</th>
+      <td>-0.109369</td>
       <td>1.000000</td>
-      <td>-0.415218</td>
-      <td>-0.350733</td>
+      <td>-0.420516</td>
+      <td>-0.356544</td>
     </tr>
     <tr>
-      <th>1.4</th>
-      <td>0.871283</td>
-      <td>-0.415218</td>
+      <th>petal_length</th>
+      <td>0.871754</td>
+      <td>-0.420516</td>
       <td>1.000000</td>
-      <td>0.962314</td>
+      <td>0.962757</td>
     </tr>
     <tr>
-      <th>0.2</th>
-      <td>0.816971</td>
-      <td>-0.350733</td>
-      <td>0.962314</td>
+      <th>petal_width</th>
+      <td>0.817954</td>
+      <td>-0.356544</td>
+      <td>0.962757</td>
       <td>1.000000</td>
     </tr>
   </tbody>
@@ -753,14 +762,14 @@ memory usage: 5.9 KB
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Statistik deskriptif</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span>
 
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;IRIS.csv&quot;</span><span class="p">)</span>
+<span class="c1"># 1. KITA BACA DATANYA LANGSUNG DI SINI AGAR PASTI 150</span>
+<span class="n">nama_kolom</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;sepal_length&#39;</span><span class="p">,</span> <span class="s1">&#39;sepal_width&#39;</span><span class="p">,</span> <span class="s1">&#39;petal_length&#39;</span><span class="p">,</span> <span class="s1">&#39;petal_width&#39;</span><span class="p">,</span> <span class="s1">&#39;species&#39;</span><span class="p">]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;IRIS.csv&quot;</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">nama_kolom</span><span class="p">)</span>
 
-<span class="c1"># Ambil hanya kolom numerik (tanpa species)</span>
+<span class="c1"># 2. PROSES STATISTIK DESKRIPTIF</span>
 <span class="n">df_numeric</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;int64&#39;</span><span class="p">,</span><span class="s1">&#39;float64&#39;</span><span class="p">])</span>
 
 <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df_numeric</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
@@ -784,60 +793,60 @@ memory usage: 5.9 KB
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>===== Statistik untuk 5.1 =====
-Jumlah Data      : 149
-Rata-rata        : 5.8483221476510066
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>===== Statistik untuk sepal_length =====
+Jumlah Data      : 150
+Rata-rata        : 5.843333333333334
 Nilai Minimum    : 4.3
 Q1               : 5.1
 Median (Q2)      : 5.8
 Q3               : 6.4
 Nilai Maximum    : 7.9
-Kemencengan      : 0.303098
+Kemencengan      : 0.314911
 Modus            : 5.0 dengan jumlah 10
-Standar Deviasi  : 0.828594
-Variansi         : 0.686568
+Standar Deviasi  : 0.828066
+Variansi         : 0.685694
 
 
-===== Statistik untuk 3.5 =====
-Jumlah Data      : 149
-Rata-rata        : 3.051006711409396
+===== Statistik untuk sepal_width =====
+Jumlah Data      : 150
+Rata-rata        : 3.0540000000000003
 Nilai Minimum    : 2.0
 Q1               : 2.8
 Median (Q2)      : 3.0
 Q3               : 3.3
 Nilai Maximum    : 4.4
-Kemencengan      : 0.350101
+Kemencengan      : 0.334053
 Modus            : 3.0 dengan jumlah 26
-Standar Deviasi  : 0.433499
-Variansi         : 0.187921
+Standar Deviasi  : 0.433594
+Variansi         : 0.188004
 
 
-===== Statistik untuk 1.4 =====
-Jumlah Data      : 149
-Rata-rata        : 3.774496644295302
+===== Statistik untuk petal_length =====
+Jumlah Data      : 150
+Rata-rata        : 3.758666666666666
 Nilai Minimum    : 1.0
 Q1               : 1.6
-Median (Q2)      : 4.4
+Median (Q2)      : 4.35
 Q3               : 5.1
 Nilai Maximum    : 6.9
-Kemencengan      : -0.289459
+Kemencengan      : -0.274464
 Modus            : 1.5 dengan jumlah 14
-Standar Deviasi  : 1.759651
-Variansi         : 3.096372
+Standar Deviasi  : 1.76442
+Variansi         : 3.113179
 
 
-===== Statistik untuk 0.2 =====
-Jumlah Data      : 149
-Rata-rata        : 1.2053691275167786
+===== Statistik untuk petal_width =====
+Jumlah Data      : 150
+Rata-rata        : 1.1986666666666668
 Nilai Minimum    : 0.1
 Q1               : 0.3
 Median (Q2)      : 1.3
 Q3               : 1.8
 Nilai Maximum    : 2.5
-Kemencengan      : -0.117808
-Modus            : 0.2 dengan jumlah 27
-Standar Deviasi  : 0.761292
-Variansi         : 0.579566
+Kemencengan      : -0.104997
+Modus            : 0.2 dengan jumlah 28
+Standar Deviasi  : 0.763161
+Variansi         : 0.582414
 </pre></div>
 </div>
 </div>
