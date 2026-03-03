@@ -391,7 +391,8 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformasi-data">Transformasi Data</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#encoding-data-kategorikal">1. Encoding Data Kategorikal</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normalisasi-min-max">2. Normalisasi Min-Max</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contoh-perhitungan">Contoh Perhitungan</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contoh-perhitungan-atribut-age">Contoh Perhitungan (Atribut Age)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#catatan">Catatan</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mengukur-jarak-tipe-data-campuran-gower-distance">Mengukur Jarak Tipe Data Campuran (Gower Distance)</a><ul class="nav section-nav flex-column">
@@ -422,7 +423,7 @@ document.write(`
 <section id="data-understanding">
 <h2>Data Understanding<a class="headerlink" href="#data-understanding" title="Link to this heading">#</a></h2>
 <p>Dataset Online Foods berisi informasi mengenai profil demografi dan perilaku pelanggan dalam layanan pemesanan makanan online. Dataset ini digunakan untuk menganalisis pola konsumsi berdasarkan faktor sosial-ekonomi. Dataset ini terdiri dari 388 data dan memiliki 13 atribut.</p>
-<p>Tujuan utama dari penggunaan dataset ini dalam mata kuliah Penambangan Data adalah untuk mempraktikkan penghitungan kemiripan (similarity) antar pelanggan yang memiliki karakteristik data campuran.</p>
+<p>Tujuan utama dari penggunaan dataset ini adalah untuk mempraktikkan penghitungan kemiripan (similarity) antar pelanggan yang memiliki karakteristik data campuran (numerik dan kategorikal).</p>
 <p><strong>Dataset ini terdiri dari:</strong></p>
 <ul class="simple">
 <li><p>388 data</p></li>
@@ -563,7 +564,7 @@ Kategori yang memiliki jenjang atau level tertentu.</p>
 </div>
 <section id="deskripsi-atribut-dataset-onlinefoods-csv">
 <h3>Deskripsi Atribut Dataset onlinefoods.csv<a class="headerlink" href="#deskripsi-atribut-dataset-onlinefoods-csv" title="Link to this heading">#</a></h3>
-<p>Berikut adalah daftar lengkap 13 atribut dalam dataset:</p>
+<p>Berikut adalah daftar lengkap 13 atribut yang terdapat pada dataset:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>No</p></th>
@@ -595,12 +596,12 @@ Kategori yang memiliki jenjang atau level tertentu.</p>
 </tr>
 <tr class="row-even"><td><p>5</p></td>
 <td><p>Monthly Income</p></td>
-<td><p>Pendapatan bulanan</p></td>
+<td><p>Rentang pendapatan bulanan</p></td>
 <td><p>Kategorikal (Ordinal)</p></td>
 </tr>
 <tr class="row-odd"><td><p>6</p></td>
 <td><p>Educational Qualifications</p></td>
-<td><p>Tingkat pendidikan</p></td>
+<td><p>Tingkat pendidikan terakhir</p></td>
 <td><p>Kategorikal (Ordinal)</p></td>
 </tr>
 <tr class="row-even"><td><p>7</p></td>
@@ -609,33 +610,33 @@ Kategori yang memiliki jenjang atau level tertentu.</p>
 <td><p>Numerik</p></td>
 </tr>
 <tr class="row-odd"><td><p>8</p></td>
-<td><p>Latitude</p></td>
-<td><p>Titik koordinat lintang</p></td>
+<td><p>latitude</p></td>
+<td><p>Koordinat lintang lokasi pelanggan</p></td>
 <td><p>Numerik</p></td>
 </tr>
 <tr class="row-even"><td><p>9</p></td>
-<td><p>Longitude</p></td>
-<td><p>Titik koordinat bujur</p></td>
+<td><p>longitude</p></td>
+<td><p>Koordinat bujur lokasi pelanggan</p></td>
 <td><p>Numerik</p></td>
 </tr>
 <tr class="row-odd"><td><p>10</p></td>
 <td><p>Pin code</p></td>
-<td><p>Kode pos area</p></td>
-<td><p>Numerik (Identitas)</p></td>
+<td><p>Kode pos area pelanggan</p></td>
+<td><p>Numerik</p></td>
 </tr>
 <tr class="row-even"><td><p>11</p></td>
 <td><p>Output</p></td>
-<td><p>Keputusan memesan kembali</p></td>
+<td><p>Keputusan memesan kembali (Yes/No)</p></td>
 <td><p>Biner (Target)</p></td>
 </tr>
 <tr class="row-odd"><td><p>12</p></td>
 <td><p>Feedback</p></td>
-<td><p>Ulasan pelanggan</p></td>
+<td><p>Ulasan pelanggan (Positive/Negative)</p></td>
 <td><p>Biner</p></td>
 </tr>
 <tr class="row-even"><td><p>13</p></td>
 <td><p>Unnamed: 12</p></td>
-<td><p>Atribut tambahan (konfirmasi/status)</p></td>
+<td><p>Duplikasi dari atribut Output</p></td>
 <td><p>Biner</p></td>
 </tr>
 </tbody>
@@ -645,45 +646,62 @@ Kategori yang memiliki jenjang atau level tertentu.</p>
 </section>
 <section id="karakteristik-dataset">
 <h3>Karakteristik Dataset<a class="headerlink" href="#karakteristik-dataset" title="Link to this heading">#</a></h3>
-<p>Dataset memiliki tipe data campuran:</p>
-<p><strong>Numerik</strong></p>
-<ul class="simple">
-<li><p>Age</p></li>
-<li><p>Family size</p></li>
-<li><p>Latitude</p></li>
-<li><p>Longitude</p></li>
-</ul>
-<p><strong>Kategorikal</strong></p>
-<ul class="simple">
-<li><p>Gender</p></li>
-<li><p>Marital Status</p></li>
-<li><p>Occupation</p></li>
-<li><p>Monthly Income</p></li>
-<li><p>Educational Qualifications</p></li>
-</ul>
-<p><strong>Biner</strong></p>
-<ul class="simple">
-<li><p>Output</p></li>
-<li><p>Feedback</p></li>
-<li><p>Unnamed: 12</p></li>
-</ul>
+<p>Dataset memiliki tipe data campuran sebagai berikut:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Kelompok Tipe Data</p></th>
+<th class="head"><p>Atribut</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Numerik</strong></p></td>
+<td><p>Age, Family size, Latitude, Longitude, Pin code</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Kategorikal (Nominal)</strong></p></td>
+<td><p>Gender, Marital Status, Occupation</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Kategorikal (Ordinal)</strong></p></td>
+<td><p>Monthly Income, Educational Qualifications</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Biner</strong></p></td>
+<td><p>Output, Feedback, Unnamed: 12</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 <hr class="docutils" />
 </section>
 <section id="penanganan-missing-value">
 <h3>Penanganan Missing Value<a class="headerlink" href="#penanganan-missing-value" title="Link to this heading">#</a></h3>
-<p><strong>Age &amp; Family size</strong><br />
-Tidak memiliki missing value.<br />
-Jika terdapat missing value, akan diisi menggunakan <strong>Median</strong>.</p>
-<p><strong>Gender &amp; Occupation</strong><br />
-Tidak memiliki missing value.<br />
-Jika terdapat missing value, akan diisi menggunakan <strong>Modus</strong>.</p>
-<p><strong>Unnamed: 12 (Atribut ke-13)</strong><br />
-Jika kolom ini merupakan duplikasi dari atribut Output, maka atribut dapat dihapus agar tidak terjadi redundansi dalam perhitungan jarak.</p>
+<p>Berdasarkan tahap <em>Data Understanding</em>, dataset relatif bersih. Namun prosedur penanganannya adalah sebagai berikut:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Jenis Atribut</p></th>
+<th class="head"><p>Metode Penanganan</p></th>
+<th class="head"><p>Alasan</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Numerik (Age, Family size, dll)</p></td>
+<td><p>Median</p></td>
+<td><p>Mengurangi pengaruh pencilan (outlier)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Kategorikal (Gender, Occupation, dll)</p></td>
+<td><p>Modus</p></td>
+<td><p>Menggunakan kategori yang paling sering muncul</p></td>
+</tr>
+<tr class="row-even"><td><p>Unnamed: 12</p></td>
+<td><p>Dihapus</p></td>
+<td><p>Duplikasi Output sehingga menyebabkan redundansi</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 <hr class="docutils" />
 </section>
 <section id="seleksi-atribut-untuk-perhitungan-jarak">
 <h3>Seleksi Atribut untuk Perhitungan Jarak<a class="headerlink" href="#seleksi-atribut-untuk-perhitungan-jarak" title="Link to this heading">#</a></h3>
-<p>Seleksi atribut bertujuan menentukan fitur yang paling berpengaruh dalam menentukan kemiripan profil pelanggan.</p>
+<p>Seleksi atribut bertujuan menentukan fitur yang paling relevan dalam mengukur kemiripan profil pelanggan tanpa menyertakan variabel target atau atribut lokasi.</p>
 <hr class="docutils" />
 </section>
 <section id="atribut-yang-digunakan">
@@ -692,13 +710,13 @@ Jika kolom ini merupakan duplikasi dari atribut Output, maka atribut dapat dihap
 <thead>
 <tr class="row-odd"><th class="head"><p>No</p></th>
 <th class="head"><p>Atribut</p></th>
-<th class="head"><p>Alasan</p></th>
+<th class="head"><p>Alasan Penggunaan</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>1</p></td>
 <td><p>Age</p></td>
-<td><p>Faktor usia menentukan selera makanan</p></td>
+<td><p>Menentukan kemiripan selera berdasarkan kelompok usia</p></td>
 </tr>
 <tr class="row-odd"><td><p>2</p></td>
 <td><p>Gender</p></td>
@@ -706,15 +724,15 @@ Jika kolom ini merupakan duplikasi dari atribut Output, maka atribut dapat dihap
 </tr>
 <tr class="row-even"><td><p>3</p></td>
 <td><p>Occupation</p></td>
-<td><p>Status pekerjaan menentukan waktu &amp; frekuensi pesan</p></td>
+<td><p>Mencerminkan gaya hidup &amp; frekuensi pemesanan</p></td>
 </tr>
 <tr class="row-odd"><td><p>4</p></td>
 <td><p>Family size</p></td>
-<td><p>Keluarga besar cenderung memesan lebih banyak</p></td>
+<td><p>Mempengaruhi jumlah porsi yang dipesan</p></td>
 </tr>
 <tr class="row-even"><td><p>5</p></td>
 <td><p>Monthly Income</p></td>
-<td><p>Menentukan daya beli pelanggan</p></td>
+<td><p>Menentukan daya beli &amp; segmentasi ekonomi</p></td>
 </tr>
 </tbody>
 </table>
@@ -723,44 +741,63 @@ Jika kolom ini merupakan duplikasi dari atribut Output, maka atribut dapat dihap
 </section>
 <section id="atribut-yang-tidak-digunakan">
 <h3>Atribut yang Tidak Digunakan<a class="headerlink" href="#atribut-yang-tidak-digunakan" title="Link to this heading">#</a></h3>
-<p><strong>Latitude, Longitude, Pin code</strong><br />
-Terlalu teknis/lokasional dan tidak merepresentasikan karakteristik personal secara langsung.</p>
-<p><strong>Output &amp; Unnamed: 12</strong><br />
-Merupakan variabel target (hasil), bukan fitur karakteristik.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Atribut</p></th>
+<th class="head"><p>Alasan Tidak Digunakan</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Latitude, Longitude, Pin code</p></td>
+<td><p>Bersifat geografis murni dan tidak mencerminkan perilaku personal</p></td>
+</tr>
+<tr class="row-odd"><td><p>Output, Feedback, Unnamed: 12</p></td>
+<td><p>Variabel target/label, bukan fitur karakteristik</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 <hr class="docutils" />
 </section>
 <section id="transformasi-data">
 <h3>Transformasi Data<a class="headerlink" href="#transformasi-data" title="Link to this heading">#</a></h3>
-<p>Sebelum menghitung jarak, data perlu diseragamkan.</p>
+<p>Sebelum menghitung jarak, data perlu diseragamkan melalui dua tahap:</p>
 <hr class="docutils" />
 </section>
 <section id="encoding-data-kategorikal">
 <h3>1. Encoding Data Kategorikal<a class="headerlink" href="#encoding-data-kategorikal" title="Link to this heading">#</a></h3>
-<p>Mengubah data teks menjadi numerik agar dapat dihitung dengan rumus jarak.</p>
+<p>Mengubah data teks menjadi numerik.</p>
 <p>Contoh:</p>
 <ul class="simple">
 <li><p>Gender: Female = 0, Male = 1</p></li>
-<li><p>Marital Status: Single = 0, Married = 1</p></li>
+<li><p>Occupation:</p>
+<ul>
+<li><p>Student = 0</p></li>
+<li><p>Employee = 1</p></li>
+<li><p>Self Employed = 2</p></li>
+<li><p>Housewife = 3</p></li>
+</ul>
+</li>
 </ul>
 <hr class="docutils" />
 </section>
 <section id="normalisasi-min-max">
 <h3>2. Normalisasi Min-Max<a class="headerlink" href="#normalisasi-min-max" title="Link to this heading">#</a></h3>
-<p>Karena rentang Age (18–33) lebih besar dibanding Family size (1–6), maka dilakukan normalisasi agar semua atribut berada pada skala yang sama (0–1).</p>
-<p><strong>Rumus Normalisasi:</strong></p>
+<p>Dilakukan agar semua atribut numerik berada pada skala yang sama (0–1).</p>
+<p><strong>Rumus:</strong></p>
 <div class="math notranslate nohighlight">
 \[
 x' = \frac{x - Min}{Max - Min}
 \]</div>
 <hr class="docutils" />
 </section>
-<section id="contoh-perhitungan">
-<h3>Contoh Perhitungan<a class="headerlink" href="#contoh-perhitungan" title="Link to this heading">#</a></h3>
+<section id="contoh-perhitungan-atribut-age">
+<h3>Contoh Perhitungan (Atribut Age)<a class="headerlink" href="#contoh-perhitungan-atribut-age" title="Link to this heading">#</a></h3>
 <p>Misalkan:</p>
 <ul class="simple">
 <li><p>Nilai minimum Age = 18</p></li>
 <li><p>Nilai maksimum Age = 33</p></li>
-<li><p>Pelanggan memiliki Age = 24</p></li>
+<li><p>Usia pelanggan = 24</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
@@ -775,7 +812,13 @@ x' = \frac{24 - 18}{33 - 18}
 = 0.4
 \]</div>
 <hr class="docutils" />
-<p>Dengan demikian, nilai usia 24 tahun berubah menjadi 0.4 dalam skala 0–1, sehingga memiliki bobot yang sebanding dengan atribut lainnya dalam perhitungan jarak.</p>
+</section>
+<section id="catatan">
+<h3>Catatan<a class="headerlink" href="#catatan" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Perhitungan normalisasi Age sudah benar secara matematis (<span class="math notranslate nohighlight">\(6/15 = 0.4\)</span>).</p></li>
+<li><p>Atribut <strong>Unnamed: 12</strong> dihapus karena merupakan duplikasi dari Output dan dapat menyebabkan redundansi dalam perhitungan jarak.</p></li>
+</ul>
 </section>
 </section>
 <section id="mengukur-jarak-tipe-data-campuran-gower-distance">
@@ -1095,7 +1138,8 @@ x_2 \text{ dan } x_3
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformasi-data">Transformasi Data</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#encoding-data-kategorikal">1. Encoding Data Kategorikal</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normalisasi-min-max">2. Normalisasi Min-Max</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contoh-perhitungan">Contoh Perhitungan</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contoh-perhitungan-atribut-age">Contoh Perhitungan (Atribut Age)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#catatan">Catatan</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mengukur-jarak-tipe-data-campuran-gower-distance">Mengukur Jarak Tipe Data Campuran (Gower Distance)</a><ul class="nav section-nav flex-column">
