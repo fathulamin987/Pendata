@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Pengantar Data Mining &#8212; Materi Penambangan Data</title>
+    <title>Mengukur Jarak Campuran &#8212; Materi Penambangan Data</title>
   
   
   
@@ -57,11 +57,11 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'pertemuan1';</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'dataCampur';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Memahami Data" href="pertemuan2.html" />
-    <link rel="prev" title="My Intro" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -124,6 +124,8 @@
       
       
       
+        
+      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -179,8 +181,8 @@
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Pengantar Data Mining</a></li>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="pertemuan1.html">Pengantar Data Mining</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pertemuan2.html">Memahami Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pertemuan3.html">Data understanding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pertemuan4.html">Mengukur Jarak Numerik</a></li>
@@ -255,7 +257,7 @@
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fpertemuan1.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FdataCampur.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -285,7 +287,7 @@
       
       
       
-      <li><a href="_sources/pertemuan1.md" target="_blank"
+      <li><a href="_sources/dataCampur.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -295,7 +297,7 @@
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
 </li>
       
@@ -369,7 +371,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Pengantar Data Mining</h1>
+    <h1>Mengukur Jarak Campuran</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -379,15 +381,16 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apa-itu-data-mining">Apa Itu Data Mining?</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pengertian-data-mining">Pengertian Data Mining</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gambaran-sederhana">Gambaran Sederhana</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan-data-mining">Tujuan Data Mining</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bidang-ilmu-pendukung">Bidang Ilmu Pendukung</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#keunggulan-data-mining">Keunggulan Data Mining</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#online-foods-dataset">Online Foods Dataset</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mengukur-jarak-tipe-data-campuran-gower-distance">Mengukur Jarak Tipe Data Campuran (Gower Distance)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-yang-digunakan-3-sampel-pertama">1. Data yang Digunakan (3 Sampel Pertama)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rumus-dasar-gower-distance">2. Rumus Dasar Gower Distance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-manual">3. Perhitungan Manual</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matriks-jarak-gower-3x3">4. Matriks Jarak Gower (3x3)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretasi-hasil">5. Interpretasi Hasil</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">Kesimpulan</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proses-data-mining-crisp-dm">Proses Data Mining (CRISP-DM)</a></li>
 </ul>
             </nav>
         </div>
@@ -399,81 +402,207 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="pengantar-data-mining">
-<h1>Pengantar Data Mining<a class="headerlink" href="#pengantar-data-mining" title="Link to this heading">#</a></h1>
-<section id="apa-itu-data-mining">
-<h2>Apa Itu Data Mining?<a class="headerlink" href="#apa-itu-data-mining" title="Link to this heading">#</a></h2>
-<section id="pengertian-data-mining">
-<h3>Pengertian Data Mining<a class="headerlink" href="#pengertian-data-mining" title="Link to this heading">#</a></h3>
-<p>Data mining adalah proses menelusuri dan mengolah kumpulan data berukuran besar untuk menemukan pola, hubungan, serta informasi penting yang tersembunyi di dalamnya.</p>
-<p>Melalui proses ini, data yang awalnya hanya berupa angka atau catatan dapat diubah menjadi pengetahuan yang bermanfaat, khususnya untuk mendukung pengambilan keputusan.</p>
-</section>
+  <section class="tex2jax_ignore mathjax_ignore" id="mengukur-jarak-campuran">
+<h1>Mengukur Jarak Campuran<a class="headerlink" href="#mengukur-jarak-campuran" title="Link to this heading">#</a></h1>
+<section id="online-foods-dataset">
+<h2>Online Foods Dataset<a class="headerlink" href="#online-foods-dataset" title="Link to this heading">#</a></h2>
+<section id="mengukur-jarak-tipe-data-campuran-gower-distance">
+<h3>Mengukur Jarak Tipe Data Campuran (Gower Distance)<a class="headerlink" href="#mengukur-jarak-tipe-data-campuran-gower-distance" title="Link to this heading">#</a></h3>
+<p>Dataset memiliki atribut campuran (numerik dan kategorikal), sehingga digunakan <strong>Gower Distance</strong> untuk menghitung jarak antar data.</p>
 <hr class="docutils" />
-<section id="gambaran-sederhana">
-<h3>Gambaran Sederhana<a class="headerlink" href="#gambaran-sederhana" title="Link to this heading">#</a></h3>
-<p>Agar lebih mudah dipahami, data mining dapat dianalogikan seperti proses penambangan emas.</p>
-<p>Seorang penambang harus mengolah dan menyaring tumpukan tanah serta pasir dalam jumlah besar untuk menemukan butiran emas yang bernilai. Tidak semua yang digali memiliki nilai, namun melalui proses penyaringan yang tepat, emas tersebut akhirnya dapat ditemukan.</p>
-<p>Hal yang sama terjadi pada data. Dari banyaknya data yang tersimpan, hanya sebagian yang mengandung informasi penting. Melalui teknik dan metode tertentu, data tersebut diproses dan dianalisis hingga menghasilkan informasi yang berguna.</p>
 </section>
-<hr class="docutils" />
-<section id="tujuan-data-mining">
-<h3>Tujuan Data Mining<a class="headerlink" href="#tujuan-data-mining" title="Link to this heading">#</a></h3>
-<p>Beberapa tujuan utama data mining antara lain:</p>
+<section id="data-yang-digunakan-3-sampel-pertama">
+<h3>1. Data yang Digunakan (3 Sampel Pertama)<a class="headerlink" href="#data-yang-digunakan-3-sampel-pertama" title="Link to this heading">#</a></h3>
+<p>Atribut yang digunakan:</p>
 <ul class="simple">
-<li><p>Menemukan pola atau kecenderungan data</p></li>
-<li><p>Mengetahui hubungan antar data</p></li>
-<li><p>Membuat prediksi masa depan</p></li>
-<li><p>Mengelompokkan data berdasarkan karakteristik</p></li>
-<li><p>Mendukung pengambilan keputusan</p></li>
+<li><p>Numerik: Age (<span class="math notranslate nohighlight">\(p_1\)</span>)</p></li>
+<li><p>Kategorikal: Gender (<span class="math notranslate nohighlight">\(p_2\)</span>), Occupation (<span class="math notranslate nohighlight">\(p_3\)</span>)</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+x_1 = (20, \text{Male}, \text{Student})
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+x_2 = (24, \text{Female}, \text{Student})
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+x_3 = (22, \text{Male}, \text{Employee})
+\]</div>
+<hr class="docutils" />
+</section>
+<section id="rumus-dasar-gower-distance">
+<h3>2. Rumus Dasar Gower Distance<a class="headerlink" href="#rumus-dasar-gower-distance" title="Link to this heading">#</a></h3>
+<p><strong>Rumus Umum</strong></p>
+<div class="math notranslate nohighlight">
+\[
+d(i,j) = \frac{\delta_{ij}^{(Age)} + \delta_{ij}^{(Gender)} + \delta_{ij}^{(Occupation)}}{3}
+\]</div>
+<p>Penjelasan:<br />
+Jarak total diperoleh dari rata-rata selisih tiap atribut.</p>
+<hr class="docutils" />
+<p><strong>Ketentuan Selisih (<span class="math notranslate nohighlight">\(\delta\)</span>)</strong></p>
+<p><strong>A. Data Kategorikal</strong></p>
+<p>Jika sama:</p>
+<div class="math notranslate nohighlight">
+\[
+\delta = 0
+\]</div>
+<p>Jika berbeda:</p>
+<div class="math notranslate nohighlight">
+\[
+\delta = 1
+\]</div>
+<hr class="docutils" />
+<p><strong>B. Data Numerik</strong></p>
+<div class="math notranslate nohighlight">
+\[
+\delta = \frac{|x_i - x_j|}{R}
+\]</div>
+<p>Dengan:</p>
+<div class="math notranslate nohighlight">
+\[
+R = \text{nilai maksimum} - \text{nilai minimum}
+\]</div>
+<p>Untuk Age:</p>
+<div class="math notranslate nohighlight">
+\[
+R = 33 - 18 = 15
+\]</div>
+<p>Artinya selisih umur dinormalisasi agar berada pada rentang 0 sampai 1.</p>
+<hr class="docutils" />
+</section>
+<section id="perhitungan-manual">
+<h3>3. Perhitungan Manual<a class="headerlink" href="#perhitungan-manual" title="Link to this heading">#</a></h3>
+<hr class="docutils" />
+<p><strong>A. Jarak antara <span class="math notranslate nohighlight">\(x_1\)</span> dan <span class="math notranslate nohighlight">\(x_2\)</span></strong></p>
+<p>Age:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{|20 - 24|}{15} = \frac{4}{15} = 0.267
+\]</div>
+<p>Gender: Male vs Female → berbeda = 1</p>
+<p>Occupation: Student vs Student → sama = 0</p>
+<p>Hasil akhir:</p>
+<div class="math notranslate nohighlight">
+\[
+d(x_1,x_2) = \frac{0.267 + 1 + 0}{3}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+= \frac{1.267}{3}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+= 0.422
+\]</div>
+<hr class="docutils" />
+<p><strong>B. Jarak antara <span class="math notranslate nohighlight">\(x_1\)</span> dan <span class="math notranslate nohighlight">\(x_3\)</span></strong></p>
+<p>Age:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{|20 - 22|}{15} = \frac{2}{15} = 0.133
+\]</div>
+<p>Gender: Male vs Male → sama = 0</p>
+<p>Occupation: Student vs Employee → berbeda = 1</p>
+<p>Hasil akhir:</p>
+<div class="math notranslate nohighlight">
+\[
+d(x_1,x_3) = \frac{0.133 + 0 + 1}{3}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+= \frac{1.133}{3}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+= 0.378
+\]</div>
+<hr class="docutils" />
+<p><strong>C. Jarak antara <span class="math notranslate nohighlight">\(x_2\)</span> dan <span class="math notranslate nohighlight">\(x_3\)</span></strong></p>
+<p>Age:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{|24 - 22|}{15} = \frac{2}{15} = 0.133
+\]</div>
+<p>Gender: Female vs Male → berbeda = 1</p>
+<p>Occupation: Student vs Employee → berbeda = 1</p>
+<p>Hasil akhir:</p>
+<div class="math notranslate nohighlight">
+\[
+d(x_2,x_3) = \frac{0.133 + 1 + 1}{3}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+= \frac{2.133}{3}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+= 0.711
+\]</div>
+<hr class="docutils" />
+</section>
+<section id="matriks-jarak-gower-3x3">
+<h3>4. Matriks Jarak Gower (3x3)<a class="headerlink" href="#matriks-jarak-gower-3x3" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+D =
+\begin{bmatrix}
+0 &amp; 0.422 &amp; 0.378 \\
+0.422 &amp; 0 &amp; 0.711 \\
+0.378 &amp; 0.711 &amp; 0
+\end{bmatrix}
+\end{split}\]</div>
+<p>Penjelasan:</p>
+<ul class="simple">
+<li><p>Matriks simetris</p></li>
+<li><p>Diagonal bernilai 0</p></li>
+</ul>
+<hr class="docutils" />
+</section>
+<section id="interpretasi-hasil">
+<h3>5. Interpretasi Hasil<a class="headerlink" href="#interpretasi-hasil" title="Link to this heading">#</a></h3>
+<p><strong>Makna Nilai Jarak</strong></p>
+<ul class="simple">
+<li><p>Nilai mendekati 0 → sangat mirip</p></li>
+<li><p>Nilai mendekati 1 → sangat berbeda</p></li>
+</ul>
+<hr class="docutils" />
+<p><strong>Data Paling Mirip</strong></p>
+<div class="math notranslate nohighlight">
+\[
+x_1 \text{ dan } x_3
+\]</div>
+<p>Karena memiliki jarak terkecil:</p>
+<div class="math notranslate nohighlight">
+\[
+0.378
+\]</div>
+<p>Mereka memiliki gender sama dan umur tidak jauh berbeda.</p>
+<hr class="docutils" />
+<p><strong>Data Paling Berbeda</strong></p>
+<div class="math notranslate nohighlight">
+\[
+x_2 \text{ dan } x_3
+\]</div>
+<p>Karena memiliki jarak terbesar:</p>
+<div class="math notranslate nohighlight">
+\[
+0.711
+\]</div>
+<p>Mereka berbeda pada gender, occupation, dan usia.</p>
+<hr class="docutils" />
+</section>
+<section id="kesimpulan">
+<h3>Kesimpulan<a class="headerlink" href="#kesimpulan" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Gower Distance cocok untuk data campuran.</p></li>
+<li><p>Atribut numerik dinormalisasi.</p></li>
+<li><p>Atribut kategorikal dinilai 0 atau 1.</p></li>
+<li><p>Pasangan paling mirip: <span class="math notranslate nohighlight">\(x_1\)</span> dan <span class="math notranslate nohighlight">\(x_3\)</span>.</p></li>
 </ul>
 </section>
-<hr class="docutils" />
-<section id="bidang-ilmu-pendukung">
-<h3>Bidang Ilmu Pendukung<a class="headerlink" href="#bidang-ilmu-pendukung" title="Link to this heading">#</a></h3>
-<p>Data mining didukung oleh berbagai disiplin ilmu, di antaranya:</p>
-<ul class="simple">
-<li><p>Statistik</p></li>
-<li><p>Matematika</p></li>
-<li><p>Machine Learning</p></li>
-<li><p>Kecerdasan Buatan (Artificial Intelligence)</p></li>
-<li><p>Sistem Basis Data</p></li>
-</ul>
-<p>Gabungan ilmu tersebut digunakan untuk mengekstraksi pengetahuan dari database dalam skala besar.</p>
-</section>
-<hr class="docutils" />
-<section id="keunggulan-data-mining">
-<h3>Keunggulan Data Mining<a class="headerlink" href="#keunggulan-data-mining" title="Link to this heading">#</a></h3>
-<p>Kelebihan data mining antara lain:</p>
-<ul class="simple">
-<li><p>Mengolah data dalam jumlah besar</p></li>
-<li><p>Menemukan pola tersembunyi</p></li>
-<li><p>Membantu proses prediksi</p></li>
-<li><p>Mendukung keputusan yang lebih akurat</p></li>
-<li><p>Menghemat waktu analisis data</p></li>
-</ul>
-</section>
-</section>
-<hr class="docutils" />
-<section id="proses-data-mining-crisp-dm">
-<h2>Proses Data Mining (CRISP-DM)<a class="headerlink" href="#proses-data-mining-crisp-dm" title="Link to this heading">#</a></h2>
-<p>Dalam data mining terdapat tahapan proses yang disebut CRISP-DM. CRISP-DM merupakan metode standar yang digunakan di berbagai industri untuk melakukan proses penambangan data. Metode ini dibuat oleh konsorsium sebagai pedoman umum bagi para praktisi data mining.</p>
-<p>CRISP-DM menjelaskan langkah-langkah yang dilakukan dalam suatu proyek data mining dari awal hingga akhir. Model ini memberikan gambaran tentang alur atau siklus kerja proyek data mining. Di dalamnya terdapat beberapa tahapan, tugas yang harus dikerjakan pada setiap tahap.
-CRISP-DM merupakan standar tahapan dalam proses data mining, yaitu:</p>
-<p><img alt="alt text" src="_images/prosesdatamining.png" /></p>
-<ol class="arabic simple">
-<li><p><strong>Business Understanding</strong><br />
-Memahami tujuan dan permasalahan yang akan diselesaikan.</p></li>
-<li><p><strong>Data Understanding</strong><br />
-Mengumpulkan serta mempelajari karakteristik data.</p></li>
-<li><p><strong>Data Preparation</strong><br />
-Membersihkan dan menyiapkan data sebelum diolah.</p></li>
-<li><p><strong>Modeling</strong><br />
-Menerapkan metode atau algoritma analisis.</p></li>
-<li><p><strong>Evaluation</strong><br />
-Menilai keakuratan serta kesesuaian hasil model.</p></li>
-<li><p><strong>Deployment</strong><br />
-Menerapkan hasil analisis ke dalam penggunaan nyata.</p></li>
-</ol>
 </section>
 </section>
 
@@ -507,24 +636,6 @@ Menerapkan hasil analisis ke dalam penggunaan nyata.</p></li>
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="intro.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">My Intro</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="pertemuan2.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Memahami Data</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
@@ -541,15 +652,16 @@ Menerapkan hasil analisis ke dalam penggunaan nyata.</p></li>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apa-itu-data-mining">Apa Itu Data Mining?</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pengertian-data-mining">Pengertian Data Mining</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gambaran-sederhana">Gambaran Sederhana</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan-data-mining">Tujuan Data Mining</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bidang-ilmu-pendukung">Bidang Ilmu Pendukung</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#keunggulan-data-mining">Keunggulan Data Mining</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#online-foods-dataset">Online Foods Dataset</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mengukur-jarak-tipe-data-campuran-gower-distance">Mengukur Jarak Tipe Data Campuran (Gower Distance)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-yang-digunakan-3-sampel-pertama">1. Data yang Digunakan (3 Sampel Pertama)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rumus-dasar-gower-distance">2. Rumus Dasar Gower Distance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-manual">3. Perhitungan Manual</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matriks-jarak-gower-3x3">4. Matriks Jarak Gower (3x3)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretasi-hasil">5. Interpretasi Hasil</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">Kesimpulan</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proses-data-mining-crisp-dm">Proses Data Mining (CRISP-DM)</a></li>
 </ul>
   </nav></div>
 
