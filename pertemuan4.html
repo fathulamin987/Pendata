@@ -57,6 +57,8 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'pertemuan4';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -378,7 +380,15 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#food-dataset">Food Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#food-dataset">Food Dataset</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-distance-euclidean-manhattan-minkowski">Perhitungan Distance (Euclidean, Manhattan, Minkowski)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#representasi-data-dalam-bentuk-vektor">1. Representasi Data dalam Bentuk Vektor</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#euclidean-distance">2. Euclidean Distance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manhattan-distance">3. Manhattan Distance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minkowski-distance-p-3">4. Minkowski Distance (<span class="math notranslate nohighlight">\(p = 3\)</span>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-singkat">Analisis Singkat</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -531,6 +541,190 @@ Kategori yang memiliki jenjang atau level tertentu.</p>
 </tbody>
 </table>
 </div>
+<section id="perhitungan-distance-euclidean-manhattan-minkowski">
+<h3>Perhitungan Distance (Euclidean, Manhattan, Minkowski)<a class="headerlink" href="#perhitungan-distance-euclidean-manhattan-minkowski" title="Link to this heading">#</a></h3>
+</section>
+<section id="representasi-data-dalam-bentuk-vektor">
+<h3>1. Representasi Data dalam Bentuk Vektor<a class="headerlink" href="#representasi-data-dalam-bentuk-vektor" title="Link to this heading">#</a></h3>
+<p>Diberikan 3 data dengan dua atribut numerik: Age dan Family Size.</p>
+<div class="math notranslate nohighlight">
+\[
+x_1 = (20,4)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+x_2 = (24,3)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+x_3 = (22,3)
+\]</div>
+<p>Setiap data direpresentasikan sebagai:</p>
+<div class="math notranslate nohighlight">
+\[
+x = (x_1, x_2)
+\]</div>
+<p>Penjelasan:<br />
+Komponen pertama menyatakan umur, dan komponen kedua menyatakan jumlah anggota keluarga.</p>
+<hr class="docutils" />
+</section>
+<section id="euclidean-distance">
+<h3>2. Euclidean Distance<a class="headerlink" href="#euclidean-distance" title="Link to this heading">#</a></h3>
+<p><strong>Rumus</strong></p>
+<div class="math notranslate nohighlight">
+\[
+d(x,y) = \sqrt{(x_1 - y_1)^2 + (x_2 - y_2)^2}
+\]</div>
+<p>Penjelasan:<br />
+Rumus ini menghitung jarak garis lurus antara dua titik dengan mengkuadratkan selisih tiap atribut, menjumlahkannya, lalu diakar.</p>
+<p><strong>Contoh Perhitungan <span class="math notranslate nohighlight">\(x_1\)</span> dan <span class="math notranslate nohighlight">\(x_2\)</span></strong></p>
+<div class="math notranslate nohighlight">
+\[
+d(x_1,x_2) = \sqrt{(20 - 24)^2 + (4 - 3)^2}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+= \sqrt{(-4)^2 + (1)^2}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+= \sqrt{16 + 1}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+= \sqrt{17}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\approx 4.123
+\]</div>
+<p>Artinya jarak antara data 1 dan data 2 adalah sekitar 4.123.</p>
+<p><strong>Matriks Jarak Euclidean</strong></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+D =
+\begin{bmatrix}
+0 &amp; 4.123 &amp; 2.236 \\
+4.123 &amp; 0 &amp; 2.000 \\
+2.236 &amp; 2.000 &amp; 0
+\end{bmatrix}
+\end{split}\]</div>
+<hr class="docutils" />
+</section>
+<section id="manhattan-distance">
+<h3>3. Manhattan Distance<a class="headerlink" href="#manhattan-distance" title="Link to this heading">#</a></h3>
+<p><strong>Rumus</strong></p>
+<div class="math notranslate nohighlight">
+\[
+d(x,y) = |x_1 - y_1| + |x_2 - y_2|
+\]</div>
+<p>Penjelasan:<br />
+Menghitung jumlah selisih absolut tiap atribut tanpa kuadrat dan akar.</p>
+<p><strong>Contoh Perhitungan <span class="math notranslate nohighlight">\(x_1\)</span> dan <span class="math notranslate nohighlight">\(x_2\)</span></strong></p>
+<div class="math notranslate nohighlight">
+\[
+d(x_1,x_2) = |20 - 24| + |4 - 3|
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+= 4 + 1
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+= 5.0
+\]</div>
+<p>Artinya jarak Manhattan antara data 1 dan data 2 adalah 5.0.</p>
+<p><strong>Matriks Jarak Manhattan</strong></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+D =
+\begin{bmatrix}
+0 &amp; 5.0 &amp; 3.0 \\
+5.0 &amp; 0 &amp; 2.0 \\
+3.0 &amp; 2.0 &amp; 0
+\end{bmatrix}
+\end{split}\]</div>
+<hr class="docutils" />
+</section>
+<section id="minkowski-distance-p-3">
+<h3>4. Minkowski Distance (<span class="math notranslate nohighlight">\(p = 3\)</span>)<a class="headerlink" href="#minkowski-distance-p-3" title="Link to this heading">#</a></h3>
+<p><strong>Rumus</strong></p>
+<div class="math notranslate nohighlight">
+\[
+d(x,y) = \left( \sum_{i=1}^{n} |x_i - y_i|^p \right)^{\frac{1}{p}}
+\]</div>
+<p>Dengan:</p>
+<div class="math notranslate nohighlight">
+\[
+p = 3
+\]</div>
+<p>Penjelasan:<br />
+Minkowski adalah bentuk umum dari Manhattan dan Euclidean.<br />
+Jika <span class="math notranslate nohighlight">\(p=1\)</span> → Manhattan<br />
+Jika <span class="math notranslate nohighlight">\(p=2\)</span> → Euclidean<br />
+Jika <span class="math notranslate nohighlight">\(p=3\)</span> → pangkat tiga lalu diakar tiga.</p>
+<p><strong>Contoh Perhitungan <span class="math notranslate nohighlight">\(x_1\)</span> dan <span class="math notranslate nohighlight">\(x_2\)</span></strong></p>
+<div class="math notranslate nohighlight">
+\[
+d(x_1,x_2) = (|20 - 24|^3 + |4 - 3|^3)^{1/3}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+= (|-4|^3 + 1^3)^{1/3}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+= (64 + 1)^{1/3}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+= \sqrt[3]{65}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\approx 4.021
+\]</div>
+<p>Artinya jarak Minkowski antara data 1 dan 2 adalah 4.021.</p>
+<p><strong>Matriks Jarak Minkowski</strong></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+D =
+\begin{bmatrix}
+0 &amp; 4.021 &amp; 2.080 \\
+4.021 &amp; 0 &amp; 2.000 \\
+2.080 &amp; 2.000 &amp; 0
+\end{bmatrix}
+\end{split}\]</div>
+<hr class="docutils" />
+</section>
+<section id="analisis-singkat">
+<h3>Analisis Singkat<a class="headerlink" href="#analisis-singkat" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Matriks bersifat simetris:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+d(x_i,x_j) = d(x_j,x_i)
+\]</div>
+<ol class="arabic simple" start="2">
+<li><p>Elemen diagonal bernilai nol:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+d(x_i,x_i) = 0
+\]</div>
+<ol class="arabic simple" start="3">
+<li><p>Data yang paling mirip adalah <span class="math notranslate nohighlight">\(x_2\)</span> dan <span class="math notranslate nohighlight">\(x_3\)</span> karena memiliki nilai jarak terkecil pada semua metode.</p></li>
+</ol>
+<hr class="docutils" />
+<p><strong>Kesimpulan</strong></p>
+<ul class="simple">
+<li><p>Euclidean → jarak garis lurus</p></li>
+<li><p>Manhattan → jumlah selisih absolut</p></li>
+<li><p>Minkowski → bentuk umum dengan parameter <span class="math notranslate nohighlight">\(p\)</span></p></li>
+<li><p>Data 2 dan Data 3 adalah pasangan paling mirip</p></li>
+</ul>
+</section>
 </section>
 </section>
 
@@ -589,7 +783,15 @@ Kategori yang memiliki jenjang atau level tertentu.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#food-dataset">Food Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#food-dataset">Food Dataset</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-distance-euclidean-manhattan-minkowski">Perhitungan Distance (Euclidean, Manhattan, Minkowski)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#representasi-data-dalam-bentuk-vektor">1. Representasi Data dalam Bentuk Vektor</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#euclidean-distance">2. Euclidean Distance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manhattan-distance">3. Manhattan Distance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minkowski-distance-p-3">4. Minkowski Distance (<span class="math notranslate nohighlight">\(p = 3\)</span>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-singkat">Analisis Singkat</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
