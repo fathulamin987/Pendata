@@ -386,9 +386,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-understanding-online-foods-datasets">Data Understanding - Online Foods Datasets</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deskripsi-atribut-dataset-onlinefoods-csv">Deskripsi Atribut Dataset onlinefoods.csv</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformasi-data">Transformasi Data</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mengukur-jarak-tipe-data-campuran-gower-distance">Mengukur Jarak Tipe Data Campuran (Gower Distance)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mengukur-jarak-tipe-data-campuran-gower-distance">Mengukur Jarak Tipe Data Campuran (Gower Distance)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implematsi-menggunakan-orange">Implematsi Menggunakan Orange</a></li>
 </ul>
 </li>
@@ -789,38 +787,14 @@ x' = \frac{24 - 18}{33 - 18}
 <li><p>Atribut <strong>Unnamed: 12</strong> dihapus karena merupakan duplikasi dari Output dan dapat menyebabkan redundansi dalam perhitungan jarak.</p></li>
 </ul>
 </section>
-</section>
 <section id="mengukur-jarak-tipe-data-campuran-gower-distance">
-<h2>Mengukur Jarak Tipe Data Campuran (Gower Distance)<a class="headerlink" href="#mengukur-jarak-tipe-data-campuran-gower-distance" title="Link to this heading">#</a></h2>
-<p>Dataset memiliki atribut campuran (numerik dan kategorikal), sehingga digunakan <strong>Gower Distance</strong> untuk menghitung jarak antar data.</p>
+<h3>Mengukur Jarak Tipe Data Campuran (Gower Distance)<a class="headerlink" href="#mengukur-jarak-tipe-data-campuran-gower-distance" title="Link to this heading">#</a></h3>
+<p>Dataset memiliki tipe data campuran yaitu numerik, kategorikal, dan ordinal.
+Karena terdapat atribut ordinal (bertingkat), maka atribut tersebut harus
+diubah terlebih dahulu menjadi numerik sesuai tingkatannya sebelum dihitung
+menggunakan Gower Distance.</p>
 <hr class="docutils" />
 <p><strong>1. Data yang Digunakan (3 Sampel Pertama)</strong></p>
-<p>Atribut yang digunakan ditunjukkan pada tabel berikut:</p>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Tipe Data</p></th>
-<th class="head"><p>Atribut</p></th>
-<th class="head"><p>Notasi</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>Numerik</p></td>
-<td><p>Age</p></td>
-<td><p><span class="math notranslate nohighlight">\(p_1\)</span></p></td>
-</tr>
-<tr class="row-odd"><td><p>Kategorikal</p></td>
-<td><p>Gender</p></td>
-<td><p><span class="math notranslate nohighlight">\(p_2\)</span></p></td>
-</tr>
-<tr class="row-even"><td><p>Kategorikal</p></td>
-<td><p>Occupation</p></td>
-<td><p><span class="math notranslate nohighlight">\(p_3\)</span></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<hr class="docutils" />
-<p><strong>Tabel Data Sampel</strong></p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Data</p></th>
@@ -849,42 +823,67 @@ x' = \frac{24 - 18}{33 - 18}
 </table>
 </div>
 <hr class="docutils" />
-<p><strong>Representasi dalam Bentuk Vektor</strong></p>
+<p><strong>2. Proses Mengubah Data Ordinal Menjadi Numerik</strong></p>
+<p>Atribut <strong>Occupation</strong> merupakan data ordinal karena memiliki tingkatan.<br />
+Dilakukan mapping sebagai berikut:</p>
 <div class="math notranslate nohighlight">
 \[
-x_1 = (20,\; \text{Male},\; \text{Student})
+\text{Student} = 1
 \]</div>
 <div class="math notranslate nohighlight">
 \[
-x_2 = (24,\; \text{Female},\; \text{Student})
+\text{Employee} = 2
+\]</div>
+<p>Setelah dikonversi menjadi numerik:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Data</p></th>
+<th class="head"><p>Age</p></th>
+<th class="head"><p>Gender</p></th>
+<th class="head"><p>Occupation (Numeric)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(x_1\)</span></p></td>
+<td><p>20</p></td>
+<td><p>Male</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(x_2\)</span></p></td>
+<td><p>24</p></td>
+<td><p>Female</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(x_3\)</span></p></td>
+<td><p>22</p></td>
+<td><p>Male</p></td>
+<td><p>2</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Representasi vektor:</p>
+<div class="math notranslate nohighlight">
+\[
+x_1 = (20,\; \text{Male},\; 1)
 \]</div>
 <div class="math notranslate nohighlight">
 \[
-x_3 = (22,\; \text{Male},\; \text{Employee})
+x_2 = (24,\; \text{Female},\; 1)
 \]</div>
-<p><strong>2. Rumus Dasar Gower Distance</strong></p>
-<p><strong>Rumus Umum</strong></p>
+<div class="math notranslate nohighlight">
+\[
+x_3 = (22,\; \text{Male},\; 2)
+\]</div>
+<hr class="docutils" />
+<p><strong>3. Rumus Dasar Gower Distance</strong></p>
 <div class="math notranslate nohighlight">
 \[
 d(i,j) = \frac{\delta_{ij}^{(Age)} + \delta_{ij}^{(Gender)} + \delta_{ij}^{(Occupation)}}{3}
 \]</div>
-<p>Penjelasan:<br />
-Jarak total diperoleh dari rata-rata selisih tiap atribut.</p>
 <hr class="docutils" />
-<p><strong>Ketentuan Selisih (<span class="math notranslate nohighlight">\(\delta\)</span>)</strong></p>
-<p><strong>A. Data Kategorikal</strong></p>
-<p>Jika sama:</p>
-<div class="math notranslate nohighlight">
-\[
-\delta = 0
-\]</div>
-<p>Jika berbeda:</p>
-<div class="math notranslate nohighlight">
-\[
-\delta = 1
-\]</div>
-<hr class="docutils" />
-<p><strong>B. Data Numerik</strong></p>
+<p><strong>4. Ketentuan Perhitungan</strong></p>
+<p>Atribut numerik dan ordinal:</p>
 <div class="math notranslate nohighlight">
 \[
 \delta = \frac{|x_i - x_j|}{R}
@@ -894,82 +893,73 @@ Jarak total diperoleh dari rata-rata selisih tiap atribut.</p>
 \[
 R = \text{nilai maksimum} - \text{nilai minimum}
 \]</div>
-<p>Untuk Age:</p>
+<p>Range Age:</p>
 <div class="math notranslate nohighlight">
 \[
-R = 33 - 18 = 15
+R_{Age} = 33 - 18 = 15
 \]</div>
-<p>Artinya selisih umur dinormalisasi agar berada pada rentang 0 sampai 1.</p>
+<p>Range Occupation:</p>
+<div class="math notranslate nohighlight">
+\[
+R_{Occ} = 2 - 1 = 1
+\]</div>
+<p>Atribut kategorikal:</p>
+<p>Jika sama:
+$<span class="math notranslate nohighlight">\(
+\delta = 0
+\)</span>$</p>
+<p>Jika berbeda:
+$<span class="math notranslate nohighlight">\(
+\delta = 1
+\)</span>$</p>
 <hr class="docutils" />
-<p><strong>3. Perhitungan Manual</strong></p>
-<hr class="docutils" />
-<p><strong>A. Jarak antara <span class="math notranslate nohighlight">\(x_1\)</span> dan <span class="math notranslate nohighlight">\(x_2\)</span></strong></p>
-<p>Age:</p>
+<p><strong>5. Perhitungan Manual</strong></p>
+<p>Jarak <span class="math notranslate nohighlight">\(x_1\)</span> dan <span class="math notranslate nohighlight">\(x_2\)</span></p>
+<p>Age:
+$<span class="math notranslate nohighlight">\(
+\frac{|20 - 24|}{15} = 0.267
+\)</span>$</p>
+<p>Gender berbeda → 1</p>
+<p>Occupation:
+$<span class="math notranslate nohighlight">\(
+\frac{|1 - 1|}{1} = 0
+\)</span>$</p>
 <div class="math notranslate nohighlight">
 \[
-\frac{|20 - 24|}{15} = \frac{4}{15} = 0.267
-\]</div>
-<p>Gender: Male vs Female → berbeda = 1</p>
-<p>Occupation: Student vs Student → sama = 0</p>
-<p>Hasil akhir:</p>
-<div class="math notranslate nohighlight">
-\[
-d(x_1,x_2) = \frac{0.267 + 1 + 0}{3}
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-= \frac{1.267}{3}
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-= 0.422
-\]</div>
-<hr class="docutils" />
-<p><strong>B. Jarak antara <span class="math notranslate nohighlight">\(x_1\)</span> dan <span class="math notranslate nohighlight">\(x_3\)</span></strong></p>
-<p>Age:</p>
-<div class="math notranslate nohighlight">
-\[
-\frac{|20 - 22|}{15} = \frac{2}{15} = 0.133
-\]</div>
-<p>Gender: Male vs Male → sama = 0</p>
-<p>Occupation: Student vs Employee → berbeda = 1</p>
-<p>Hasil akhir:</p>
-<div class="math notranslate nohighlight">
-\[
-d(x_1,x_3) = \frac{0.133 + 0 + 1}{3}
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-= \frac{1.133}{3}
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-= 0.378
+d(x_1,x_2) = \frac{0.267 + 1 + 0}{3} = 0.422
 \]</div>
 <hr class="docutils" />
-<p><strong>C. Jarak antara <span class="math notranslate nohighlight">\(x_2\)</span> dan <span class="math notranslate nohighlight">\(x_3\)</span></strong></p>
-<p>Age:</p>
+<p>Jarak <span class="math notranslate nohighlight">\(x_1\)</span> dan <span class="math notranslate nohighlight">\(x_3\)</span></p>
+<p>Age:
+$<span class="math notranslate nohighlight">\(
+\frac{|20 - 22|}{15} = 0.133
+\)</span>$</p>
+<p>Gender sama → 0</p>
+<p>Occupation:
+$<span class="math notranslate nohighlight">\(
+\frac{|1 - 2|}{1} = 1
+\)</span>$</p>
 <div class="math notranslate nohighlight">
 \[
-\frac{|24 - 22|}{15} = \frac{2}{15} = 0.133
-\]</div>
-<p>Gender: Female vs Male → berbeda = 1</p>
-<p>Occupation: Student vs Employee → berbeda = 1</p>
-<p>Hasil akhir:</p>
-<div class="math notranslate nohighlight">
-\[
-d(x_2,x_3) = \frac{0.133 + 1 + 1}{3}
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-= \frac{2.133}{3}
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-= 0.711
+d(x_1,x_3) = \frac{0.133 + 0 + 1}{3} = 0.378
 \]</div>
 <hr class="docutils" />
-<p><strong>4. Matriks Jarak Gower (3x3)</strong></p>
+<p>Jarak <span class="math notranslate nohighlight">\(x_2\)</span> dan <span class="math notranslate nohighlight">\(x_3\)</span></p>
+<p>Age:
+$<span class="math notranslate nohighlight">\(
+\frac{|24 - 22|}{15} = 0.133
+\)</span>$</p>
+<p>Gender berbeda → 1</p>
+<p>Occupation:
+$<span class="math notranslate nohighlight">\(
+\frac{|1 - 2|}{1} = 1
+\)</span>$</p>
+<div class="math notranslate nohighlight">
+\[
+d(x_2,x_3) = \frac{0.133 + 1 + 1}{3} = 0.711
+\]</div>
+<hr class="docutils" />
+<p><strong>6. Matriks Jarak Gower</strong></p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 D =
@@ -979,50 +969,24 @@ D =
 0.378 &amp; 0.711 &amp; 0
 \end{bmatrix}
 \end{split}\]</div>
-<p>Penjelasan:</p>
-<ul class="simple">
-<li><p>Matriks simetris</p></li>
-<li><p>Diagonal bernilai 0</p></li>
-</ul>
 <hr class="docutils" />
-<p><strong>5. Interpretasi Hasil</strong></p>
-<p><strong>Makna Nilai Jarak</strong></p>
-<ul class="simple">
-<li><p>Nilai mendekati 0 → sangat mirip</p></li>
-<li><p>Nilai mendekati 1 → sangat berbeda</p></li>
-</ul>
-<hr class="docutils" />
-<p><strong>Data Paling Mirip</strong></p>
-<div class="math notranslate nohighlight">
-\[
+<p><strong>7. Interpretasi</strong></p>
+<p>Nilai mendekati 0 menunjukkan data semakin mirip,<br />
+sedangkan nilai mendekati 1 menunjukkan data semakin berbeda.</p>
+<p>Pasangan paling mirip:
+$<span class="math notranslate nohighlight">\(
 x_1 \text{ dan } x_3
-\]</div>
-<p>Karena memiliki jarak terkecil:</p>
-<div class="math notranslate nohighlight">
-\[
-0.378
-\]</div>
-<p>Mereka memiliki gender sama dan umur tidak jauh berbeda.</p>
-<hr class="docutils" />
-<p><strong>Data Paling Berbeda</strong></p>
-<div class="math notranslate nohighlight">
-\[
+\)</span>$</p>
+<p>Pasangan paling berbeda:
+$<span class="math notranslate nohighlight">\(
 x_2 \text{ dan } x_3
-\]</div>
-<p>Karena memiliki jarak terbesar:</p>
-<div class="math notranslate nohighlight">
-\[
-0.711
-\]</div>
-<p>Mereka berbeda pada gender, occupation, dan usia.</p>
+\)</span>$</p>
 <hr class="docutils" />
-<p><strong>Kesimpulan</strong></p>
-<ul class="simple">
-<li><p>Gower Distance cocok untuk data campuran.</p></li>
-<li><p>Atribut numerik dinormalisasi.</p></li>
-<li><p>Atribut kategorikal dinilai 0 atau 1.</p></li>
-<li><p>Pasangan paling mirip: <span class="math notranslate nohighlight">\(x_1\)</span> dan <span class="math notranslate nohighlight">\(x_3\)</span>.</p></li>
-</ul>
+<p><strong>8. Kesimpulan</strong></p>
+<p>Data ordinal harus dikonversi terlebih dahulu menjadi numerik sesuai tingkatannya.<br />
+Setelah dikonversi, atribut ordinal dihitung seperti atribut numerik dengan normalisasi range.<br />
+Gower Distance sangat cocok untuk dataset dengan tipe data campuran.</p>
+</section>
 <section id="implematsi-menggunakan-orange">
 <h3>Implematsi Menggunakan Orange<a class="headerlink" href="#implematsi-menggunakan-orange" title="Link to this heading">#</a></h3>
 <p>Pada implementasi menggunakan Orange, diperoleh matriks jarak dengan dimensi 388 × 388.</p>
@@ -1089,9 +1053,7 @@ x_2 \text{ dan } x_3
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-understanding-online-foods-datasets">Data Understanding - Online Foods Datasets</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deskripsi-atribut-dataset-onlinefoods-csv">Deskripsi Atribut Dataset onlinefoods.csv</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformasi-data">Transformasi Data</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mengukur-jarak-tipe-data-campuran-gower-distance">Mengukur Jarak Tipe Data Campuran (Gower Distance)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mengukur-jarak-tipe-data-campuran-gower-distance">Mengukur Jarak Tipe Data Campuran (Gower Distance)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implematsi-menggunakan-orange">Implematsi Menggunakan Orange</a></li>
 </ul>
 </li>
