@@ -978,14 +978,16 @@ R_{Income} = 5 - 1 = 4
 <p>Penjelasan:<br />
 Range adalah nilai maksimum dikurangi minimum.</p>
 <p>Atribut nominal:</p>
-<p>Jika sama:
-$<span class="math notranslate nohighlight">\(
+<p>Jika sama:</p>
+<div class="math notranslate nohighlight">
+\[
 \delta = 0
-\)</span>$</p>
-<p>Jika berbeda:
-$<span class="math notranslate nohighlight">\(
+\]</div>
+<p>Jika berbeda:</p>
+<div class="math notranslate nohighlight">
+\[
 \delta = 1
-\)</span>$</p>
+\]</div>
 <p>Penjelasan:<br />
 Untuk data kategori, jika sama dianggap tidak ada jarak (0), jika berbeda dianggap berbeda penuh (1).</p>
 <hr class="docutils" />
@@ -994,18 +996,20 @@ Untuk data kategori, jika sama dianggap tidak ada jarak (0), jika berbeda diangg
 </section>
 <section id="jarak-x-1-dan-x-2">
 <h3>Jarak <span class="math notranslate nohighlight">\(x_1\)</span> dan <span class="math notranslate nohighlight">\(x_2\)</span><a class="headerlink" href="#jarak-x-1-dan-x-2" title="Link to this heading">#</a></h3>
-<p>Age:
-$<span class="math notranslate nohighlight">\(
+<p>Age:</p>
+<div class="math notranslate nohighlight">
+\[
 \frac{|20 - 24|}{15} = 0.267
-\)</span>$
-Penjelasan: Selisih usia 4 tahun, dibagi 15.</p>
+\]</div>
+<p>Penjelasan: Selisih usia 4 tahun, dibagi 15.</p>
 <p>Gender berbeda → 1<br />
 Penjelasan: Male ≠ Female, maka nilainya 1.</p>
-<p>Income:
-$<span class="math notranslate nohighlight">\(
+<p>Income:</p>
+<div class="math notranslate nohighlight">
+\[
 \frac{|4 - 5|}{4} = 0.25
-\)</span>$
-Penjelasan: Selisih 1 tingkat income, dibagi 4.</p>
+\]</div>
+<p>Penjelasan: Selisih 1 tingkat income, dibagi 4.</p>
 <div class="math notranslate nohighlight">
 \[
 d(x_1,x_2) = \frac{0.267 + 1 + 0.25}{3}
@@ -1020,17 +1024,19 @@ Rata-rata dari ketiga jarak atribut.</p>
 <hr class="docutils" />
 <section id="jarak-x-1-dan-x-3">
 <h3>Jarak <span class="math notranslate nohighlight">\(x_1\)</span> dan <span class="math notranslate nohighlight">\(x_3\)</span><a class="headerlink" href="#jarak-x-1-dan-x-3" title="Link to this heading">#</a></h3>
-<p>Age:
-$<span class="math notranslate nohighlight">\(
+<p>Age:</p>
+<div class="math notranslate nohighlight">
+\[
 \frac{|20 - 22|}{15} = 0.133
-\)</span>$
-Penjelasan: Selisih 2 tahun.</p>
+\]</div>
+<p>Penjelasan: Selisih 2 tahun.</p>
 <p>Gender sama → 0<br />
 Penjelasan: Sama-sama Male.</p>
-<p>Income:
-$<span class="math notranslate nohighlight">\(
+<p>Income:</p>
+<div class="math notranslate nohighlight">
+\[
 \frac{|4 - 3|}{4} = 0.25
-\)</span>$</p>
+\]</div>
 <div class="math notranslate nohighlight">
 \[
 d(x_1,x_3) = \frac{0.133 + 0 + 0.25}{3}
@@ -1045,16 +1051,18 @@ Nilainya kecil karena banyak atribut yang mirip.</p>
 <hr class="docutils" />
 <section id="jarak-x-2-dan-x-3">
 <h3>Jarak <span class="math notranslate nohighlight">\(x_2\)</span> dan <span class="math notranslate nohighlight">\(x_3\)</span><a class="headerlink" href="#jarak-x-2-dan-x-3" title="Link to this heading">#</a></h3>
-<p>Age:
-$<span class="math notranslate nohighlight">\(
+<p>Age:</p>
+<div class="math notranslate nohighlight">
+\[
 \frac{|24 - 22|}{15} = 0.133
-\)</span>$</p>
+\]</div>
 <p>Gender berbeda → 1</p>
-<p>Income:
-$<span class="math notranslate nohighlight">\(
+<p>Income:</p>
+<div class="math notranslate nohighlight">
+\[
 \frac{|5 - 3|}{4} = 0.5
-\)</span>$
-Penjelasan: Selisih income cukup jauh (2 tingkat).</p>
+\]</div>
+<p>Penjelasan: Selisih income cukup jauh (2 tingkat).</p>
 <div class="math notranslate nohighlight">
 \[
 d(x_2,x_3) = \frac{0.133 + 1 + 0.5}{3}
@@ -1082,14 +1090,16 @@ Diagonal bernilai 0 karena jarak dengan dirinya sendiri adalah 0.</p>
 <p><strong>7. Interpretasi</strong></p>
 <p>Nilai mendekati 0 → semakin mirip.<br />
 Nilai mendekati 1 → semakin berbeda.</p>
-<p>Data paling mirip:
-$<span class="math notranslate nohighlight">\(
+<p>Data paling mirip:</p>
+<div class="math notranslate nohighlight">
+\[
 x_1 \text{ dan } x_3
-\)</span>$</p>
-<p>Data paling berbeda:
-$<span class="math notranslate nohighlight">\(
+\]</div>
+<p>Data paling berbeda:</p>
+<div class="math notranslate nohighlight">
+\[
 x_2 \text{ dan } x_3
-\)</span>$</p>
+\]</div>
 <hr class="docutils" />
 <p><strong>8. Kesimpulan</strong></p>
 <p>Monthly Income termasuk data ordinal karena memiliki tingkatan.<br />
