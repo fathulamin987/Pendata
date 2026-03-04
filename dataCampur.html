@@ -398,6 +398,11 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contoh-normalisasi-monthly-income"><strong>Contoh Normalisasi Monthly Income</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan"><strong>Kesimpulan</strong></a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mengukur-jarak-tipe-data-campuran-gower-distance">Mengukur Jarak Tipe Data Campuran (Gower Distance)</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jarak-x-1-dan-x-2">Jarak <span class="math notranslate nohighlight">\(x_1\)</span> dan <span class="math notranslate nohighlight">\(x_2\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jarak-x-1-dan-x-3">Jarak <span class="math notranslate nohighlight">\(x_1\)</span> dan <span class="math notranslate nohighlight">\(x_3\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jarak-x-2-dan-x-3">Jarak <span class="math notranslate nohighlight">\(x_2\)</span> dan <span class="math notranslate nohighlight">\(x_3\)</span></a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#implematsi-menggunakan-orange">Implematsi Menggunakan Orange</a></li>
 </ul>
 </li>
@@ -888,6 +893,8 @@ Pada perhitungan ini digunakan:</p>
 </tbody>
 </table>
 </div>
+<p>Penjelasan:<br />
+Tiga data ini digunakan sebagai contoh untuk menghitung jarak secara manual.</p>
 <hr class="docutils" />
 <p><strong>2. Proses Mengubah Data Ordinal Menjadi Numerik</strong></p>
 <p>Mapping tingkat Monthly Income:</p>
@@ -911,6 +918,8 @@ Pada perhitungan ini digunakan:</p>
 \[
 \text{More than 50000} = 5
 \]</div>
+<p>Penjelasan:<br />
+Karena income memiliki tingkatan dari rendah ke tinggi, maka diberi angka berurutan agar bisa dihitung secara matematis.</p>
 <p>Setelah dikonversi:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -939,25 +948,14 @@ Pada perhitungan ini digunakan:</p>
 </tbody>
 </table>
 </div>
-<p>Representasi vektor:</p>
-<div class="math notranslate nohighlight">
-\[
-x_1 = (20,\; \text{Male},\; 4)
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-x_2 = (24,\; \text{Female},\; 5)
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-x_3 = (22,\; \text{Male},\; 3)
-\]</div>
 <hr class="docutils" />
 <p><strong>3. Rumus Dasar Gower Distance</strong></p>
 <div class="math notranslate nohighlight">
 \[
 d(i,j) = \frac{\delta_{ij}^{(Age)} + \delta_{ij}^{(Gender)} + \delta_{ij}^{(Income)}}{3}
 \]</div>
+<p>Penjelasan:<br />
+Jarak Gower dihitung dengan menjumlahkan jarak tiap atribut, lalu dibagi jumlah atribut (3).</p>
 <hr class="docutils" />
 <p><strong>4. Ketentuan Perhitungan</strong></p>
 <p>Atribut numerik dan ordinal:</p>
@@ -965,7 +963,9 @@ d(i,j) = \frac{\delta_{ij}^{(Age)} + \delta_{ij}^{(Gender)} + \delta_{ij}^{(Inco
 \[
 \delta = \frac{|x_i - x_j|}{R}
 \]</div>
-<p>Range Age (dari dataset):</p>
+<p>Penjelasan:<br />
+Selisih nilai dibagi range agar hasil berada antara 0–1.</p>
+<p>Range Age:</p>
 <div class="math notranslate nohighlight">
 \[
 R_{Age} = 33 - 18 = 15
@@ -975,6 +975,8 @@ R_{Age} = 33 - 18 = 15
 \[
 R_{Income} = 5 - 1 = 4
 \]</div>
+<p>Penjelasan:<br />
+Range adalah nilai maksimum dikurangi minimum.</p>
 <p>Atribut nominal:</p>
 <p>Jika sama:
 $<span class="math notranslate nohighlight">\(
@@ -984,37 +986,47 @@ $<span class="math notranslate nohighlight">\(
 $<span class="math notranslate nohighlight">\(
 \delta = 1
 \)</span>$</p>
+<p>Penjelasan:<br />
+Untuk data kategori, jika sama dianggap tidak ada jarak (0), jika berbeda dianggap berbeda penuh (1).</p>
 <hr class="docutils" />
 <p><strong>5. Perhitungan Manual</strong></p>
-<p>Jarak <span class="math notranslate nohighlight">\(x_1\)</span> dan <span class="math notranslate nohighlight">\(x_2\)</span></p>
+</section>
+</section>
+<section id="jarak-x-1-dan-x-2">
+<h3>Jarak <span class="math notranslate nohighlight">\(x_1\)</span> dan <span class="math notranslate nohighlight">\(x_2\)</span><a class="headerlink" href="#jarak-x-1-dan-x-2" title="Link to this heading">#</a></h3>
 <p>Age:
 $<span class="math notranslate nohighlight">\(
 \frac{|20 - 24|}{15} = 0.267
-\)</span>$</p>
-<p>Gender berbeda → 1</p>
+\)</span>$
+Penjelasan: Selisih usia 4 tahun, dibagi 15.</p>
+<p>Gender berbeda → 1<br />
+Penjelasan: Male ≠ Female, maka nilainya 1.</p>
 <p>Income:
 $<span class="math notranslate nohighlight">\(
 \frac{|4 - 5|}{4} = 0.25
-\)</span>$</p>
+\)</span>$
+Penjelasan: Selisih 1 tingkat income, dibagi 4.</p>
 <div class="math notranslate nohighlight">
 \[
 d(x_1,x_2) = \frac{0.267 + 1 + 0.25}{3}
 \]</div>
 <div class="math notranslate nohighlight">
 \[
-= \frac{1.517}{3}
-\]</div>
-<div class="math notranslate nohighlight">
-\[
 = 0.506
 \]</div>
+<p>Penjelasan:<br />
+Rata-rata dari ketiga jarak atribut.</p>
+</section>
 <hr class="docutils" />
-<p>Jarak <span class="math notranslate nohighlight">\(x_1\)</span> dan <span class="math notranslate nohighlight">\(x_3\)</span></p>
+<section id="jarak-x-1-dan-x-3">
+<h3>Jarak <span class="math notranslate nohighlight">\(x_1\)</span> dan <span class="math notranslate nohighlight">\(x_3\)</span><a class="headerlink" href="#jarak-x-1-dan-x-3" title="Link to this heading">#</a></h3>
 <p>Age:
 $<span class="math notranslate nohighlight">\(
 \frac{|20 - 22|}{15} = 0.133
-\)</span>$</p>
-<p>Gender sama → 0</p>
+\)</span>$
+Penjelasan: Selisih 2 tahun.</p>
+<p>Gender sama → 0<br />
+Penjelasan: Sama-sama Male.</p>
 <p>Income:
 $<span class="math notranslate nohighlight">\(
 \frac{|4 - 3|}{4} = 0.25
@@ -1025,14 +1037,14 @@ d(x_1,x_3) = \frac{0.133 + 0 + 0.25}{3}
 \]</div>
 <div class="math notranslate nohighlight">
 \[
-= \frac{0.383}{3}
-\]</div>
-<div class="math notranslate nohighlight">
-\[
 = 0.128
 \]</div>
+<p>Penjelasan:<br />
+Nilainya kecil karena banyak atribut yang mirip.</p>
+</section>
 <hr class="docutils" />
-<p>Jarak <span class="math notranslate nohighlight">\(x_2\)</span> dan <span class="math notranslate nohighlight">\(x_3\)</span></p>
+<section id="jarak-x-2-dan-x-3">
+<h3>Jarak <span class="math notranslate nohighlight">\(x_2\)</span> dan <span class="math notranslate nohighlight">\(x_3\)</span><a class="headerlink" href="#jarak-x-2-dan-x-3" title="Link to this heading">#</a></h3>
 <p>Age:
 $<span class="math notranslate nohighlight">\(
 \frac{|24 - 22|}{15} = 0.133
@@ -1041,19 +1053,18 @@ $<span class="math notranslate nohighlight">\(
 <p>Income:
 $<span class="math notranslate nohighlight">\(
 \frac{|5 - 3|}{4} = 0.5
-\)</span>$</p>
+\)</span>$
+Penjelasan: Selisih income cukup jauh (2 tingkat).</p>
 <div class="math notranslate nohighlight">
 \[
 d(x_2,x_3) = \frac{0.133 + 1 + 0.5}{3}
 \]</div>
 <div class="math notranslate nohighlight">
 \[
-= \frac{1.633}{3}
-\]</div>
-<div class="math notranslate nohighlight">
-\[
 = 0.544
 \]</div>
+<p>Penjelasan:<br />
+Nilai besar karena berbeda gender dan income cukup jauh.</p>
 <hr class="docutils" />
 <p><strong>6. Matriks Jarak Gower</strong></p>
 <div class="math notranslate nohighlight">
@@ -1065,29 +1076,26 @@ D =
 0.128 &amp; 0.544 &amp; 0
 \end{bmatrix}
 \end{split}\]</div>
+<p>Penjelasan:<br />
+Diagonal bernilai 0 karena jarak dengan dirinya sendiri adalah 0.</p>
 <hr class="docutils" />
 <p><strong>7. Interpretasi</strong></p>
-<p>Nilai mendekati 0 menunjukkan data semakin mirip.<br />
-Nilai mendekati 1 menunjukkan data semakin berbeda.</p>
-<p>Data paling mirip:</p>
-<div class="math notranslate nohighlight">
-\[
+<p>Nilai mendekati 0 → semakin mirip.<br />
+Nilai mendekati 1 → semakin berbeda.</p>
+<p>Data paling mirip:
+$<span class="math notranslate nohighlight">\(
 x_1 \text{ dan } x_3
-\]</div>
-<p>karena memiliki jarak terkecil yaitu 0.128.</p>
-<p>Data paling berbeda:</p>
-<div class="math notranslate nohighlight">
-\[
+\)</span>$</p>
+<p>Data paling berbeda:
+$<span class="math notranslate nohighlight">\(
 x_2 \text{ dan } x_3
-\]</div>
-<p>karena memiliki jarak terbesar yaitu 0.544.</p>
+\)</span>$</p>
 <hr class="docutils" />
 <p><strong>8. Kesimpulan</strong></p>
-<p>Monthly Income merupakan data ordinal karena memiliki urutan tingkat ekonomi.<br />
-Data ordinal harus dikonversi terlebih dahulu menjadi numerik sesuai tingkatannya.<br />
-Setelah dikonversi, atribut ordinal dihitung seperti atribut numerik dengan normalisasi berdasarkan range.<br />
-Metode Gower Distance sangat sesuai untuk dataset dengan tipe data campuran.</p>
-</section>
+<p>Monthly Income termasuk data ordinal karena memiliki tingkatan.<br />
+Data ordinal harus dikonversi ke numerik terlebih dahulu.<br />
+Setelah itu dihitung seperti data numerik dengan normalisasi range.<br />
+Gower Distance cocok digunakan untuk data campuran.</p>
 <section id="implematsi-menggunakan-orange">
 <h4>Implematsi Menggunakan Orange<a class="headerlink" href="#implematsi-menggunakan-orange" title="Link to this heading">#</a></h4>
 <p>Pada implementasi menggunakan Orange, diperoleh matriks jarak dengan dimensi 388 × 388.</p>
@@ -1167,6 +1175,11 @@ Metode Gower Distance sangat sesuai untuk dataset dengan tipe data campuran.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contoh-normalisasi-monthly-income"><strong>Contoh Normalisasi Monthly Income</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan"><strong>Kesimpulan</strong></a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mengukur-jarak-tipe-data-campuran-gower-distance">Mengukur Jarak Tipe Data Campuran (Gower Distance)</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jarak-x-1-dan-x-2">Jarak <span class="math notranslate nohighlight">\(x_1\)</span> dan <span class="math notranslate nohighlight">\(x_2\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jarak-x-1-dan-x-3">Jarak <span class="math notranslate nohighlight">\(x_1\)</span> dan <span class="math notranslate nohighlight">\(x_3\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jarak-x-2-dan-x-3">Jarak <span class="math notranslate nohighlight">\(x_2\)</span> dan <span class="math notranslate nohighlight">\(x_3\)</span></a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#implematsi-menggunakan-orange">Implematsi Menggunakan Orange</a></li>
 </ul>
 </li>
