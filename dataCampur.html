@@ -57,6 +57,8 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'dataCampur';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -387,7 +389,14 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#atribut-yang-tidak-digunakan">Atribut yang Tidak Digunakan</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-pemilihan-atribut">Kesimpulan Pemilihan Atribut</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformasi-atribut-sebelum-perhitungan-jarak">Transformasi Atribut Sebelum Perhitungan Jarak</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#atribut-numerik">1. Atribut Numerik</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#atribut-kategorikal-nominal">2. Atribut Kategorikal (Nominal)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#atribut-ordinal">3. Atribut Ordinal</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-jarak-campuran">Perhitungan Jarak Campuran</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jarak-numerik">Jarak Numerik</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jarak-kategorikal">Jarak Kategorikal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jarak-ordinal">Jarak Ordinal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jarak-total">Jarak Total</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implematsi-menggunakan-orange">Implematsi Menggunakan Orange</a></li>
 </ul>
 </li>
@@ -675,21 +684,26 @@ Tidak digunakan karena termasuk variabel perilaku spesifik, bukan profil dasar p
 </section>
 <section id="transformasi-atribut-sebelum-perhitungan-jarak">
 <h3>Transformasi Atribut Sebelum Perhitungan Jarak<a class="headerlink" href="#transformasi-atribut-sebelum-perhitungan-jarak" title="Link to this heading">#</a></h3>
-<p>Karena dataset memiliki tipe data campuran, maka diperlukan transformasi agar seluruh atribut dapat dihitung secara matematis.</p>
+<p>Karena dataset memiliki tipe data campuran (<em>mixed attributes</em>), maka diperlukan transformasi agar seluruh atribut dapat dihitung secara matematis dalam satu kerangka perhitungan jarak.</p>
 <hr class="docutils" />
-<p><strong>1. Atribut Numerik</strong></p>
+</section>
+<section id="atribut-numerik">
+<h3>1. Atribut Numerik<a class="headerlink" href="#atribut-numerik" title="Link to this heading">#</a></h3>
 <p>Atribut numerik:</p>
 <ul class="simple">
 <li><p>Age</p></li>
 <li><p>Family Size</p></li>
 </ul>
-<p>Dilakukan normalisasi menggunakan Min-Max Scaling:</p>
-<p>[
-X’ = \frac{X - X_{min}}{X_{max} - X_{min}}
-]</p>
-<p>Tujuan normalisasi adalah menyamakan skala agar tidak ada atribut yang mendominasi.</p>
+<p>Dilakukan normalisasi menggunakan metode <strong>Min-Max Scaling</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+X' = \frac{X - X_{\min}}{X_{\max} - X_{\min}}
+\]</div>
+<p>Tujuan normalisasi adalah menyamakan skala agar tidak ada atribut yang mendominasi perhitungan jarak.</p>
 <hr class="docutils" />
-<p><strong>2. Atribut Kategorikal (Nominal)</strong></p>
+</section>
+<section id="atribut-kategorikal-nominal">
+<h3>2. Atribut Kategorikal (Nominal)<a class="headerlink" href="#atribut-kategorikal-nominal" title="Link to this heading">#</a></h3>
 <p>Atribut:</p>
 <ul class="simple">
 <li><p>Gender</p></li>
@@ -697,93 +711,122 @@ X’ = \frac{X - X_{min}}{X_{max} - X_{min}}
 <li><p>Occupation</p></li>
 <li><p>Educational Qualifications</p></li>
 </ul>
-<p>Ditranformasikan menggunakan label encoding.</p>
-<p>Contoh:</p>
-<p>Gender:</p>
-<ul class="simple">
-<li><p>Male = 0</p></li>
-<li><p>Female = 1</p></li>
-</ul>
-<p>Marital Status:</p>
-<ul class="simple">
-<li><p>Single = 0</p></li>
-<li><p>Married = 1</p></li>
-<li><p>Prefer not to say = 2</p></li>
-</ul>
-<p>Occupation:</p>
-<ul class="simple">
-<li><p>Student = 0</p></li>
-<li><p>Employee = 1</p></li>
-<li><p>Self Employed = 2</p></li>
-<li><p>House wife = 3</p></li>
-</ul>
-<p>Educational Qualifications:</p>
-<ul class="simple">
-<li><p>Graduate = 0</p></li>
-<li><p>Post Graduate = 1</p></li>
-<li><p>PhD = 2</p></li>
-<li><p>Uneducated = 3</p></li>
-</ul>
-<p>Perhitungan jarak:</p>
-<ul class="simple">
-<li><p>0 jika sama</p></li>
-<li><p>1 jika berbeda</p></li>
-</ul>
+<p>Ditranformasikan menggunakan <strong>label encoding</strong>.</p>
+<p><strong>Contoh pengkodean:</strong></p>
+<p>Gender<br />
+Male = 0<br />
+Female = 1</p>
+<p>Marital Status<br />
+Single = 0<br />
+Married = 1<br />
+Prefer not to say = 2</p>
+<p>Occupation<br />
+Student = 0<br />
+Employee = 1<br />
+Self Employed = 2<br />
+House wife = 3</p>
+<p>Educational Qualifications<br />
+Graduate = 0<br />
+Post Graduate = 1<br />
+PhD = 2<br />
+Uneducated = 3</p>
+<p>Perhitungan jarak atribut kategorikal:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+d_{cat} =
+\begin{cases}
+0, &amp; \text{jika sama} \\
+1, &amp; \text{jika berbeda}
+\end{cases}
+\end{split}\]</div>
 <hr class="docutils" />
-<p><strong>3. Atribut Ordinal</strong></p>
+</section>
+<section id="atribut-ordinal">
+<h3>3. Atribut Ordinal<a class="headerlink" href="#atribut-ordinal" title="Link to this heading">#</a></h3>
 <p>Atribut:</p>
 <ul class="simple">
 <li><p>Monthly Income</p></li>
 </ul>
-<p>Karena memiliki tingkatan, dilakukan pengkodean berdasarkan urutan:</p>
+<p>Pengkodean berdasarkan tingkatan:</p>
+<p>No Income = 0<br />
+Below 25000 = 1<br />
+25001 to 50000 = 2<br />
+More than 50000 = 3</p>
+<p>Normalisasi ordinal:</p>
+<div class="math notranslate nohighlight">
+\[
+r_i = \frac{\text{rank}_i - 1}{m - 1}
+\]</div>
+<p>dengan:</p>
 <ul class="simple">
-<li><p>No Income = 0</p></li>
-<li><p>Below 25000 = 1</p></li>
-<li><p>25001 to 50000 = 2</p></li>
-<li><p>More than 50000 = 3</p></li>
+<li><p><span class="math notranslate nohighlight">\(rank_i\)</span> = peringkat kategori ke-i</p></li>
+<li><p><span class="math notranslate nohighlight">\(m\)</span> = jumlah kategori ordinal</p></li>
 </ul>
-<p>Kemudian dinormalisasi:</p>
-<p>[
-r_i = \frac{rank_i - 1}{m - 1}
-]</p>
 <hr class="docutils" />
 </section>
 <section id="perhitungan-jarak-campuran">
 <h3>Perhitungan Jarak Campuran<a class="headerlink" href="#perhitungan-jarak-campuran" title="Link to this heading">#</a></h3>
-<p>Rumus umum:</p>
-<p>[
+<p>Rumus umum jarak:</p>
+<div class="math notranslate nohighlight">
+\[
 D(i,j) = \frac{\sum_{k=1}^{p} d_{ijk}}{p}
-]</p>
-<p>Dengan:</p>
+\]</div>
+<p>dengan:</p>
 <ul class="simple">
-<li><p>p = 7 atribut</p></li>
-<li><p>d_{ijk} = jarak tiap atribut</p></li>
+<li><p><span class="math notranslate nohighlight">\(p = 7\)</span> atribut</p></li>
+<li><p><span class="math notranslate nohighlight">\(d_{ijk}\)</span> = jarak tiap atribut</p></li>
 </ul>
 <hr class="docutils" />
-<p><strong>Jarak Numerik</strong></p>
-<p>[
-d_{num} = |x’_i - x’_j|
-]</p>
+</section>
+<section id="jarak-numerik">
+<h3>Jarak Numerik<a class="headerlink" href="#jarak-numerik" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[
+d_{num} = |x'_i - x'_j|
+\]</div>
 <hr class="docutils" />
-<p><strong>Jarak Kategorikal</strong></p>
-<p>[
+</section>
+<section id="jarak-kategorikal">
+<h3>Jarak Kategorikal<a class="headerlink" href="#jarak-kategorikal" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[\begin{split}
 d_{cat} =
 \begin{cases}
-0, &amp; jika sama \
-1, &amp; jika berbeda
+0, &amp; \text{jika sama} \\
+1, &amp; \text{jika berbeda}
 \end{cases}
-]</p>
+\end{split}\]</div>
 <hr class="docutils" />
-<p><strong>Jarak Ordinal</strong></p>
-<p>[
+</section>
+<section id="jarak-ordinal">
+<h3>Jarak Ordinal<a class="headerlink" href="#jarak-ordinal" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[
 d_{ord} = |r_i - r_j|
-]</p>
+\]</div>
 <hr class="docutils" />
-<p><strong>Jarak Total</strong></p>
-<p>[
-D(i,j) = \frac{d_{Age} + d_{FamilySize} + d_{Gender} + d_{MaritalStatus} + d_{Occupation} + d_{Education} + d_{Income}}{7}
-]</p>
-<p>Hasil akhirnya berupa matriks jarak berukuran 388 × 388 yang menunjukkan jarak antar seluruh pasangan data dalam dataset.</p>
+</section>
+<section id="jarak-total">
+<h3>Jarak Total<a class="headerlink" href="#jarak-total" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[
+D(i,j) =
+\frac{
+d_{\text{Age}} +
+d_{\text{FamilySize}} +
+d_{\text{Gender}} +
+d_{\text{MaritalStatus}} +
+d_{\text{Occupation}} +
+d_{\text{Education}} +
+d_{\text{Income}}
+}{7}
+\]</div>
+<p>Hasil akhir berupa matriks jarak berukuran:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{D} \in \mathbb{R}^{388 \times 388}
+\]</div>
+<p>yang menunjukkan jarak antar seluruh pasangan data dalam dataset.</p>
 </section>
 <section id="implematsi-menggunakan-orange">
 <h3>Implematsi Menggunakan Orange<a class="headerlink" href="#implematsi-menggunakan-orange" title="Link to this heading">#</a></h3>
@@ -854,7 +897,14 @@ D(i,j) = \frac{d_{Age} + d_{FamilySize} + d_{Gender} + d_{MaritalStatus} + d_{Oc
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#atribut-yang-tidak-digunakan">Atribut yang Tidak Digunakan</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-pemilihan-atribut">Kesimpulan Pemilihan Atribut</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformasi-atribut-sebelum-perhitungan-jarak">Transformasi Atribut Sebelum Perhitungan Jarak</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#atribut-numerik">1. Atribut Numerik</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#atribut-kategorikal-nominal">2. Atribut Kategorikal (Nominal)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#atribut-ordinal">3. Atribut Ordinal</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-jarak-campuran">Perhitungan Jarak Campuran</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jarak-numerik">Jarak Numerik</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jarak-kategorikal">Jarak Kategorikal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jarak-ordinal">Jarak Ordinal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jarak-total">Jarak Total</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implematsi-menggunakan-orange">Implematsi Menggunakan Orange</a></li>
 </ul>
 </li>
