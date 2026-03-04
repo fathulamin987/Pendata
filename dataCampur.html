@@ -385,21 +385,16 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-understanding-online-foods-datasets">Data Understanding - Online Foods Datasets</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deskripsi-atribut-dataset-onlinefoods-csv">Deskripsi Atribut Dataset onlinefoods.csv</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#karakteristik-dataset"><strong>Karakteristik Dataset</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#seleksi-atribut-untuk-pengukuran-jarak"><strong>Seleksi Atribut untuk Pengukuran Jarak</strong></a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transformasi-data">Transformasi Data</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#encoding-data-nominal"><strong>1. Encoding Data Nominal</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformasi-data-ordinal"><strong>2. Transformasi Data Ordinal</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normalisasi-min-max"><strong>3. Normalisasi Min-Max</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contoh-normalisasi-age"><strong>Contoh Normalisasi Age</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contoh-normalisasi-family-size"><strong>Contoh Normalisasi Family Size</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contoh-normalisasi-monthly-income"><strong>Contoh Normalisasi Monthly Income</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan"><strong>Kesimpulan</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformasi-data-ordinal-monthly-income"><strong>Transformasi Data Ordinal (Monthly Income)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#range-data-untuk-normalisasi"><strong>Range Data untuk Normalisasi</strong></a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mengukur-jarak-tipe-data-campuran-gower-distance">Mengukur Jarak Tipe Data Campuran (Gower Distance)</a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-jarak">Perhitungan Jarak</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jarak-x-1-dan-x-2">Jarak <span class="math notranslate nohighlight">\(x_1\)</span> dan <span class="math notranslate nohighlight">\(x_2\)</span></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jarak-x-1-dan-x-3">Jarak <span class="math notranslate nohighlight">\(x_1\)</span> dan <span class="math notranslate nohighlight">\(x_3\)</span></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jarak-x-2-dan-x-3">Jarak <span class="math notranslate nohighlight">\(x_2\)</span> dan <span class="math notranslate nohighlight">\(x_3\)</span></a><ul class="nav section-nav flex-column">
@@ -647,99 +642,24 @@ Kategori yang memiliki jenjang atau level tertentu.</p>
 </div>
 </section>
 <hr class="docutils" />
-<section id="karakteristik-dataset">
-<h3><strong>Karakteristik Dataset</strong><a class="headerlink" href="#karakteristik-dataset" title="Link to this heading">#</a></h3>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Kelompok Tipe Data</p></th>
-<th class="head"><p>Atribut</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><strong>Numerik</strong></p></td>
-<td><p>Age, Family size, Latitude, Longitude, Pin code</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Kategorikal (Nominal)</strong></p></td>
-<td><p>Gender, Marital Status, Occupation</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Kategorikal (Ordinal)</strong></p></td>
-<td><p>Monthly Income, Educational Qualifications</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Biner</strong></p></td>
-<td><p>Output, Feedback, Unnamed: 12</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<hr class="docutils" />
 <section id="seleksi-atribut-untuk-pengukuran-jarak">
 <h3><strong>Seleksi Atribut untuk Pengukuran Jarak</strong><a class="headerlink" href="#seleksi-atribut-untuk-pengukuran-jarak" title="Link to this heading">#</a></h3>
-<p>Berdasarkan analisis, atribut yang digunakan dalam perhitungan jarak adalah:</p>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>No</p></th>
-<th class="head"><p>Atribut</p></th>
-<th class="head"><p>Alasan</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>1</p></td>
-<td><p>Age</p></td>
-<td><p>Membedakan kelompok usia pelanggan</p></td>
-</tr>
-<tr class="row-odd"><td><p>2</p></td>
-<td><p>Gender</p></td>
-<td><p>Mempengaruhi preferensi pemesanan</p></td>
-</tr>
-<tr class="row-even"><td><p>3</p></td>
-<td><p>Occupation</p></td>
-<td><p>Mencerminkan gaya hidup</p></td>
-</tr>
-<tr class="row-odd"><td><p>4</p></td>
-<td><p>Family size</p></td>
-<td><p>Mempengaruhi jumlah pesanan</p></td>
-</tr>
-<tr class="row-even"><td><p>5</p></td>
-<td><p>Monthly Income</p></td>
-<td><p>Menentukan daya beli pelanggan</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>Atribut lain seperti Latitude, Longitude, Pin code tidak digunakan karena bersifat geografis.<br />
-Output, Feedback, dan Unnamed: 12 tidak digunakan karena merupakan variabel target.</p>
+<p>Dalam perhitungan Gower Distance secara keseluruhan dapat digunakan beberapa atribut.<br />
+Namun untuk contoh perhitungan manual, digunakan 3 atribut utama agar lebih sederhana dan mudah dipahami, yaitu:</p>
+<ul class="simple">
+<li><p>Age (Numerik)</p></li>
+<li><p>Gender (Nominal)</p></li>
+<li><p>Monthly Income (Ordinal)</p></li>
+</ul>
 <hr class="docutils" />
 <section id="transformasi-data">
 <h4>Transformasi Data<a class="headerlink" href="#transformasi-data" title="Link to this heading">#</a></h4>
-<p>Sebelum menghitung jarak, semua atribut harus berbentuk numerik dan berada dalam skala yang sama.</p>
+<p>Sebelum menghitung jarak, atribut ordinal harus dikonversi menjadi numerik sesuai urutannya.</p>
 </section>
 </section>
 <hr class="docutils" />
-<section id="encoding-data-nominal">
-<h3><strong>1. Encoding Data Nominal</strong><a class="headerlink" href="#encoding-data-nominal" title="Link to this heading">#</a></h3>
-<p>Contoh:</p>
-<ul class="simple">
-<li><p>Gender</p>
-<ul>
-<li><p>Female = 0</p></li>
-<li><p>Male = 1</p></li>
-</ul>
-</li>
-<li><p>Occupation</p>
-<ul>
-<li><p>Student = 0</p></li>
-<li><p>Employee = 1</p></li>
-<li><p>Self Employed = 2</p></li>
-<li><p>Housewife = 3</p></li>
-</ul>
-</li>
-</ul>
-</section>
-<hr class="docutils" />
-<section id="transformasi-data-ordinal">
-<h3><strong>2. Transformasi Data Ordinal</strong><a class="headerlink" href="#transformasi-data-ordinal" title="Link to this heading">#</a></h3>
-<p>Karena <strong>Monthly Income memiliki tingkatan ekonomi</strong>, maka harus dikonversi sesuai urutan.</p>
+<section id="transformasi-data-ordinal-monthly-income">
+<h3><strong>Transformasi Data Ordinal (Monthly Income)</strong><a class="headerlink" href="#transformasi-data-ordinal-monthly-income" title="Link to this heading">#</a></h3>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Kategori</p></th>
@@ -748,122 +668,48 @@ Output, Feedback, dan Unnamed: 12 tidak digunakan karena merupakan variabel targ
 </thead>
 <tbody>
 <tr class="row-even"><td><p>No Income</p></td>
-<td><p>0</p></td>
-</tr>
-<tr class="row-odd"><td><p>Below 10000</p></td>
 <td><p>1</p></td>
 </tr>
-<tr class="row-even"><td><p>10001 to 25000</p></td>
+<tr class="row-odd"><td><p>Below Rs.10000</p></td>
 <td><p>2</p></td>
 </tr>
-<tr class="row-odd"><td><p>25001 to 50000</p></td>
+<tr class="row-even"><td><p>10001 to 25000</p></td>
 <td><p>3</p></td>
 </tr>
-<tr class="row-even"><td><p>More than 50000</p></td>
+<tr class="row-odd"><td><p>25001 to 50000</p></td>
 <td><p>4</p></td>
+</tr>
+<tr class="row-even"><td><p>More than 50000</p></td>
+<td><p>5</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>Alasan:<br />
-Data ordinal memiliki urutan, sehingga tidak boleh diencoding secara acak seperti data nominal.</p>
+<p>Penjelasan:<br />
+Monthly Income memiliki tingkatan dari rendah ke tinggi, sehingga harus diberi nilai numerik berurutan.</p>
 </section>
 <hr class="docutils" />
-<section id="normalisasi-min-max">
-<h3><strong>3. Normalisasi Min-Max</strong><a class="headerlink" href="#normalisasi-min-max" title="Link to this heading">#</a></h3>
-<p>Digunakan agar semua atribut berada dalam rentang 0–1.</p>
-<p>Rumus:</p>
-<div class="math notranslate nohighlight">
-\[
-x' = \frac{x - Min}{Max - Min}
-\]</div>
-</section>
-<hr class="docutils" />
-<section id="contoh-normalisasi-age">
-<h3><strong>Contoh Normalisasi Age</strong><a class="headerlink" href="#contoh-normalisasi-age" title="Link to this heading">#</a></h3>
-<p>Misal:</p>
-<ul class="simple">
-<li><p>Min Age = 18</p></li>
-<li><p>Max Age = 33</p></li>
-<li><p>Age pelanggan = 24</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-x' = \frac{24 - 18}{33 - 18}
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-= \frac{6}{15}
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-= 0.4
-\]</div>
-</section>
-<hr class="docutils" />
-<section id="contoh-normalisasi-family-size">
-<h3><strong>Contoh Normalisasi Family Size</strong><a class="headerlink" href="#contoh-normalisasi-family-size" title="Link to this heading">#</a></h3>
-<p>Misal:</p>
-<ul class="simple">
-<li><p>Min Family size = 1</p></li>
-<li><p>Max Family size = 6</p></li>
-<li><p>Nilai pelanggan = 4</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-x' = \frac{4 - 1}{6 - 1}
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-= \frac{3}{5}
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-= 0.6
-\]</div>
-</section>
-<hr class="docutils" />
-<section id="contoh-normalisasi-monthly-income">
-<h3><strong>Contoh Normalisasi Monthly Income</strong><a class="headerlink" href="#contoh-normalisasi-monthly-income" title="Link to this heading">#</a></h3>
-<p>Misal:</p>
-<ul class="simple">
-<li><p>Income pelanggan = 25001–50000 → dikonversi menjadi 3</p></li>
-<li><p>Nilai minimum ordinal = 0</p></li>
-<li><p>Nilai maksimum ordinal = 4</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-x' = \frac{3 - 0}{4 - 0}
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-= \frac{3}{4}
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-= 0.75
-\]</div>
-</section>
-<hr class="docutils" />
-<section id="kesimpulan">
-<h3><strong>Kesimpulan</strong><a class="headerlink" href="#kesimpulan" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p>Atribut yang digunakan dalam pengukuran jarak adalah Age, Gender, Occupation, Family size, dan Monthly Income.</p></li>
-<li><p>Data nominal diencoding terlebih dahulu.</p></li>
-<li><p>Data ordinal dikonversi berdasarkan urutan tingkatannya.</p></li>
-<li><p>Semua atribut numerik kemudian dinormalisasi menggunakan Min-Max.</p></li>
-<li><p>Dataset sudah konsisten dengan proses pengukuran jarak yang dilakukan.</p></li>
-</ul>
+<section id="range-data-untuk-normalisasi">
+<h3><strong>Range Data untuk Normalisasi</strong><a class="headerlink" href="#range-data-untuk-normalisasi" title="Link to this heading">#</a></h3>
+<p>Range Age:
+$<span class="math notranslate nohighlight">\(
+R_{Age} = 33 - 18 = 15
+\)</span>$</p>
+<p>Range Monthly Income:
+$<span class="math notranslate nohighlight">\(
+R_{Income} = 5 - 1 = 4
+\)</span>$</p>
+<p>Penjelasan:<br />
+Range diperoleh dari nilai maksimum dikurangi nilai minimum pada dataset.</p>
 <section id="mengukur-jarak-tipe-data-campuran-gower-distance">
 <h4>Mengukur Jarak Tipe Data Campuran (Gower Distance)<a class="headerlink" href="#mengukur-jarak-tipe-data-campuran-gower-distance" title="Link to this heading">#</a></h4>
-<p>Dataset memiliki tipe data campuran yaitu numerik, nominal, dan ordinal.<br />
-Pada perhitungan ini digunakan:</p>
+<p>Dataset memiliki tipe data campuran yaitu numerik, nominal, dan ordinal.</p>
+<p>Pada contoh perhitungan manual ini digunakan:</p>
 <ul class="simple">
 <li><p>Age → Numerik</p></li>
 <li><p>Gender → Nominal</p></li>
-<li><p>Monthly Income → Ordinal (memiliki urutan tingkat ekonomi)</p></li>
+<li><p>Monthly Income → Ordinal</p></li>
 </ul>
-<p>Karena Monthly Income adalah data ordinal, maka harus dikonversi terlebih dahulu menjadi numerik sesuai tingkatannya sebelum dihitung menggunakan Gower Distance.</p>
 <hr class="docutils" />
 <p><strong>1. Data yang Digunakan (3 Sampel Pertama)</strong></p>
 <div class="pst-scrollable-table-container"><table class="table">
@@ -896,37 +742,14 @@ Pada perhitungan ini digunakan:</p>
 <p>Penjelasan:<br />
 Tiga data ini digunakan sebagai contoh untuk menghitung jarak secara manual.</p>
 <hr class="docutils" />
-<p><strong>2. Proses Mengubah Data Ordinal Menjadi Numerik</strong></p>
-<p>Mapping tingkat Monthly Income:</p>
-<div class="math notranslate nohighlight">
-\[
-\text{No Income} = 1
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-\text{Below Rs.10000} = 2
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-\text{10001 to 25000} = 3
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-\text{25001 to 50000} = 4
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-\text{More than 50000} = 5
-\]</div>
-<p>Penjelasan:<br />
-Karena income memiliki tingkatan dari rendah ke tinggi, maka diberi angka berurutan agar bisa dihitung secara matematis.</p>
+<p><strong>2. Konversi Ordinal ke Numerik</strong></p>
 <p>Setelah dikonversi:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Data</p></th>
 <th class="head"><p>Age</p></th>
 <th class="head"><p>Gender</p></th>
-<th class="head"><p>Monthly Income (Numeric)</p></th>
+<th class="head"><p>Income</p></th>
 </tr>
 </thead>
 <tbody>
@@ -948,133 +771,87 @@ Karena income memiliki tingkatan dari rendah ke tinggi, maka diberi angka beruru
 </tbody>
 </table>
 </div>
+<p>Penjelasan:<br />
+Income diubah menjadi angka sesuai tingkatannya agar bisa dihitung secara matematis.</p>
 <hr class="docutils" />
-<p><strong>3. Rumus Dasar Gower Distance</strong></p>
+<p><strong>3. Rumus Gower Distance</strong></p>
 <div class="math notranslate nohighlight">
 \[
-d(i,j) = \frac{\delta_{ij}^{(Age)} + \delta_{ij}^{(Gender)} + \delta_{ij}^{(Income)}}{3}
+d(i,j) = \frac{\delta_{Age} + \delta_{Gender} + \delta_{Income}}{3}
 \]</div>
 <p>Penjelasan:<br />
-Jarak Gower dihitung dengan menjumlahkan jarak tiap atribut, lalu dibagi jumlah atribut (3).</p>
+Jarak total diperoleh dari rata-rata jarak setiap atribut.</p>
 <hr class="docutils" />
 <p><strong>4. Ketentuan Perhitungan</strong></p>
-<p>Atribut numerik dan ordinal:</p>
+<p>Untuk numerik dan ordinal:</p>
 <div class="math notranslate nohighlight">
 \[
 \delta = \frac{|x_i - x_j|}{R}
 \]</div>
+<p>Untuk nominal (Gender):</p>
+<ul class="simple">
+<li><p>Jika sama → 0</p></li>
+<li><p>Jika berbeda → 1</p></li>
+</ul>
 <p>Penjelasan:<br />
-Selisih nilai dibagi range agar hasil berada antara 0–1.</p>
-<p>Range Age:</p>
-<div class="math notranslate nohighlight">
-\[
-R_{Age} = 33 - 18 = 15
-\]</div>
-<p>Range Monthly Income:</p>
-<div class="math notranslate nohighlight">
-\[
-R_{Income} = 5 - 1 = 4
-\]</div>
-<p>Penjelasan:<br />
-Range adalah nilai maksimum dikurangi minimum.</p>
-<p>Atribut nominal:</p>
-<p>Jika sama:</p>
-<div class="math notranslate nohighlight">
-\[
-\delta = 0
-\]</div>
-<p>Jika berbeda:</p>
-<div class="math notranslate nohighlight">
-\[
-\delta = 1
-\]</div>
-<p>Penjelasan:<br />
-Untuk data kategori, jika sama dianggap tidak ada jarak (0), jika berbeda dianggap berbeda penuh (1).</p>
-<hr class="docutils" />
-<p><strong>5. Perhitungan Manual</strong></p>
+Pada atribut nominal, tidak perlu dikonversi menjadi angka secara eksplisit karena dalam Gower langsung dihitung 0 atau 1.</p>
 </section>
+</section>
+<hr class="docutils" />
+<section id="perhitungan-jarak">
+<h3>Perhitungan Jarak<a class="headerlink" href="#perhitungan-jarak" title="Link to this heading">#</a></h3>
 </section>
 <section id="jarak-x-1-dan-x-2">
 <h3>Jarak <span class="math notranslate nohighlight">\(x_1\)</span> dan <span class="math notranslate nohighlight">\(x_2\)</span><a class="headerlink" href="#jarak-x-1-dan-x-2" title="Link to this heading">#</a></h3>
-<p>Age:</p>
-<div class="math notranslate nohighlight">
-\[
+<p>Age:
+$<span class="math notranslate nohighlight">\(
 \frac{|20 - 24|}{15} = 0.267
-\]</div>
-<p>Penjelasan: Selisih usia 4 tahun, dibagi 15.</p>
-<p>Gender berbeda → 1<br />
-Penjelasan: Male ≠ Female, maka nilainya 1.</p>
-<p>Income:</p>
-<div class="math notranslate nohighlight">
-\[
+\)</span>$</p>
+<p>Gender berbeda → 1</p>
+<p>Income:
+$<span class="math notranslate nohighlight">\(
 \frac{|4 - 5|}{4} = 0.25
-\]</div>
-<p>Penjelasan: Selisih 1 tingkat income, dibagi 4.</p>
+\)</span>$</p>
 <div class="math notranslate nohighlight">
 \[
-d(x_1,x_2) = \frac{0.267 + 1 + 0.25}{3}
+d(x_1,x_2) = \frac{0.267 + 1 + 0.25}{3} = 0.506
 \]</div>
-<div class="math notranslate nohighlight">
-\[
-= 0.506
-\]</div>
-<p>Penjelasan:<br />
-Rata-rata dari ketiga jarak atribut.</p>
 </section>
 <hr class="docutils" />
 <section id="jarak-x-1-dan-x-3">
 <h3>Jarak <span class="math notranslate nohighlight">\(x_1\)</span> dan <span class="math notranslate nohighlight">\(x_3\)</span><a class="headerlink" href="#jarak-x-1-dan-x-3" title="Link to this heading">#</a></h3>
-<p>Age:</p>
-<div class="math notranslate nohighlight">
-\[
+<p>Age:
+$<span class="math notranslate nohighlight">\(
 \frac{|20 - 22|}{15} = 0.133
-\]</div>
-<p>Penjelasan: Selisih 2 tahun.</p>
-<p>Gender sama → 0<br />
-Penjelasan: Sama-sama Male.</p>
-<p>Income:</p>
-<div class="math notranslate nohighlight">
-\[
+\)</span>$</p>
+<p>Gender sama → 0</p>
+<p>Income:
+$<span class="math notranslate nohighlight">\(
 \frac{|4 - 3|}{4} = 0.25
-\]</div>
+\)</span>$</p>
 <div class="math notranslate nohighlight">
 \[
-d(x_1,x_3) = \frac{0.133 + 0 + 0.25}{3}
+d(x_1,x_3) = \frac{0.133 + 0 + 0.25}{3} = 0.128
 \]</div>
-<div class="math notranslate nohighlight">
-\[
-= 0.128
-\]</div>
-<p>Penjelasan:<br />
-Nilainya kecil karena banyak atribut yang mirip.</p>
 </section>
 <hr class="docutils" />
 <section id="jarak-x-2-dan-x-3">
 <h3>Jarak <span class="math notranslate nohighlight">\(x_2\)</span> dan <span class="math notranslate nohighlight">\(x_3\)</span><a class="headerlink" href="#jarak-x-2-dan-x-3" title="Link to this heading">#</a></h3>
-<p>Age:</p>
-<div class="math notranslate nohighlight">
-\[
+<p>Age:
+$<span class="math notranslate nohighlight">\(
 \frac{|24 - 22|}{15} = 0.133
-\]</div>
+\)</span>$</p>
 <p>Gender berbeda → 1</p>
-<p>Income:</p>
-<div class="math notranslate nohighlight">
-\[
+<p>Income:
+$<span class="math notranslate nohighlight">\(
 \frac{|5 - 3|}{4} = 0.5
-\]</div>
-<p>Penjelasan: Selisih income cukup jauh (2 tingkat).</p>
+\)</span>$</p>
 <div class="math notranslate nohighlight">
 \[
-d(x_2,x_3) = \frac{0.133 + 1 + 0.5}{3}
+d(x_2,x_3) = \frac{0.133 + 1 + 0.5}{3} = 0.544
 \]</div>
-<div class="math notranslate nohighlight">
-\[
-= 0.544
-\]</div>
-<p>Penjelasan:<br />
-Nilai besar karena berbeda gender dan income cukup jauh.</p>
 <hr class="docutils" />
-<p><strong>6. Matriks Jarak Gower</strong></p>
+<p><strong>5. Matriks Jarak</strong></p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 D =
@@ -1084,28 +861,21 @@ D =
 0.128 &amp; 0.544 &amp; 0
 \end{bmatrix}
 \end{split}\]</div>
-<p>Penjelasan:<br />
-Diagonal bernilai 0 karena jarak dengan dirinya sendiri adalah 0.</p>
 <hr class="docutils" />
-<p><strong>7. Interpretasi</strong></p>
-<p>Nilai mendekati 0 → semakin mirip.<br />
-Nilai mendekati 1 → semakin berbeda.</p>
-<p>Data paling mirip:</p>
-<div class="math notranslate nohighlight">
-\[
-x_1 \text{ dan } x_3
-\]</div>
-<p>Data paling berbeda:</p>
-<div class="math notranslate nohighlight">
-\[
-x_2 \text{ dan } x_3
-\]</div>
+<p><strong>6. Interpretasi</strong></p>
+<p>Nilai mendekati 0 menunjukkan data semakin mirip.<br />
+Nilai mendekati 1 menunjukkan data semakin berbeda.</p>
+<p>Data paling mirip:<br />
+<span class="math notranslate nohighlight">\(x_1\)</span> dan <span class="math notranslate nohighlight">\(x_3\)</span></p>
+<p>Data paling berbeda:<br />
+<span class="math notranslate nohighlight">\(x_2\)</span> dan <span class="math notranslate nohighlight">\(x_3\)</span></p>
 <hr class="docutils" />
-<p><strong>8. Kesimpulan</strong></p>
-<p>Monthly Income termasuk data ordinal karena memiliki tingkatan.<br />
-Data ordinal harus dikonversi ke numerik terlebih dahulu.<br />
-Setelah itu dihitung seperti data numerik dengan normalisasi range.<br />
-Gower Distance cocok digunakan untuk data campuran.</p>
+<p><strong>Kesimpulan</strong></p>
+<ul class="simple">
+<li><p>Monthly Income merupakan data ordinal sehingga harus dikonversi terlebih dahulu.</p></li>
+<li><p>Gender sebagai data nominal dihitung dengan aturan sama = 0 dan berbeda = 1.</p></li>
+<li><p>Gower Distance sesuai untuk dataset dengan tipe data campuran.</p></li>
+</ul>
 <section id="implematsi-menggunakan-orange">
 <h4>Implematsi Menggunakan Orange<a class="headerlink" href="#implematsi-menggunakan-orange" title="Link to this heading">#</a></h4>
 <p>Pada implementasi menggunakan Orange, diperoleh matriks jarak dengan dimensi 388 × 388.</p>
@@ -1172,21 +942,16 @@ Gower Distance cocok digunakan untuk data campuran.</p>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-understanding-online-foods-datasets">Data Understanding - Online Foods Datasets</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deskripsi-atribut-dataset-onlinefoods-csv">Deskripsi Atribut Dataset onlinefoods.csv</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#karakteristik-dataset"><strong>Karakteristik Dataset</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#seleksi-atribut-untuk-pengukuran-jarak"><strong>Seleksi Atribut untuk Pengukuran Jarak</strong></a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transformasi-data">Transformasi Data</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#encoding-data-nominal"><strong>1. Encoding Data Nominal</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformasi-data-ordinal"><strong>2. Transformasi Data Ordinal</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normalisasi-min-max"><strong>3. Normalisasi Min-Max</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contoh-normalisasi-age"><strong>Contoh Normalisasi Age</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contoh-normalisasi-family-size"><strong>Contoh Normalisasi Family Size</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contoh-normalisasi-monthly-income"><strong>Contoh Normalisasi Monthly Income</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan"><strong>Kesimpulan</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformasi-data-ordinal-monthly-income"><strong>Transformasi Data Ordinal (Monthly Income)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#range-data-untuk-normalisasi"><strong>Range Data untuk Normalisasi</strong></a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mengukur-jarak-tipe-data-campuran-gower-distance">Mengukur Jarak Tipe Data Campuran (Gower Distance)</a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-jarak">Perhitungan Jarak</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jarak-x-1-dan-x-2">Jarak <span class="math notranslate nohighlight">\(x_1\)</span> dan <span class="math notranslate nohighlight">\(x_2\)</span></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jarak-x-1-dan-x-3">Jarak <span class="math notranslate nohighlight">\(x_1\)</span> dan <span class="math notranslate nohighlight">\(x_3\)</span></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jarak-x-2-dan-x-3">Jarak <span class="math notranslate nohighlight">\(x_2\)</span> dan <span class="math notranslate nohighlight">\(x_3\)</span></a><ul class="nav section-nav flex-column">
