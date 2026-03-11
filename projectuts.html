@@ -386,13 +386,13 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pengisian-missing-value">Pengisian Missing Value</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menggunakan-wknn-manual">Menggunakan WKNN Manual</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-asli"><strong>Data Asli</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-asli">Data Asli</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normalisasi-menggunakan-min-max">Normalisasi Menggunakan Min-Max</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-1-hitung-jarak-dan-kemiripan"><strong>Langkah 1: Hitung Jarak dan Kemiripan</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-2-hitung-estimasi-menggunakan-weighted-average"><strong>Langkah 2: Hitung Estimasi Menggunakan Weighted Average</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#penjumlahan-pembilang"><strong>Penjumlahan Pembilang</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#penjumlahan-penyebut"><strong>Penjumlahan Penyebut</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil-akhir"><strong>Hasil Akhir</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-1-hitung-jarak-dan-kemiripan">Langkah 1: Hitung Jarak dan Kemiripan</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-2-hitung-estimasi-menggunakan-weighted-average">Langkah 2: Hitung Estimasi Menggunakan Weighted Average</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#penjumlahan-pembilang">Penjumlahan Pembilang</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#penjumlahan-penyebut">Penjumlahan Penyebut</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil-akhir">Hasil Akhir</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menggunakan-code-wknn">Menggunakan Code WKNN</a></li>
 </ul>
 </li>
@@ -414,12 +414,12 @@ document.write(`
 <section id="menggunakan-wknn-manual">
 <h3>Menggunakan WKNN Manual<a class="headerlink" href="#menggunakan-wknn-manual" title="Link to this heading">#</a></h3>
 <p>Pada tahap awal preprocessing dilakukan pengecekan terhadap <strong><strong>missing value</strong></strong> atau nilai yang kosong pada dataset. Missing value dapat menyebabkan proses perhitungan jarak tidak berjalan dengan baik karena setiap atribut harus memiliki nilai.</p>
-<p>Oleh karena itu, nilai yang kosong perlu diisi terlebih dahulu. Proses ini disebut <strong><strong>imputasi data</strong></strong>. Salah satu metode yang dapat digunakan adalah mengisi nilai yang kosong menggunakan <strong><strong>nilai rata-rata (mean)</strong></strong> atau nilai yang paling mendekati dari atribut tersebut.</p>
+<p>Oleh karena itu, nilai yang kosong perlu diisi terlebih dahulu. Proses ini disebut <strong>imputasi data</strong>. Salah satu metode yang dapat digunakan adalah mengisi nilai yang kosong menggunakan <strong>nilai rata-rata (mean)</strong> atau nilai yang paling mendekati dari atribut tersebut.</p>
 <p>Dengan melakukan pengisian missing value, dataset menjadi lengkap sehingga dapat digunakan pada proses selanjutnya yaitu <strong><strong>normalisasi data</strong></strong> dan perhitungan menggunakan metode <strong><strong>Weighted K-Nearest Neighbor (WKNN)</strong></strong>.</p>
 <hr class="docutils" />
 </section>
 <section id="data-asli">
-<h3><strong>Data Asli</strong><a class="headerlink" href="#data-asli" title="Link to this heading">#</a></h3>
+<h3>Data Asli<a class="headerlink" href="#data-asli" title="Link to this heading">#</a></h3>
 <p>Berikut merupakan dataset sebelum dilakukan proses normalisasi.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -465,15 +465,15 @@ document.write(`
 </div>
 <p>Keterangan:</p>
 <ul class="simple">
-<li><p><strong><strong>IPK</strong></strong> : Indeks Prestasi Kumulatif</p></li>
-<li><p><strong><strong>PO</strong></strong> : Penghasilan Orang Tua</p></li>
-<li><p><strong><strong>JML</strong></strong> : Jumlah tanggungan / kelas target</p></li>
+<li><p><strong>IPK</strong> : Indeks Prestasi Kumulatif</p></li>
+<li><p><strong>PO</strong> : Penghasilan Orang Tua</p></li>
+<li><p><strong>JML</strong> : Jumlah tanggungan / kelas target</p></li>
 </ul>
 <hr class="docutils" />
 </section>
 <section id="normalisasi-menggunakan-min-max">
 <h3>Normalisasi Menggunakan Min-Max<a class="headerlink" href="#normalisasi-menggunakan-min-max" title="Link to this heading">#</a></h3>
-<p>Karena nilai pada setiap atribut memiliki skala yang berbeda, maka dilakukan proses <strong><strong>normalisasi Min-Max</strong></strong> agar seluruh nilai berada pada rentang yang sama yaitu <strong><strong>0 sampai 1</strong></strong>.</p>
+<p>Karena nilai pada setiap atribut memiliki skala yang berbeda, maka dilakukan proses <strong>normalisasi Min-Max</strong> agar seluruh nilai berada pada rentang yang sama yaitu <strong>0 sampai 1</strong>.</p>
 <p>Rumus normalisasi Min-Max:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -485,7 +485,7 @@ X' = \frac{X - X_{min}}{X_{max} - X_{min}}
 <li><p><span class="math notranslate nohighlight">\(X_{min}\)</span> = nilai minimum</p></li>
 <li><p><span class="math notranslate nohighlight">\(X_{max}\)</span> = nilai maksimum</p></li>
 </ul>
-<p>Sebagai contoh normalisasi pada atribut <strong><strong>IPK</strong></strong>:</p>
+<p>Sebagai contoh normalisasi pada atribut <strong>IPK</strong>:</p>
 <p>Nilai minimum IPK = 2<br />
 Nilai maksimum IPK = 4</p>
 <div class="math notranslate nohighlight">
@@ -496,7 +496,7 @@ Nilai maksimum IPK = 4</p>
 \[
 \frac{4-2}{4-2}=1
 \]</div>
-<p><strong>Hasil normalisasi data menjadi sebagai berikut:</strong></p>
+<p>**Hasil normalisasi data menjadi sebagai berikut:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Data</p></th>
@@ -542,15 +542,15 @@ Nilai maksimum IPK = 4</p>
 <hr class="docutils" />
 </section>
 <section id="langkah-1-hitung-jarak-dan-kemiripan">
-<h3><strong>Langkah 1: Hitung Jarak dan Kemiripan</strong><a class="headerlink" href="#langkah-1-hitung-jarak-dan-kemiripan" title="Link to this heading">#</a></h3>
-<p>Setelah data dinormalisasi, langkah berikutnya adalah menghitung <strong><strong>jarak antara data uji dengan data latih</strong></strong> menggunakan metode <strong><strong>Euclidean Distance</strong></strong>.</p>
+<h3>Langkah 1: Hitung Jarak dan Kemiripan<a class="headerlink" href="#langkah-1-hitung-jarak-dan-kemiripan" title="Link to this heading">#</a></h3>
+<p>Setelah data dinormalisasi, langkah berikutnya adalah menghitung <strong>jarak antara data uji dengan data latih</strong> menggunakan metode <strong>Euclidean Distance</strong>.</p>
 <p>Rumus Euclidean Distance:</p>
 <div class="math notranslate nohighlight">
 \[
 d = \sqrt{(x_1-x_2)^2 + (y_1-y_2)^2}
 \]</div>
-<p>Perhitungan jarak ini dilakukan berdasarkan atribut <strong><strong>IPK</strong></strong> dan <strong><strong>PO</strong></strong>.</p>
-<p>Setelah jarak diperoleh, maka dihitung <strong><strong>bobot (weight)</strong></strong> menggunakan rumus:</p>
+<p>Perhitungan jarak ini dilakukan berdasarkan atribut <strong>IPK</strong> dan <strong>PO</strong>.</p>
+<p>Setelah jarak diperoleh, maka dihitung <strong>bobot (weight)</strong> menggunakan rumus:</p>
 <div class="math notranslate nohighlight">
 \[
 w = \frac{1}{d}
@@ -588,8 +588,8 @@ w = \frac{1}{d}
 <hr class="docutils" />
 </section>
 <section id="langkah-2-hitung-estimasi-menggunakan-weighted-average">
-<h3><strong>Langkah 2: Hitung Estimasi Menggunakan Weighted Average</strong><a class="headerlink" href="#langkah-2-hitung-estimasi-menggunakan-weighted-average" title="Link to this heading">#</a></h3>
-<p>Setelah bobot diperoleh, langkah selanjutnya adalah menghitung estimasi menggunakan <strong><strong>Weighted Average</strong></strong>.</p>
+<h3>Langkah 2: Hitung Estimasi Menggunakan Weighted Average<a class="headerlink" href="#langkah-2-hitung-estimasi-menggunakan-weighted-average" title="Link to this heading">#</a></h3>
+<p>Setelah bobot diperoleh, langkah selanjutnya adalah menghitung estimasi menggunakan <strong>Weighted Average</strong>.</p>
 <p>Rumus:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -603,8 +603,8 @@ w = \frac{1}{d}
 <hr class="docutils" />
 </section>
 <section id="penjumlahan-pembilang">
-<h3><strong>Penjumlahan Pembilang</strong><a class="headerlink" href="#penjumlahan-pembilang" title="Link to this heading">#</a></h3>
-<p>Pembilang diperoleh dari hasil perkalian antara <strong><strong>bobot dengan nilai JML</strong></strong>.</p>
+<h3>Penjumlahan Pembilang<a class="headerlink" href="#penjumlahan-pembilang" title="Link to this heading">#</a></h3>
+<p>Pembilang diperoleh dari hasil perkalian antara <strong>bobot dengan nilai JML</strong>.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Bobot</p></th>
@@ -648,7 +648,7 @@ w = \frac{1}{d}
 <hr class="docutils" />
 </section>
 <section id="penjumlahan-penyebut">
-<h3><strong>Penjumlahan Penyebut</strong><a class="headerlink" href="#penjumlahan-penyebut" title="Link to this heading">#</a></h3>
+<h3>Penjumlahan Penyebut<a class="headerlink" href="#penjumlahan-penyebut" title="Link to this heading">#</a></h3>
 <p>Penyebut merupakan jumlah seluruh bobot.</p>
 <div class="math notranslate nohighlight">
 \[
@@ -657,14 +657,14 @@ w = \frac{1}{d}
 <hr class="docutils" />
 </section>
 <section id="hasil-akhir">
-<h3><strong>Hasil Akhir</strong><a class="headerlink" href="#hasil-akhir" title="Link to this heading">#</a></h3>
+<h3>Hasil Akhir<a class="headerlink" href="#hasil-akhir" title="Link to this heading">#</a></h3>
 <p>Nilai akhir diperoleh dengan membagi pembilang dengan penyebut.</p>
 <div class="math notranslate nohighlight">
 \[
 \frac{4.895}{9.79} = 0.5
 \]</div>
-<p>Sehingga hasil estimasi menggunakan metode <strong><strong>Weighted K-Nearest Neighbor (WKNN)</strong></strong> adalah:</p>
-<p><strong><strong>0.5</strong></strong></p>
+<p>Sehingga hasil estimasi menggunakan metode <strong>Weighted K-Nearest Neighbor (WKNN)</strong> adalah:</p>
+<p><strong>0.5</strong></p>
 <p>Nilai ini menunjukkan hasil prediksi berdasarkan kedekatan setiap data terhadap data uji dengan mempertimbangkan bobot dari setiap tetangga terdekat.</p>
 </section>
 <section id="menggunakan-code-wknn">
@@ -802,13 +802,13 @@ Hasil Akhir: 0.5
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pengisian-missing-value">Pengisian Missing Value</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menggunakan-wknn-manual">Menggunakan WKNN Manual</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-asli"><strong>Data Asli</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-asli">Data Asli</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normalisasi-menggunakan-min-max">Normalisasi Menggunakan Min-Max</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-1-hitung-jarak-dan-kemiripan"><strong>Langkah 1: Hitung Jarak dan Kemiripan</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-2-hitung-estimasi-menggunakan-weighted-average"><strong>Langkah 2: Hitung Estimasi Menggunakan Weighted Average</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#penjumlahan-pembilang"><strong>Penjumlahan Pembilang</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#penjumlahan-penyebut"><strong>Penjumlahan Penyebut</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil-akhir"><strong>Hasil Akhir</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-1-hitung-jarak-dan-kemiripan">Langkah 1: Hitung Jarak dan Kemiripan</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-2-hitung-estimasi-menggunakan-weighted-average">Langkah 2: Hitung Estimasi Menggunakan Weighted Average</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#penjumlahan-pembilang">Penjumlahan Pembilang</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#penjumlahan-penyebut">Penjumlahan Penyebut</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil-akhir">Hasil Akhir</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menggunakan-code-wknn">Menggunakan Code WKNN</a></li>
 </ul>
 </li>
