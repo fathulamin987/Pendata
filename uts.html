@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Pengantar Data Mining &#8212; Materi Penambangan Data</title>
+    <title>Proyek UTS: Missing Values Imputation dan Normalisasi Data &#8212; Materi Penambangan Data</title>
   
   
   
@@ -57,11 +57,13 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'pertemuan1';</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'uts';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Memahami Data" href="pertemuan2.html" />
-    <link rel="prev" title="My Intro" href="intro.html" />
+    <link rel="next" title="Pengisian Missing Value" href="missing.html" />
+    <link rel="prev" title="Mengukur Jarak Campuran" href="dataCampur.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -180,14 +182,14 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Pengantar Data Mining</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pertemuan1.html">Pengantar Data Mining</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pertemuan2.html">Memahami Data</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="pertemuan3.html">Data understanding</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="pertemuan4.html">Mengukur Jarak Iris</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dataCampur.html">Mengukur Jarak Campuran</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="uts.html">Proyek UTS: Missing Values Imputation dan Normalisasi Data</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Proyek UTS: Missing Values Imputation dan Normalisasi Data</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="missing.html">Pengisian Missing Value</a></li>
 </ul>
 </details></li>
@@ -262,7 +264,7 @@
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fpertemuan1.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Futs.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -292,7 +294,7 @@
       
       
       
-      <li><a href="_sources/pertemuan1.md" target="_blank"
+      <li><a href="_sources/uts.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -302,7 +304,7 @@
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
 </li>
       
@@ -363,9 +365,7 @@ document.write(`
   </button>
 `);
 </script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</button>
+
 </div></div>
       
     </div>
@@ -376,27 +376,11 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Pengantar Data Mining</h1>
+    <h1>Proyek UTS: Missing Values Imputation dan Normalisasi Data</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apa-itu-data-mining">Apa Itu Data Mining?</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pengertian-data-mining">Pengertian Data Mining</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gambaran-sederhana">Gambaran Sederhana</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan-data-mining">Tujuan Data Mining</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bidang-ilmu-pendukung">Bidang Ilmu Pendukung</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#keunggulan-data-mining">Keunggulan Data Mining</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proses-data-mining-crisp-dm">Proses Data Mining (CRISP-DM)</a></li>
-</ul>
-            </nav>
         </div>
     </div>
 </div>
@@ -406,82 +390,20 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="pengantar-data-mining">
-<h1>Pengantar Data Mining<a class="headerlink" href="#pengantar-data-mining" title="Link to this heading">#</a></h1>
-<section id="apa-itu-data-mining">
-<h2>Apa Itu Data Mining?<a class="headerlink" href="#apa-itu-data-mining" title="Link to this heading">#</a></h2>
-<section id="pengertian-data-mining">
-<h3>Pengertian Data Mining<a class="headerlink" href="#pengertian-data-mining" title="Link to this heading">#</a></h3>
-<p>Data mining adalah proses menelusuri dan mengolah kumpulan data berukuran besar untuk menemukan pola, hubungan, serta informasi penting yang tersembunyi di dalamnya.</p>
-<p>Melalui proses ini, data yang awalnya hanya berupa angka atau catatan dapat diubah menjadi pengetahuan yang bermanfaat, khususnya untuk mendukung pengambilan keputusan.</p>
-</section>
-<hr class="docutils" />
-<section id="gambaran-sederhana">
-<h3>Gambaran Sederhana<a class="headerlink" href="#gambaran-sederhana" title="Link to this heading">#</a></h3>
-<p>Agar lebih mudah dipahami, data mining dapat dianalogikan seperti proses penambangan emas.</p>
-<p>Seorang penambang harus mengolah dan menyaring tumpukan tanah serta pasir dalam jumlah besar untuk menemukan butiran emas yang bernilai. Tidak semua yang digali memiliki nilai, namun melalui proses penyaringan yang tepat, emas tersebut akhirnya dapat ditemukan.</p>
-<p>Hal yang sama terjadi pada data. Dari banyaknya data yang tersimpan, hanya sebagian yang mengandung informasi penting. Melalui teknik dan metode tertentu, data tersebut diproses dan dianalisis hingga menghasilkan informasi yang berguna.</p>
-</section>
-<hr class="docutils" />
-<section id="tujuan-data-mining">
-<h3>Tujuan Data Mining<a class="headerlink" href="#tujuan-data-mining" title="Link to this heading">#</a></h3>
-<p>Beberapa tujuan utama data mining antara lain:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="proyek-uts-missing-values-imputation-dan-normalisasi-data">
+<h1>Proyek UTS: Missing Values Imputation dan Normalisasi Data<a class="headerlink" href="#proyek-uts-missing-values-imputation-dan-normalisasi-data" title="Link to this heading">#</a></h1>
+<p>Pada proyek UTS ini dilakukan pembahasan mengenai <strong>penanganan missing values</strong> dan <strong>normalisasi data</strong> sebagai bagian dari proses <em>data preprocessing</em>.</p>
+<p>Penanganan missing values dilakukan menggunakan metode <strong>Weighted K-Nearest Neighbor Imputation (WKNN)</strong>. Perhitungan metode WKNN dilakukan secara <strong>manual untuk memahami proses perhitungannya</strong>, serta menggunakan <strong>kode program untuk menghitung nilai imputasi</strong>.</p>
+<p>Selain itu, proyek ini juga membahas <strong>normalisasi data</strong>, yang bertujuan untuk menyamakan skala nilai pada data numerik. Beberapa metode normalisasi yang dijelaskan antara lain:</p>
 <ul class="simple">
-<li><p>Menemukan pola atau kecenderungan data</p></li>
-<li><p>Mengetahui hubungan antar data</p></li>
-<li><p>Membuat prediksi masa depan</p></li>
-<li><p>Mengelompokkan data berdasarkan karakteristik</p></li>
-<li><p>Mendukung pengambilan keputusan</p></li>
+<li><p><strong>Min-Max Normalization</strong></p></li>
+<li><p><strong>Z-Score Normalization</strong></p></li>
+<li><p><strong>Decimal Scaling</strong></p></li>
 </ul>
-</section>
-<hr class="docutils" />
-<section id="bidang-ilmu-pendukung">
-<h3>Bidang Ilmu Pendukung<a class="headerlink" href="#bidang-ilmu-pendukung" title="Link to this heading">#</a></h3>
-<p>Data mining didukung oleh berbagai disiplin ilmu, di antaranya:</p>
-<ul class="simple">
-<li><p>Statistik</p></li>
-<li><p>Matematika</p></li>
-<li><p>Machine Learning</p></li>
-<li><p>Kecerdasan Buatan (Artificial Intelligence)</p></li>
-<li><p>Sistem Basis Data</p></li>
-</ul>
-<p>Gabungan ilmu tersebut digunakan untuk mengekstraksi pengetahuan dari database dalam skala besar.</p>
-</section>
-<hr class="docutils" />
-<section id="keunggulan-data-mining">
-<h3>Keunggulan Data Mining<a class="headerlink" href="#keunggulan-data-mining" title="Link to this heading">#</a></h3>
-<p>Kelebihan data mining antara lain:</p>
-<ul class="simple">
-<li><p>Mengolah data dalam jumlah besar</p></li>
-<li><p>Menemukan pola tersembunyi</p></li>
-<li><p>Membantu proses prediksi</p></li>
-<li><p>Mendukung keputusan yang lebih akurat</p></li>
-<li><p>Menghemat waktu analisis data</p></li>
-</ul>
-</section>
-</section>
-<hr class="docutils" />
-<section id="proses-data-mining-crisp-dm">
-<h2>Proses Data Mining (CRISP-DM)<a class="headerlink" href="#proses-data-mining-crisp-dm" title="Link to this heading">#</a></h2>
-<p>Dalam data mining terdapat tahapan proses yang disebut CRISP-DM. CRISP-DM merupakan metode standar yang digunakan di berbagai industri untuk melakukan proses penambangan data. Metode ini dibuat oleh konsorsium sebagai pedoman umum bagi para praktisi data mining.</p>
-<p>CRISP-DM menjelaskan langkah-langkah yang dilakukan dalam suatu proyek data mining dari awal hingga akhir. Model ini memberikan gambaran tentang alur atau siklus kerja proyek data mining. Di dalamnya terdapat beberapa tahapan, tugas yang harus dikerjakan pada setiap tahap.
-CRISP-DM merupakan standar tahapan dalam proses data mining, yaitu:</p>
-<p><img alt="alt text" src="_images/prosesdatamining.png" /></p>
-<ol class="arabic simple">
-<li><p><strong>Business Understanding</strong><br />
-Memahami tujuan dan permasalahan yang akan diselesaikan.</p></li>
-<li><p><strong>Data Understanding</strong><br />
-Mengumpulkan serta mempelajari karakteristik data.</p></li>
-<li><p><strong>Data Preparation</strong><br />
-Membersihkan dan menyiapkan data sebelum diolah.</p></li>
-<li><p><strong>Modeling</strong><br />
-Menerapkan metode atau algoritma analisis.</p></li>
-<li><p><strong>Evaluation</strong><br />
-Menilai keakuratan serta kesesuaian hasil model.</p></li>
-<li><p><strong>Deployment</strong><br />
-Menerapkan hasil analisis ke dalam penggunaan nyata.</p></li>
-</ol>
-</section>
+<p>Setiap metode akan diberikan <strong>contoh hasil normalisasi data</strong>.</p>
+<p>Implementasi normalisasi dilakukan menggunakan <strong>library <code class="docutils literal notranslate"><span class="pre">sklearn</span></code></strong> atau dengan <strong>membuat fungsi normalisasi sendiri</strong>.</p>
+<div class="toctree-wrapper compound">
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -515,20 +437,20 @@ Menerapkan hasil analisis ke dalam penggunaan nyata.</p></li>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="intro.html"
+       href="dataCampur.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">My Intro</p>
+        <p class="prev-next-title">Mengukur Jarak Campuran</p>
       </div>
     </a>
     <a class="right-next"
-       href="pertemuan2.html"
+       href="missing.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Memahami Data</p>
+        <p class="prev-next-title">Pengisian Missing Value</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -538,29 +460,6 @@ Menerapkan hasil analisis ke dalam penggunaan nyata.</p></li>
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apa-itu-data-mining">Apa Itu Data Mining?</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pengertian-data-mining">Pengertian Data Mining</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gambaran-sederhana">Gambaran Sederhana</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan-data-mining">Tujuan Data Mining</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bidang-ilmu-pendukung">Bidang Ilmu Pendukung</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#keunggulan-data-mining">Keunggulan Data Mining</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proses-data-mining-crisp-dm">Proses Data Mining (CRISP-DM)</a></li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>
