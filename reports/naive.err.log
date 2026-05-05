@@ -18,49 +18,109 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-import knime.scripting.io as knio
 import pandas as pd
 from sklearn.naive_bayes import GaussianNB
 from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import train_test_split
 
-# 1. Ambil data dari port input KNIME
-# Input 0 = Data Training (80%), Input 1 = Data Testing (20%)
-df_train = knio.input_tables[0].to_pandas()
-df_test = knio.input_tables[1].to_pandas()
+# 1. Load Data dari CSV (Menggantikan knio)
+# Sesuaikan 'data.csv' dengan nama file kamu
+df = pd.read_csv('data.csv')
 
-# 2. Pisahkan kolom 'target' dari fitur lainnya
-X_train = df_train.drop(columns=['target'])
-y_train = df_train['target']
+# 2. Pisahkan Fitur (X) dan Target (y)
+# Ganti 'target' dengan nama kolom label/tujuan di datamu
+X = df.drop(columns=['target'])
+y = df['target']
 
-X_test = df_test.drop(columns=['target'])
-y_test = df_test['target']
+# 3. Bagi data menjadi Training (80%) dan Testing (20%)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-# 3. Normalisasi (Agar data punya skala yang sama)
+# 4. Normalisasi (Agar data punya skala yang sama)
 scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
 
-# 4. Training Model (Proses Belajar Naive Bayes)
+# 5. Training Model (Proses Belajar Naive Bayes)
 model = GaussianNB()
 model.fit(X_train, y_train)
 
-# 5. Prediksi (Menebak data testing)
+# 6. Prediksi (Menebak data testing)
 y_pred = model.predict(X_test)
 
-# 6. Masukkan hasil tebakan ke kolom baru bernama 'Prediction'
-df_test['Prediction'] = y_pred
+# 7. Tampilkan Hasil
+df_hasil = pd.DataFrame(X_test, columns=X.columns) # Mengembalikan nama kolom
+df_hasil['Actual'] = y_test.values
+df_hasil['Prediction'] = y_pred
 
-# 7. Kirim hasilnya kembali ke KNIME agar bisa dibaca node Scorer
-knio.output_tables[0] = knio.Table.from_pandas(df_test)
+print("Hasil Prediksi Naive Bayes:")
+print(df_hasil.head())
 ------------------
 
 
 [31m---------------------------------------------------------------------------[39m
-[31mModuleNotFoundError[39m                       Traceback (most recent call last)
-[36mCell[39m[36m [39m[32mIn[1][39m[32m, line 1[39m
-[32m----> [39m[32m1[39m [38;5;28;01mimport[39;00m[38;5;250m [39m[34;01mknime[39;00m[34;01m.[39;00m[34;01mscripting[39;00m[34;01m.[39;00m[34;01mio[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[34;01mknio[39;00m
-[32m      2[39m [38;5;28;01mimport[39;00m[38;5;250m [39m[34;01mpandas[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[34;01mpd[39;00m
-[32m      3[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01msklearn[39;00m[34;01m.[39;00m[34;01mnaive_bayes[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m GaussianNB
+[31mFileNotFoundError[39m                         Traceback (most recent call last)
+[36mCell[39m[36m [39m[32mIn[1][39m[32m, line 8[39m
+[32m      4[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01msklearn[39;00m[34;01m.[39;00m[34;01mmodel_selection[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m train_test_split
+[32m      6[39m [38;5;66;03m# 1. Load Data dari CSV (Menggantikan knio)[39;00m
+[32m      7[39m [38;5;66;03m# Sesuaikan 'data.csv' dengan nama file kamu[39;00m
+[32m----> [39m[32m8[39m df = [43mpd[49m[43m.[49m[43mread_csv[49m[43m([49m[33;43m'[39;49m[33;43mdata.csv[39;49m[33;43m'[39;49m[43m)[49m
+[32m     10[39m [38;5;66;03m# 2. Pisahkan Fitur (X) dan Target (y)[39;00m
+[32m     11[39m [38;5;66;03m# Ganti 'target' dengan nama kolom label/tujuan di datamu[39;00m
+[32m     12[39m X = df.drop(columns=[[33m'[39m[33mtarget[39m[33m'[39m])
 
-[31mModuleNotFoundError[39m: No module named 'knime'
+[36mFile [39m[32m~\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\io\parsers\readers.py:873[39m, in [36mread_csv[39m[34m(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, skip_blank_lines, parse_dates, date_format, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, on_bad_lines, low_memory, memory_map, float_precision, storage_options, dtype_backend)[39m
+[32m    861[39m kwds_defaults = _refine_defaults_read(
+[32m    862[39m     dialect,
+[32m    863[39m     delimiter,
+[32m   (...)[39m[32m    869[39m     dtype_backend=dtype_backend,
+[32m    870[39m )
+[32m    871[39m kwds.update(kwds_defaults)
+[32m--> [39m[32m873[39m [38;5;28;01mreturn[39;00m [43m_read[49m[43m([49m[43mfilepath_or_buffer[49m[43m,[49m[43m [49m[43mkwds[49m[43m)[49m
+
+[36mFile [39m[32m~\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\io\parsers\readers.py:300[39m, in [36m_read[39m[34m(filepath_or_buffer, kwds)[39m
+[32m    297[39m _validate_names(kwds.get([33m"[39m[33mnames[39m[33m"[39m, [38;5;28;01mNone[39;00m))
+[32m    299[39m [38;5;66;03m# Create the parser.[39;00m
+[32m--> [39m[32m300[39m parser = [43mTextFileReader[49m[43m([49m[43mfilepath_or_buffer[49m[43m,[49m[43m [49m[43m*[49m[43m*[49m[43mkwds[49m[43m)[49m
+[32m    302[39m [38;5;28;01mif[39;00m chunksize [38;5;129;01mor[39;00m iterator:
+[32m    303[39m     [38;5;28;01mreturn[39;00m parser
+
+[36mFile [39m[32m~\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\io\parsers\readers.py:1645[39m, in [36mTextFileReader.__init__[39m[34m(self, f, engine, **kwds)[39m
+[32m   1642[39m     [38;5;28mself[39m.options[[33m"[39m[33mhas_index_names[39m[33m"[39m] = kwds[[33m"[39m[33mhas_index_names[39m[33m"[39m]
+[32m   1644[39m [38;5;28mself[39m.handles: IOHandles | [38;5;28;01mNone[39;00m = [38;5;28;01mNone[39;00m
+[32m-> [39m[32m1645[39m [38;5;28mself[39m._engine = [38;5;28;43mself[39;49m[43m.[49m[43m_make_engine[49m[43m([49m[43mf[49m[43m,[49m[43m [49m[38;5;28;43mself[39;49m[43m.[49m[43mengine[49m[43m)[49m
+
+[36mFile [39m[32m~\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\io\parsers\readers.py:1904[39m, in [36mTextFileReader._make_engine[39m[34m(self, f, engine)[39m
+[32m   1902[39m     [38;5;28;01mif[39;00m [33m"[39m[33mb[39m[33m"[39m [38;5;129;01mnot[39;00m [38;5;129;01min[39;00m mode:
+[32m   1903[39m         mode += [33m"[39m[33mb[39m[33m"[39m
+[32m-> [39m[32m1904[39m [38;5;28mself[39m.handles = [43mget_handle[49m[43m([49m
+[32m   1905[39m [43m    [49m[43mf[49m[43m,[49m
+[32m   1906[39m [43m    [49m[43mmode[49m[43m,[49m
+[32m   1907[39m [43m    [49m[43mencoding[49m[43m=[49m[38;5;28;43mself[39;49m[43m.[49m[43moptions[49m[43m.[49m[43mget[49m[43m([49m[33;43m"[39;49m[33;43mencoding[39;49m[33;43m"[39;49m[43m,[49m[43m [49m[38;5;28;43;01mNone[39;49;00m[43m)[49m[43m,[49m
+[32m   1908[39m [43m    [49m[43mcompression[49m[43m=[49m[38;5;28;43mself[39;49m[43m.[49m[43moptions[49m[43m.[49m[43mget[49m[43m([49m[33;43m"[39;49m[33;43mcompression[39;49m[33;43m"[39;49m[43m,[49m[43m [49m[38;5;28;43;01mNone[39;49;00m[43m)[49m[43m,[49m
+[32m   1909[39m [43m    [49m[43mmemory_map[49m[43m=[49m[38;5;28;43mself[39;49m[43m.[49m[43moptions[49m[43m.[49m[43mget[49m[43m([49m[33;43m"[39;49m[33;43mmemory_map[39;49m[33;43m"[39;49m[43m,[49m[43m [49m[38;5;28;43;01mFalse[39;49;00m[43m)[49m[43m,[49m
+[32m   1910[39m [43m    [49m[43mis_text[49m[43m=[49m[43mis_text[49m[43m,[49m
+[32m   1911[39m [43m    [49m[43merrors[49m[43m=[49m[38;5;28;43mself[39;49m[43m.[49m[43moptions[49m[43m.[49m[43mget[49m[43m([49m[33;43m"[39;49m[33;43mencoding_errors[39;49m[33;43m"[39;49m[43m,[49m[43m [49m[33;43m"[39;49m[33;43mstrict[39;49m[33;43m"[39;49m[43m)[49m[43m,[49m
+[32m   1912[39m [43m    [49m[43mstorage_options[49m[43m=[49m[38;5;28;43mself[39;49m[43m.[49m[43moptions[49m[43m.[49m[43mget[49m[43m([49m[33;43m"[39;49m[33;43mstorage_options[39;49m[33;43m"[39;49m[43m,[49m[43m [49m[38;5;28;43;01mNone[39;49;00m[43m)[49m[43m,[49m
+[32m   1913[39m [43m[49m[43m)[49m
+[32m   1914[39m [38;5;28;01massert[39;00m [38;5;28mself[39m.handles [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m
+[32m   1915[39m f = [38;5;28mself[39m.handles.handle
+
+[36mFile [39m[32m~\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\io\common.py:926[39m, in [36mget_handle[39m[34m(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)[39m
+[32m    921[39m [38;5;28;01melif[39;00m [38;5;28misinstance[39m(handle, [38;5;28mstr[39m):
+[32m    922[39m     [38;5;66;03m# Check whether the filename is to be opened in binary mode.[39;00m
+[32m    923[39m     [38;5;66;03m# Binary mode does not support 'encoding' and 'newline'.[39;00m
+[32m    924[39m     [38;5;28;01mif[39;00m ioargs.encoding [38;5;129;01mand[39;00m [33m"[39m[33mb[39m[33m"[39m [38;5;129;01mnot[39;00m [38;5;129;01min[39;00m ioargs.mode:
+[32m    925[39m         [38;5;66;03m# Encoding[39;00m
+[32m--> [39m[32m926[39m         handle = [38;5;28;43mopen[39;49m[43m([49m
+[32m    927[39m [43m            [49m[43mhandle[49m[43m,[49m
+[32m    928[39m [43m            [49m[43mioargs[49m[43m.[49m[43mmode[49m[43m,[49m
+[32m    929[39m [43m            [49m[43mencoding[49m[43m=[49m[43mioargs[49m[43m.[49m[43mencoding[49m[43m,[49m
+[32m    930[39m [43m            [49m[43merrors[49m[43m=[49m[43merrors[49m[43m,[49m
+[32m    931[39m [43m            [49m[43mnewline[49m[43m=[49m[33;43m"[39;49m[33;43m"[39;49m[43m,[49m
+[32m    932[39m [43m        [49m[43m)[49m
+[32m    933[39m     [38;5;28;01melse[39;00m:
+[32m    934[39m         [38;5;66;03m# Binary mode[39;00m
+[32m    935[39m         handle = [38;5;28mopen[39m(handle, ioargs.mode)
+
+[31mFileNotFoundError[39m: [Errno 2] No such file or directory: 'data.csv'
 
