@@ -1,0 +1,793 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Analisis Data Naive Bayes &#8212; Penambangan Data A</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=1ae7504c"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'naive';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="UTS Penambangan Data" href="uts.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/Amin.png" class="logo__image only-light" alt="Penambangan Data A - Home"/>
+    <script>document.write(`<img src="_static/Amin.png" class="logo__image only-dark" alt="Penambangan Data A - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    My Intro
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="pertemuan1.html">Pengantar Data Mining</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pertemuan2.html">Memahami Data</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="pertemuan3.html">Data understanding</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="pertemuan4.html">Mengukur Jarak Iris</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dataCampur.html">Mengukur Jarak Campuran</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="Tugas.html">Tugas</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="MengisiMissing.html">Mengisi Missing Value</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Normalisasi.html">Materi Normalisasi</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="uts.html">UTS Penambangan Data</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Analisis Data Naive Bayes</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fnaive.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/naive.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Analisis Data Naive Bayes</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eksplorasi-dataset">1. Eksplorasi Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing-data">2. Preprocessing Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-model-knime-python">3. Implementasi Model (KNIME + Python)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-knime">Workflow KNIME</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-gaussian-naive-bayes-melalui-python-scripting">Implementasi Gaussian Naive Bayes melalui Python Scripting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil-dan-evaluasi-model">4. Hasil dan Evaluasi Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">Confusion Matrix</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluasi-model">Evaluasi Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">Kesimpulan</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="analisis-data-naive-bayes">
+<h1>Analisis Data Naive Bayes<a class="headerlink" href="#analisis-data-naive-bayes" title="Link to this heading">#</a></h1>
+<section id="eksplorasi-dataset">
+<h2>1. Eksplorasi Dataset<a class="headerlink" href="#eksplorasi-dataset" title="Link to this heading">#</a></h2>
+<p><strong>Deskripsi Dataset :</strong></p>
+<p>Tahap awal dari proyek ini adalah memahami data yang akan kita olah. Kami menggunakan Heart Disease Dataset, sebuah dataset medis yang berisi informasi klinis pasien untuk menentukan apakah mereka memiliki risiko penyakit jantung. Dataset ini lebih kompleks daripada dataset klasifikasi dasar karena melibatkan parameter biologis manusia yang dinamis.</p>
+<ul class="simple">
+<li><p>Sumber Data: Heart Disease Dataset - Kaggle</p></li>
+<li><p>link data : <a class="reference external" href="https://www.kaggle.com/datasets/johnsmith88/heart-disease-dataset">https://www.kaggle.com/datasets/johnsmith88/heart-disease-dataset</a></p></li>
+</ul>
+<p>Penelitian ini menggunakan Heart Disease Dataset dari Kaggle untuk memprediksi risiko penyakit jantung berdasarkan data medis pasien. Dataset ini terdiri dari 1.025 data pasien dengan 13 fitur dan 1 target class.</p>
+<p>Dataset ini termasuk data medis yang kompleks karena memiliki kombinasi fitur numerik dan kategorikal.</p>
+<p><strong>Informasi Dataset :</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Informasi</p></th>
+<th class="head"><p>Keterangan</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Jumlah Data</p></td>
+<td><p>1.025 baris</p></td>
+</tr>
+<tr class="row-odd"><td><p>Jumlah Atribut</p></td>
+<td><p>14 kolom (13 fitur + 1 target)</p></td>
+</tr>
+<tr class="row-even"><td><p>Target</p></td>
+<td><p>0 = Sehat, 1 = Penyakit Jantung</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Atribut yang Digunakan :</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>No</p></th>
+<th class="head"><p>Nama Kolom</p></th>
+<th class="head"><p>Deskripsi</p></th>
+<th class="head"><p>Tipe Data</p></th>
+<th class="head"><p>Peran</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>age</p></td>
+<td><p>Usia pasien</p></td>
+<td><p>Numerik</p></td>
+<td><p>Fitur</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>sex</p></td>
+<td><p>Jenis kelamin (1=L, 0=P)</p></td>
+<td><p>Kategorikal</p></td>
+<td><p>Fitur</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>cp</p></td>
+<td><p>Tipe nyeri dada</p></td>
+<td><p>Kategorikal</p></td>
+<td><p>Fitur</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>trestbps</p></td>
+<td><p>Tekanan darah istirahat</p></td>
+<td><p>Numerik</p></td>
+<td><p>Fitur</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>chol</p></td>
+<td><p>Kolesterol serum</p></td>
+<td><p>Numerik</p></td>
+<td><p>Fitur</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>thalach</p></td>
+<td><p>Detak jantung maksimal</p></td>
+<td><p>Numerik</p></td>
+<td><p>Fitur</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>oldpeak</p></td>
+<td><p>Depresi ST</p></td>
+<td><p>Numerik</p></td>
+<td><p>Fitur</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>target</p></td>
+<td><p>Diagnosa penyakit</p></td>
+<td><p>Kategorikal</p></td>
+<td><p>Target</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="preprocessing-data">
+<h2>2. Preprocessing Data<a class="headerlink" href="#preprocessing-data" title="Link to this heading">#</a></h2>
+<p><strong>Standardisasi Data (Z-Score)</strong>
+Tahap preprocessing dilakukan untuk menyamakan skala antar fitur agar model tidak bias terhadap fitur dengan nilai besar seperti kolesterol.</p>
+<hr class="docutils" />
+<p><strong>Mengapa perlu normalisasi ?</strong></p>
+<p>Karena setiap fitur memiliki rentang nilai berbeda :</p>
+<ul class="simple">
+<li><p>Kolesterol: ratusan</p></li>
+<li><p>Usia: puluhan</p></li>
+<li><p>Oldpeak: kecil</p></li>
+</ul>
+<p>Tanpa normalisasi, model akan lebih fokus ke fitur bernilai besar dan hasil prediksi menjadi tidak akurat.</p>
+<hr class="docutils" />
+<p><strong>Metode yang digunakan</strong></p>
+<p>Z-Score Standardization :</p>
+<ul class="simple">
+<li><p>Mengubah data menjadi distribusi dengan mean = 0 dan standar deviasi = 1</p></li>
+<li><p>Cocok untuk algoritma probabilistik seperti Naive Bayes</p></li>
+</ul>
+<p><strong>Partisi Data (80:20)</strong></p>
+<p>Data dibagi menjadi :</p>
+<ul class="simple">
+<li><p><strong>80% Training (820 data)</strong> → Melatih model</p></li>
+<li><p><strong>20% Testing (205 data)</strong> → Menguji model</p></li>
+</ul>
+<p><img alt="alt text" src="_images/partitioner.png" /></p>
+<p>Partitioning node KNIME (setting 80%)</p>
+</section>
+<section id="implementasi-model-knime-python">
+<h2>3. Implementasi Model (KNIME + Python)<a class="headerlink" href="#implementasi-model-knime-python" title="Link to this heading">#</a></h2>
+<p><strong>Tools yang digunakan :</strong></p>
+<ul class="simple">
+<li><p>KNIME Analytics Platform</p></li>
+<li><p>Python Script (Scikit-Learn)</p></li>
+<li><p>Gaussian Naive Bayes</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="workflow-knime">
+<h2>Workflow KNIME<a class="headerlink" href="#workflow-knime" title="Link to this heading">#</a></h2>
+<p><img alt="alt text" src="_images/workflow.png" /></p>
+<p><strong>Ekstensi yang Digunakan pada Workflow KNIME :</strong></p>
+<ul class="simple">
+<li><p><strong>CSV Reader</strong>: Digunakan untuk membaca dataset penyakit jantung dari file CSV sebagai sumber data awal dalam workflow.</p></li>
+<li><p><strong>Column Filter</strong>: Berfungsi untuk memilih atribut yang relevan dan menghapus kolom yang tidak diperlukan agar analisis lebih fokus.</p></li>
+<li><p><strong>Table Partitioner</strong>: Membagi dataset menjadi data training (80%) dan data testing (20%) untuk proses pelatihan dan pengujian model.</p></li>
+<li><p><strong>Python Script</strong>: Menjalankan proses utama seperti normalisasi data menggunakan StandardScaler, pelatihan model Gaussian Naive Bayes, serta prediksi data testing.</p></li>
+<li><p><strong>Scorer</strong>: Digunakan untuk mengevaluasi performa model dengan menghasilkan metrik seperti akurasi dan confusion matrix.</p></li>
+<li><p><strong>ROC Curve</strong>: Menampilkan kurva ROC untuk mengukur kemampuan model dalam membedakan kelas positif dan negatif.</p></li>
+<li><p><strong>Table View</strong>: Menyajikan hasil prediksi dalam bentuk tabel untuk memudahkan analisis dan perbandingan dengan data asli.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="implementasi-gaussian-naive-bayes-melalui-python-scripting">
+<h2>Implementasi Gaussian Naive Bayes melalui Python Scripting<a class="headerlink" href="#implementasi-gaussian-naive-bayes-melalui-python-scripting" title="Link to this heading">#</a></h2>
+<p>Meskipun KNIME menyediakan node Naive Bayes bawaan, proyek ini memilih menggunakan Python Scripting dengan library scikit-learn. Hal ini dilakukan untuk mendapatkan kontrol penuh atas proses normalisasi dan parameter model.</p>
+<p>Kami memilih varian Gaussian Naive Bayes karena sebagian besar fitur medis kami berbentuk angka kontinu. Algoritma ini bekerja dengan asumsi bahwa fitur-fitur tersebut terdistribusi secara normal (mengikuti kurva lonceng). Model akan menghitung probabilitas pasien masuk ke kategori “Sakit” atau “Sehat” berdasarkan sebaran data tersebut.</p>
+<p><strong>Script Pyhton yang digunakan :</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">knime.scripting.io</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">knio</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.naive_bayes</span><span class="w"> </span><span class="kn">import</span> <span class="n">GaussianNB</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
+
+<span class="c1"># 1. Ambil data dari port input KNIME</span>
+<span class="c1"># Input 0 = Data Training (80%), Input 1 = Data Testing (20%)</span>
+<span class="n">df_train</span> <span class="o">=</span> <span class="n">knio</span><span class="o">.</span><span class="n">input_tables</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
+<span class="n">df_test</span> <span class="o">=</span> <span class="n">knio</span><span class="o">.</span><span class="n">input_tables</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
+
+<span class="c1"># 2. Pisahkan kolom &#39;target&#39; dari fitur lainnya</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">])</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span>
+
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">df_test</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">])</span>
+<span class="n">y_test</span> <span class="o">=</span> <span class="n">df_test</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span>
+
+<span class="c1"># 3. Normalisasi (Agar data punya skala yang sama)</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="c1"># 4. Training Model (Proses Belajar Naive Bayes)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">GaussianNB</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># 5. Prediksi (Menebak data testing)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="c1"># 6. Masukkan hasil tebakan ke kolom baru bernama &#39;Prediction&#39;</span>
+<span class="n">df_test</span><span class="p">[</span><span class="s1">&#39;Prediction&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">y_pred</span>
+
+<span class="c1"># 7. Kirim hasilnya kembali ke KNIME agar bisa dibaca node Scorer</span>
+<span class="n">knio</span><span class="o">.</span><span class="n">output_tables</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">knio</span><span class="o">.</span><span class="n">Table</span><span class="o">.</span><span class="n">from_pandas</span><span class="p">(</span><span class="n">df_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span><span class="w"> </span><span class="nn">knime.scripting.io</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">knio</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.naive_bayes</span><span class="w"> </span><span class="kn">import</span> <span class="n">GaussianNB</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;knime&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="hasil-dan-evaluasi-model">
+<h2>4. Hasil dan Evaluasi Model<a class="headerlink" href="#hasil-dan-evaluasi-model" title="Link to this heading">#</a></h2>
+<p><strong>Hasil Prediksi :</strong></p>
+<p>Model digunakan untuk memprediksi apakah pasien memiliki penyakit jantung atau tidak berdasarkan data testing.</p>
+<p><img alt="alt text" src="_images/tableview.png" /></p>
+</section>
+<hr class="docutils" />
+<section id="confusion-matrix">
+<h2>Confusion Matrix<a class="headerlink" href="#confusion-matrix" title="Link to this heading">#</a></h2>
+<p>Confusion Matrix digunakan untuk melihat performa model dalam klasifikasi.</p>
+<p><img alt="alt text" src="_images/confusionmatrix.png" /></p>
+<p><strong>Hasil:</strong></p>
+<ul class="simple">
+<li><p>True Positive: 89</p></li>
+<li><p>True Negative: 83</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="evaluasi-model">
+<h2>Evaluasi Model<a class="headerlink" href="#evaluasi-model" title="Link to this heading">#</a></h2>
+<p>Setelah model selesai menebak, kita perlu cek seberapa hebat kinerjanya. Bagian ini menunjukkan bukti statistik apakah model kita bisa dipercaya atau tidak.</p>
+<ol class="arabic simple">
+<li><p>Statistik Akurasi
+Tabel ini menunjukkan ringkasan keberhasilan model dalam memprediksi data.</p></li>
+</ol>
+<p><img alt="alt text" src="_images/accuracy.png" /></p>
+<p>Model berhasil mendapatkan akurasi 83.9%. Artinya, dari 205 pasien yang diuji, sekitar 172 orang berhasil ditebak kondisinya dengan benar. Nilai ini sudah sangat bagus untuk sebuah deteksi awal kesehatan.</p>
+<ol class="arabic simple" start="2">
+<li><p>ROC Curve
+Grafik ini menunjukkan kemampuan model dalam membedakan mana orang yang benar-benar sakit dan mana yang sehat.</p></li>
+</ol>
+<p><img alt="alt text" src="_images/ROC.png" /></p>
+<p>Semakin melengkung garis birunya ke arah kiri atas, berarti model semakin jago membedakan kelas pasien. Grafik di atas membuktikan model kita punya performa yang stabil dan kuat.</p>
+<p><strong>Hasil Evaluasi:</strong></p>
+<ul class="simple">
+<li><p>Akurasi (Overall Accuracy) : 0.83902… → dibulatkan jadi 83.9%</p></li>
+<li><p>F1-Score (F-Measure): 0.8444… → dibulatkan jadi 0.844</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="kesimpulan">
+<h2>Kesimpulan<a class="headerlink" href="#kesimpulan" title="Link to this heading">#</a></h2>
+<p>Model <strong>Gaussian Naive Bayes</strong> berhasil memberikan hasil yang cukup baik dalam klasifikasi penyakit jantung. Dengan tingkat akurasi yang stabil, model ini sangat layak digunakan sebagai instrumen skrining atau alat bantu diagnosa awal dalam bidang medis.</p>
+<ul class="simple">
+<li><p><strong>Data Training</strong>: 820 pasien (80%)</p></li>
+<li><p><strong>Data Testing</strong>: 205 pasien (20%)</p></li>
+<li><p><strong>Akurasi Model</strong>: <strong>83.9%</strong> (Berdasarkan evaluasi Scorer)</p></li>
+<li><p><strong>F1-Score</strong>: <strong>0.844</strong> (Menunjukkan performa prediksi yang kuat)</p></li>
+</ul>
+<p><strong>Hasil Diagnosa (Confusion Matrix):</strong></p>
+<ul class="simple">
+<li><p><strong>True Positive (TP)</strong>: <strong>95 pasien</strong> sakit berhasil diprediksi dengan benar.</p></li>
+<li><p><strong>True Negative (TN)</strong>: <strong>78 pasien</strong> sehat berhasil diprediksi dengan benar.</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="uts.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">UTS Penambangan Data</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eksplorasi-dataset">1. Eksplorasi Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing-data">2. Preprocessing Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-model-knime-python">3. Implementasi Model (KNIME + Python)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-knime">Workflow KNIME</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-gaussian-naive-bayes-melalui-python-scripting">Implementasi Gaussian Naive Bayes melalui Python Scripting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil-dan-evaluasi-model">4. Hasil dan Evaluasi Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">Confusion Matrix</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluasi-model">Evaluasi Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">Kesimpulan</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Fathul Amin - 240411100217
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
