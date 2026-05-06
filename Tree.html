@@ -366,7 +366,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -382,6 +384,30 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eksplorasi-dataset">1. Eksplorasi Dataset</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#informasi-dataset">Informasi Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struktur-dataset">Struktur Dataset</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-pada-knime">2. Implementasi pada KNIME</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#csv-reader">CSV Reader</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#partitioning">Partitioning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#color-manager-color-appender">Color Manager &amp; Color Appender</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-tree-learner">Decision Tree Learner</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-tree-predictor">Decision Tree Predictor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scorer">Scorer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-tree-view">Decision Tree View</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-logika-keputusan-step-by-step">3. Analisis Logika Keputusan (Step-by-Step)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-entropy-gain">Perhitungan Entropy &amp; Gain</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struktur-percabangan">Struktur Percabangan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">4. Kesimpulan</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -393,8 +419,266 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="decission-tree">
 <h1>Decission Tree<a class="headerlink" href="#decission-tree" title="Link to this heading">#</a></h1>
+<p>Implementasi Decision Tree pada Dataset <em>Play Tennis</em> menggunakan KNIME</p>
+<p>Halaman ini berisi dokumentasi lengkap mengenai pembangunan model klasifikasi menggunakan <strong>Decision Tree</strong> untuk memprediksi keputusan bermain tenis berdasarkan kondisi cuaca dengan bantuan <strong>KNIME Analytics Platform</strong>.</p>
+<hr class="docutils" />
+<section id="eksplorasi-dataset">
+<h2>1. Eksplorasi Dataset<a class="headerlink" href="#eksplorasi-dataset" title="Link to this heading">#</a></h2>
+<p>Dataset yang digunakan adalah <strong>Play Tennis</strong>, yaitu dataset sederhana yang sering digunakan dalam pembelajaran machine learning.</p>
+<p>Dataset ini terdiri dari <strong>14 data cuaca harian</strong> dengan <strong>5 atribut utama</strong>.</p>
+<section id="informasi-dataset">
+<h3>Informasi Dataset<a class="headerlink" href="#informasi-dataset" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Keterangan</p></th>
+<th class="head"><p>Detail</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Jumlah Data</strong></p></td>
+<td><p>14 baris</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Jumlah Atribut</strong></p></td>
+<td><p>5 kolom</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Atribut</strong></p></td>
+<td><p>Outlook, Temperature, Humidity, Wind, Play Tennis (Target/Class)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="struktur-dataset">
+<h3>Struktur Dataset<a class="headerlink" href="#struktur-dataset" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Day</p></th>
+<th class="head"><p>Outlook</p></th>
+<th class="head"><p>Temp</p></th>
+<th class="head"><p>Humidity</p></th>
+<th class="head"><p>Wind</p></th>
+<th class="head"><p>Play Tennis</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>D1</p></td>
+<td><p>Sunny</p></td>
+<td><p>Hot</p></td>
+<td><p>High</p></td>
+<td><p>False</p></td>
+<td><p>No</p></td>
+</tr>
+<tr class="row-odd"><td><p>D2</p></td>
+<td><p>Sunny</p></td>
+<td><p>Hot</p></td>
+<td><p>High</p></td>
+<td><p>True</p></td>
+<td><p>No</p></td>
+</tr>
+<tr class="row-even"><td><p>D3</p></td>
+<td><p>Overcast</p></td>
+<td><p>Hot</p></td>
+<td><p>High</p></td>
+<td><p>False</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>D4</p></td>
+<td><p>Rain</p></td>
+<td><p>Mild</p></td>
+<td><p>High</p></td>
+<td><p>False</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>D5</p></td>
+<td><p>Rain</p></td>
+<td><p>Cool</p></td>
+<td><p>Normal</p></td>
+<td><p>False</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>D6</p></td>
+<td><p>Rain</p></td>
+<td><p>Cool</p></td>
+<td><p>Normal</p></td>
+<td><p>True</p></td>
+<td><p>No</p></td>
+</tr>
+<tr class="row-even"><td><p>D7</p></td>
+<td><p>Overcast</p></td>
+<td><p>Cool</p></td>
+<td><p>Normal</p></td>
+<td><p>False</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>D8</p></td>
+<td><p>Sunny</p></td>
+<td><p>Mild</p></td>
+<td><p>High</p></td>
+<td><p>False</p></td>
+<td><p>No</p></td>
+</tr>
+<tr class="row-even"><td><p>D9</p></td>
+<td><p>Sunny</p></td>
+<td><p>Cold</p></td>
+<td><p>Normal</p></td>
+<td><p>False</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>D10</p></td>
+<td><p>Rain</p></td>
+<td><p>Mild</p></td>
+<td><p>Normal</p></td>
+<td><p>True</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>D11</p></td>
+<td><p>Sunny</p></td>
+<td><p>Mild</p></td>
+<td><p>Normal</p></td>
+<td><p>True</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>D12</p></td>
+<td><p>Overcast</p></td>
+<td><p>Mild</p></td>
+<td><p>High</p></td>
+<td><p>True</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>D13</p></td>
+<td><p>Overcast</p></td>
+<td><p>Hot</p></td>
+<td><p>Normal</p></td>
+<td><p>False</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>D14</p></td>
+<td><p>Rain</p></td>
+<td><p>Mild</p></td>
+<td><p>High</p></td>
+<td><p>True</p></td>
+<td><p>No</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="implementasi-pada-knime">
+<h2>2. Implementasi pada KNIME<a class="headerlink" href="#implementasi-pada-knime" title="Link to this heading">#</a></h2>
+<p>Workflow dibangun menggunakan <strong>KNIME Analytics Platform</strong> untuk membuat model Decision Tree secara visual.</p>
+<p><strong>Workflow KNIME :</strong></p>
 <p><img alt="alt text" src="_images/pohonknime.png" /></p>
-<p><em>NB : Materi akan segera diupdate</em></p>
+</section>
+<hr class="docutils" />
+<section id="csv-reader">
+<h2>CSV Reader<a class="headerlink" href="#csv-reader" title="Link to this heading">#</a></h2>
+<p>Node ini digunakan untuk mengimpor dataset <code class="docutils literal notranslate"><span class="pre">training_examples_play_tennis.csv</span></code> ke dalam KNIME.</p>
+<p><img alt="alt text" src="_images/readercsv.png" /></p>
+</section>
+<hr class="docutils" />
+<section id="partitioning">
+<h2>Partitioning<a class="headerlink" href="#partitioning" title="Link to this heading">#</a></h2>
+<p>Node ini digunakan untuk membagi dataset menjadi:</p>
+<ul class="simple">
+<li><p>Data Training</p></li>
+<li><p>Data Testing</p></li>
+</ul>
+<p>Tujuannya agar model dapat dilatih dan diuji secara terpisah.</p>
+<p><img alt="alt text" src="_images/partitioner1.png" /></p>
+</section>
+<hr class="docutils" />
+<section id="color-manager-color-appender">
+<h2>Color Manager &amp; Color Appender<a class="headerlink" href="#color-manager-color-appender" title="Link to this heading">#</a></h2>
+<p>Node ini digunakan untuk memberikan warna pada kelas target (<strong>Yes / No</strong>) agar lebih mudah divisualisasikan.</p>
+<p><img alt="alt text" src="_images/colormanager.png" /></p>
+<p><img alt="alt text" src="_images/tablecolor.png" /></p>
+</section>
+<hr class="docutils" />
+<section id="decision-tree-learner">
+<h2>Decision Tree Learner<a class="headerlink" href="#decision-tree-learner" title="Link to this heading">#</a></h2>
+<p>Node utama untuk melatih model Decision Tree.</p>
+<p>Proses yang dilakukan:</p>
+<ul class="simple">
+<li><p>Menghitung <strong>Entropy</strong></p></li>
+<li><p>Menghitung <strong>Information Gain</strong></p></li>
+<li><p>Menentukan struktur pohon terbaik</p></li>
+</ul>
+<p><img alt="alt text" src="_images/decisionlearner.png" /></p>
+</section>
+<hr class="docutils" />
+<section id="decision-tree-predictor">
+<h2>Decision Tree Predictor<a class="headerlink" href="#decision-tree-predictor" title="Link to this heading">#</a></h2>
+<p>Node ini menerapkan model yang telah dilatih ke data testing untuk menghasilkan prediksi.</p>
+<p>Output:</p>
+<ul class="simple">
+<li><p><strong>Yes / No</strong> berdasarkan kondisi cuaca</p></li>
+</ul>
+<p><img alt="alt text" src="_images/decisionpredictor.png" /></p>
+</section>
+<hr class="docutils" />
+<section id="scorer">
+<h2>Scorer<a class="headerlink" href="#scorer" title="Link to this heading">#</a></h2>
+<p>Node ini digunakan untuk mengevaluasi performa model.</p>
+<p>Hasil evaluasi:</p>
+<p><strong>Confusion Matrix :</strong></p>
+<p><img alt="alt text" src="_images/confusion.png" /></p>
+<p><strong>Accuracy Statistics :</strong>
+<img alt="alt text" src="_images/acuracy.png" /></p>
+</section>
+<hr class="docutils" />
+<section id="decision-tree-view">
+<h2>Decision Tree View<a class="headerlink" href="#decision-tree-view" title="Link to this heading">#</a></h2>
+<p>Menampilkan hasil model dalam bentuk <strong>diagram pohon keputusan interaktif</strong>.</p>
+<p><img alt="alt text" src="_images/pohon.png" /></p>
+</section>
+<hr class="docutils" />
+<section id="analisis-logika-keputusan-step-by-step">
+<h2>3. Analisis Logika Keputusan (Step-by-Step)<a class="headerlink" href="#analisis-logika-keputusan-step-by-step" title="Link to this heading">#</a></h2>
+<p>Berdasarkan hasil Decision Tree Learner, model menghasilkan struktur keputusan berikut:</p>
+</section>
+<section id="perhitungan-entropy-gain">
+<h2>Perhitungan Entropy &amp; Gain<a class="headerlink" href="#perhitungan-entropy-gain" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Entropy awal (14 data: 9 Yes, 5 No) = <strong>0.940</strong></p></li>
+<li><p>Fitur dengan Information Gain tertinggi adalah:</p>
+<ul>
+<li><p><strong>Outlook (0.246)</strong> → menjadi root node</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="struktur-percabangan">
+<h2>Struktur Percabangan<a class="headerlink" href="#struktur-percabangan" title="Link to this heading">#</a></h2>
+<p><strong>Outlook = Overcast</strong></p>
+<ul class="simple">
+<li><p>Semua data → <em>Yes</em></p></li>
+<li><p>Entropy = 0 (pure node)</p></li>
+</ul>
+<p><strong>Outlook = Sunny</strong>
+Dilanjutkan dengan atribut <em>Humidity</em> :</p>
+<ul class="simple">
+<li><p>High → No</p></li>
+<li><p>Normal → Yes</p></li>
+</ul>
+<p><strong>Outlook = Rain</strong>
+Dilanjutkan dengan atribut <em>Wind</em>:</p>
+<ul class="simple">
+<li><p>Strong → No</p></li>
+<li><p>Weak → Yes</p></li>
+</ul>
+</section>
+<section id="kesimpulan">
+<h2>4. Kesimpulan<a class="headerlink" href="#kesimpulan" title="Link to this heading">#</a></h2>
+<p>Model <strong>Decision Tree menggunakan KNIME</strong> berhasil mengubah dataset cuaca menjadi aturan keputusan yang jelas dan mudah dipahami.</p>
+<ul class="simple">
+<li><p>Model dapat memprediksi keputusan bermain tenis</p></li>
+<li><p>Berdasarkan atribut cuaca: Outlook, Humidity, Wind</p></li>
+<li><p>Hasil berupa struktur pohon yang mudah diinterpretasikan</p></li>
+</ul>
+<p>Decision Tree sangat efektif untuk klasifikasi sederhana karena memberikan hasil yang transparan, logis, dan mudah dijelaskan.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -442,6 +726,37 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eksplorasi-dataset">1. Eksplorasi Dataset</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#informasi-dataset">Informasi Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struktur-dataset">Struktur Dataset</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-pada-knime">2. Implementasi pada KNIME</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#csv-reader">CSV Reader</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#partitioning">Partitioning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#color-manager-color-appender">Color Manager &amp; Color Appender</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-tree-learner">Decision Tree Learner</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-tree-predictor">Decision Tree Predictor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scorer">Scorer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-tree-view">Decision Tree View</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-logika-keputusan-step-by-step">3. Analisis Logika Keputusan (Step-by-Step)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-entropy-gain">Perhitungan Entropy &amp; Gain</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struktur-percabangan">Struktur Percabangan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">4. Kesimpulan</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
