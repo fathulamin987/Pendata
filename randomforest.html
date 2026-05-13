@@ -367,7 +367,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -383,6 +385,16 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#input-data-excel-reader">Input Data: Excel Reader</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pembagian-data-table-partitioner">Pembagian Data: Table Partitioner</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-forest-learner">Random Forest Learner</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -395,7 +407,34 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="random-forest">
 <h1>Random Forest<a class="headerlink" href="#random-forest" title="Link to this heading">#</a></h1>
 <p><img alt="alt text" src="_images/workflowrandom.png" /></p>
+<section id="input-data-excel-reader">
+<h2>Input Data: Excel Reader<a class="headerlink" href="#input-data-excel-reader" title="Link to this heading">#</a></h2>
+<p>Tahap pertama adalah memasukkan data mentah ke dalam KNIME. Node ini membaca file tugas-pohon.xlsx yang berisi histori data cuaca. Kita dapat melihat variabel seperti Outlook (cuaca), Temperature, Humidity, dan Windy. Target yang ingin kita tebak adalah kolom Play Tennis (Yes/No).</p>
+<p><img alt="alt text" src="_images/excelreaderrandom.png" /></p>
+</section>
+<section id="pembagian-data-table-partitioner">
+<h2>Pembagian Data: Table Partitioner<a class="headerlink" href="#pembagian-data-table-partitioner" title="Link to this heading">#</a></h2>
+<p>Di sini kita mengatur pembagian data secara adil. Kita menggunakan proporsi 80% untuk data belajar dan 20% untuk data ujian.</p>
+<p><img alt="alt text" src="_images/partitionerrandom.png" /></p>
+<p><strong>First Partition 80% :</strong></p>
+<p>Ini adalah data firsstpartition yang digunakan sebagai bahan belajar model.</p>
+<p><img alt="alt text" src="_images/firstpartition.png" /></p>
+<p><strong>second Partition 20% :</strong></p>
+<p>Ini adalah data secondpartition yang disimpan untuk menguji keakuratan tebakan model nantinya.</p>
+<p><img alt="alt text" src="_images/secondpartition.png" /></p>
+</section>
+<section id="random-forest-learner">
+<h2>Random Forest Learner<a class="headerlink" href="#random-forest-learner" title="Link to this heading">#</a></h2>
+<p>Di sinilah proses “belajar” yang sebenarnya terjadi dengan membangun sekumpulan pohon keputusan.</p>
+<p><img alt="alt text" src="_images/trainrandom.png" /></p>
+<p>Pada konfigurasi Random Forest Learner, model mencoba mencari hubungan antara cuaca dan keputusan bermain. Algoritma ini tidak hanya mengandalkan satu pohon, melainkan banyak pohon acak untuk memastikan prediksi yang dihasilkan lebih stabil dan tidak hanya “menghafal” data (overfitting).</p>
+<p><strong>Detail Statistik &amp; Validasi:</strong></p>
+<p><img alt="alt text" src="_images/attributestatics.png" /></p>
+<p>Tabel Attribute Statistics menunjukkan fitur cuaca mana yang paling sering digunakan dalam pengambilan keputusan. Ini membantu kita memahami faktor terpenting</p>
+<p><img alt="alt text" src="_images/outofbag.png" /></p>
+<p>Hasil Out-of-Bag (OOB) Error merupakan fitur spesial dari Random Forest. Gambar ini menampilkan “rapor” sementara model, di mana ia mengetes dirinya sendiri menggunakan sebagian data yang tidak terpilih saat proses belajar.</p>
 <p><em>Materi akan segera di update</em></p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -443,6 +482,23 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#input-data-excel-reader">Input Data: Excel Reader</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pembagian-data-table-partitioner">Pembagian Data: Table Partitioner</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-forest-learner">Random Forest Learner</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
