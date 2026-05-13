@@ -57,6 +57,8 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'randomforest';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -395,6 +397,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proses-pembelajaran-model-random-forest-learner">Proses Pembelajaran Model (Random Forest Learner)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-forest-predictor">Random Forest Predictor</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-forest-predictor-regression">Random Forest Predictor - Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#column-filter-penyaringan-data">Column Filter (Penyaringan Data)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scorer-deprecated">Scorer (deprecated)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#line-plot-legacy">Line Plot (legacy)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numeric-scorer-deprecated">Numeric Scorer (deprecated)</a></li>
 </ul>
             </nav>
         </div>
@@ -444,6 +450,52 @@ document.write(`
 <h2>Random Forest Predictor - Regression<a class="headerlink" href="#random-forest-predictor-regression" title="Link to this heading">#</a></h2>
 <p>Berbeda dengan jalur sebelumnya, bagian Regresi ini bertujuan untuk memprediksi nilai numerik yang bersifat kontinu. Melalui gambar ini, kita dapat melihat bahwa output yang dihasilkan oleh AI bukan lagi berupa label teks, melainkan angka desimal yang lebih presisi pada kolom Prediction. Proses regresi ini sangat penting untuk memahami sejauh mana model mampu memperkirakan nilai target dengan selisih angka yang sekecil mungkin dari data aslinya. Dengan melihat detail tabel ini, kita dapat mengevaluasi performa model melalui jarak antara angka kenyataan dan angka prediksi untuk menentukan tingkat kesalahan atau error estimasi yang dihasilkan oleh sistem.</p>
 <p><img alt="alt text" src="_images/predictorregresi.png" /></p>
+</section>
+<section id="column-filter-penyaringan-data">
+<h2>Column Filter (Penyaringan Data)<a class="headerlink" href="#column-filter-penyaringan-data" title="Link to this heading">#</a></h2>
+<p>Pada tahap ini, kita melakukan pemilihan kolom secara spesifik untuk memastikan hanya informasi yang relevan yang muncul dalam hasil akhir. Seperti yang terlihat pada gambar, kita memisahkan kolom ke dalam dua bagian:</p>
+<ul class="simple">
+<li><p>Excludes (Kiri): Kolom-kolom yang tidak diperlukan atau mengandung data kosong (missing values) disingkirkan agar tidak membingungkan proses analisis.</p></li>
+<li><p>Includes (Kanan): Kita hanya mempertahankan kolom utama seperti data cuaca (Outlook, Temp, Humidity) dan hasil prediksi (Prediction).</p></li>
+</ul>
+<p><img alt="alt text" src="_images/columnfilter.png" /></p>
+</section>
+<section id="scorer-deprecated">
+<h2>Scorer (deprecated)<a class="headerlink" href="#scorer-deprecated" title="Link to this heading">#</a></h2>
+<p>Node Scorer adalah alat evaluasi untuk mengukur seberapa akurat model AI dalam melakukan prediksi. Di dalam proyek ini, kita menggunakan dua Node Scorer untuk menguji dua aspek yang berbeda:</p>
+<p><strong>Pengujian Pertama</strong></p>
+<p>Pada pengujian pertama ini, kita menguji performa “Internal” model menggunakan metode Out-of-bag. Apa yang diuji? Kita membandingkan kolom data asli Play Tennis dengan kolom Play Tennis (Out-of-bag).</p>
+<p>Maksudnya adalah: AI mencoba menebak data yang dia gunakan untuk latihan sendiri. Ini adalah tes awal untuk melihat seberapa baik AI memahami pola dasar tanpa melihat data luar.</p>
+<p>Hasilnya: Akurasi 27.273%. Ini menunjukkan bahwa saat mencoba menebak datanya sendiri pun, AI masih banyak melakukan kesalahan karena pola datanya sangat acak.</p>
+<p><img alt="alt text" src="_images/scorerdeprecated.png" /></p>
+<p><strong>Pengujian Kedua</strong></p>
+<p>Pada pengujian kedua ini, kita menguji performa “Eksternal” model menggunakan Data Test. Apa yang diuji? Kita membandingkan kolom data asli Play Tennis dengan kolom Prediction (Play Tennis) yang dihasilkan oleh node Predictor.</p>
+<p>Maksudnya adalah: Ini adalah “Ujian Final”. Kita memberikan data baru yang sudah dipisahkan (dari node Partitioning) untuk ditebak oleh AI. Kita ingin melihat apakah AI bisa menerapkan ilmu yang sudah dipelajari ke data yang benar-benar baru.</p>
+<p>Hasilnya: Akurasi 66.667%. Ini menunjukkan peningkatan drastis! Artinya, AI jauh lebih jago menebak data baru yang dipisahkan secara rapi daripada menebak seluruh data sekaligus.</p>
+<p><img alt="alt text" src="_images/scorerdeprecated2.png" /></p>
+</section>
+<section id="line-plot-legacy">
+<h2>Line Plot (legacy)<a class="headerlink" href="#line-plot-legacy" title="Link to this heading">#</a></h2>
+<p>Grafik ini digunakan untuk melihat hasil kerja AI dalam bentuk garis agar lebih mudah dibaca dibandingkan hanya melihat angka di dalam tabel.</p>
+<p><img alt="alt text" src="_images/lineplot.png" /></p>
+<p>Pada gambar diatas membandingkan Data Asli dengan Hasil Tebakan AI. Tujuannya untuk melihat seberapa mirip tebakan AI dengan kenyataan yang ada.</p>
+<p>Penjelasan Hasil:</p>
+<ul class="simple">
+<li><p>Garis Naik-Turun: Menunjukkan perubahan kondisi data (misalnya perubahan suhu atau kecepatan angin).</p></li>
+<li><p>Ketepatan: Semakin dekat jarak antara garis yang satu dengan yang lain, artinya tebakan AI kita semakin akurat dan mendekati kenyataan.</p></li>
+</ul>
+</section>
+<section id="numeric-scorer-deprecated">
+<h2>Numeric Scorer (deprecated)<a class="headerlink" href="#numeric-scorer-deprecated" title="Link to this heading">#</a></h2>
+<p>Jika pada klasifikasi kita mencari akurasi, pada jalur Regresi kita menggunakan node Numeric Scorer untuk mengukur seberapa jauh selisih antara angka yang ditebak AI dengan angka kenyataan di lapangan.</p>
+<p><img alt="alt text" src="_images/numericscorer.png" /></p>
+<p>Disini menguji ketepatan prediksi angka (seperti memprediksi kecepatan angin atau suhu). AI diukur berdasarkan “jarak” kesalahannya. Semakin kecil nilai error-nya, semakin hebat AI tersebut.</p>
+<p><em>Penjelasan Hasil Statistik:</em></p>
+<ul class="simple">
+<li><p>Mean Absolute Error (0.712): Ini adalah rata-rata kesalahan AI. Artinya, setiap kali AI menebak angka, tebakannya meleset sekitar 0.7. Semakin mendekati angka 0, maka tebakan AI semakin sempurna.</p></li>
+<li><p>Root Mean Squared Error (0.738): Ini juga ukuran kesalahan yang memberikan bobot lebih besar pada kesalahan yang fatal. Nilai 0.7 menunjukkan bahwa kesalahan AI masih dalam batas yang cukup wajar.</p></li>
+<li><p><span class="math notranslate nohighlight">\(R^2\)</span> (-1.452): Nilai ini menunjukkan seberapa cocok model kita dengan data. Jika nilainya minus, itu tandanya model regresi kita masih perlu diperbaiki lagi agar bisa mengikuti pola data dengan lebih baik.</p></li>
+</ul>
 </section>
 </section>
 
@@ -507,6 +559,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proses-pembelajaran-model-random-forest-learner">Proses Pembelajaran Model (Random Forest Learner)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-forest-predictor">Random Forest Predictor</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-forest-predictor-regression">Random Forest Predictor - Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#column-filter-penyaringan-data">Column Filter (Penyaringan Data)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scorer-deprecated">Scorer (deprecated)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#line-plot-legacy">Line Plot (legacy)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numeric-scorer-deprecated">Numeric Scorer (deprecated)</a></li>
 </ul>
   </nav></div>
 
