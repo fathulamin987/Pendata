@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Analisa Regresi Linier Analitik (Metode Matriks) &#8212; Penambangan Data A</title>
+    <title>Analisa Regresi &#8212; Penambangan Data A</title>
   
   
   
@@ -197,7 +197,7 @@
 <li class="toctree-l1"><a class="reference internal" href="naive.html">Analisis Data Naive Bayes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Tree.html">Decission Tree</a></li>
 <li class="toctree-l1"><a class="reference internal" href="randomforest.html">Random Forest</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Analisa Regresi Linier Analitik (Metode Matriks)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Analisa Regresi</a></li>
 </ul>
 
     </div>
@@ -383,7 +383,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Analisa Regresi Linier Analitik (Metode Matriks)</h1>
+    <h1>Analisa Regresi</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -400,7 +400,11 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-5-menghitung-invers-matriks-x-t-x-1">Langkah 5: Menghitung Invers Matriks <span class="math notranslate nohighlight">\((X^T X)^{-1}\)</span></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-6-menghitung-perkalian-matriks-x-t-y">Langkah 6: Menghitung Perkalian Matriks <span class="math notranslate nohighlight">\(X^T Y\)</span></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-7-menghitung-nilai-akhir-koefisien-regresi-hat-beta">Langkah 7: Menghitung Nilai Akhir Koefisien Regresi (<span class="math notranslate nohighlight">\(\hat{\beta}\)</span>)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-akhir">Kesimpulan Akhir</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-akhir">Kesimpulan Akhir</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-python">Implementasi Python</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-geogebra">Implementasi geogebra</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -412,8 +416,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="analisa-regresi-linier-analitik-metode-matriks">
-<h1>Analisa Regresi Linier Analitik (Metode Matriks)<a class="headerlink" href="#analisa-regresi-linier-analitik-metode-matriks" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="analisa-regresi">
+<h1>Analisa Regresi<a class="headerlink" href="#analisa-regresi" title="Link to this heading">#</a></h1>
 <p>Berikut adalah pengerjaan lengkap secara analitik menggunakan metode matriks langkah demi langkah beserta detail data koordinatnya.</p>
 <hr class="docutils" />
 <section id="langkah-1-breakdown-data-dan-pemetaan-variabel">
@@ -549,6 +553,61 @@ $<span class="math notranslate nohighlight">\(\hat{\beta} = \begin{bmatrix} 0 \\
 </ul>
 <p>Sehingga, model fungsi persamaan garis regresi linier untuk data Anda adalah:
 $<span class="math notranslate nohighlight">\(Y = 0 + 1.0769X \quad \Rightarrow \quad Y = 1.0769X\)</span>$</p>
+<section id="implementasi-python">
+<h3>Implementasi Python<a class="headerlink" href="#implementasi-python" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearRegression</span>
+
+<span class="c1"># 1. INPUT DATA DARI GEOGEBRA</span>
+<span class="c1"># Matriks X (Fitur/Prediktor) harus dalam bentuk 2D array [[x]]</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">]])</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">6</span><span class="p">]])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;======= METODE 1: SKLEARN =======&quot;</span><span class="p">)</span>
+<span class="c1"># Inisialisasi dan latih model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+
+<span class="c1"># Mengambil hasil koefisien dari sklearn</span>
+<span class="n">intercept_sklearn</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">intercept_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">coef_sklearn</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Intercept (beta_0) : </span><span class="si">{</span><span class="n">intercept_sklearn</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Koefisien (beta_1) : </span><span class="si">{</span><span class="n">coef_sklearn</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">======= METODE 2: ANALITIK (NUMPY) =======&quot;</span><span class="p">)</span>
+<span class="c1"># Menambahkan kolom angka 1 untuk matriks intercept</span>
+<span class="n">X_bias</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">)),</span> <span class="n">X</span><span class="p">]</span>
+
+<span class="c1"># Menghitung dengan rumus: (X^T * X)^(-1) * X^T * Y</span>
+<span class="n">beta_analitik</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">X_bias</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">X_bias</span><span class="p">)</span> <span class="o">@</span> <span class="n">X_bias</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">Y</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Intercept (beta_0) : </span><span class="si">{</span><span class="n">beta_analitik</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Koefisien (beta_1) : </span><span class="si">{</span><span class="n">beta_analitik</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>======= METODE 1: SKLEARN =======
+Intercept (beta_0) : -0.0000
+Koefisien (beta_1) : 1.0769
+
+======= METODE 2: ANALITIK (NUMPY) =======
+Intercept (beta_0) : 0.0000
+Koefisien (beta_1) : 1.0769
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="implementasi-geogebra">
+<h3>Implementasi geogebra<a class="headerlink" href="#implementasi-geogebra" title="Link to this heading">#</a></h3>
+<p><img alt="alt text" src="_images/geogebra.png" /></p>
+<p>Garis regresi yang saya buat menunjukkan hubungan linear positif antara nilai x dan y. Dari hasil perhitungan diperoleh persamaan garis regresi y=1.0769x. Artinya, setiap kenaikan nilai x sebesar 1 satuan akan meningkatkan nilai y sekitar 1.07 satuan. Titik-titik data juga terlihat cukup dekat dengan garis regresi, sehingga menunjukkan bahwa data memiliki pola hubungan yang cukup baik dan dapat digunakan untuk prediksi.</p>
+</section>
 </section>
 </section>
 
@@ -614,7 +673,11 @@ $<span class="math notranslate nohighlight">\(Y = 0 + 1.0769X \quad \Rightarrow 
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-5-menghitung-invers-matriks-x-t-x-1">Langkah 5: Menghitung Invers Matriks <span class="math notranslate nohighlight">\((X^T X)^{-1}\)</span></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-6-menghitung-perkalian-matriks-x-t-y">Langkah 6: Menghitung Perkalian Matriks <span class="math notranslate nohighlight">\(X^T Y\)</span></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-7-menghitung-nilai-akhir-koefisien-regresi-hat-beta">Langkah 7: Menghitung Nilai Akhir Koefisien Regresi (<span class="math notranslate nohighlight">\(\hat{\beta}\)</span>)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-akhir">Kesimpulan Akhir</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-akhir">Kesimpulan Akhir</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-python">Implementasi Python</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-geogebra">Implementasi geogebra</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
