@@ -395,17 +395,9 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#latar-belakang">Latar belakang</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instalasi-library-openeo">1. Instalasi Library OpenEO</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-library-openeo">2. Import Library OpenEO</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#koneksi-dan-autentikasi-ke-copernicus-data-space-ecosystem">3. Koneksi dan Autentikasi ke Copernicus Data Space Ecosystem</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mengatasi-missing-value-menggunakan-interpolasi-linear">4. Mengatasi Missing Value Menggunakan Interpolasi Linear</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pengecekan-kelengkapan-data-harian">5. Pengecekan Kelengkapan Data Harian</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deteksi-outlier-menggunakan-metode-iqr">6. Deteksi Outlier Menggunakan Metode IQR</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-outlier">7. Visualisasi Outlier</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menghapus-outlier-dan-mengisi-kembali-dengan-interpolasi-linear">8. Menghapus Outlier dan Mengisi Kembali dengan Interpolasi Linear</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-setelah-outlier-removal">9. Visualisasi Setelah Outlier Removal</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menyimpan-dataset-bersih">10. Menyimpan Dataset Bersih</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-menggunakan-knn-regression">11. Modeling Menggunakan KNN Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pematangan-lingkungan-akumulasi-data-data-acquisition">2. Pematangan Lingkungan &amp; Akumulasi Data (Data Acquisition)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pra-pemrosesan-data-data-preprocessing">3. Pra-Pemrosesan Data (Data Preprocessing)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tahap-pemodelan-menggunakan-knn-regression">4. Tahap Pemodelan Menggunakan KNN Regression</a></li>
 </ul>
             </nav>
         </div>
@@ -425,8 +417,9 @@ document.write(`
 <p>Pemantauan kadar NO₂ dapat dilakukan menggunakan data penginderaan jauh dari satelit Sentinel-5P yang menyediakan informasi konsentrasi NO₂ secara berkala. Dengan memanfaatkan data time series tersebut, dapat dilakukan analisis dan peramalan untuk mengetahui pola perubahan kadar NO₂ di masa mendatang.</p>
 <p>Pada penelitian ini dilakukan peramalan kadar NO₂ di wilayah Kabupaten Sampang, Madura menggunakan data Sentinel-5P yang diperoleh melalui platform OpenEO. Selanjutnya data diolah dan digunakan dalam model K-Nearest Neighbor (KNN) Regression untuk memprediksi kadar NO₂ berdasarkan data historis sebelumnya.</p>
 </section>
-<section id="instalasi-library-openeo">
-<h2>1. Instalasi Library OpenEO<a class="headerlink" href="#instalasi-library-openeo" title="Link to this heading">#</a></h2>
+<section id="pematangan-lingkungan-akumulasi-data-data-acquisition">
+<h2>2. Pematangan Lingkungan &amp; Akumulasi Data (Data Acquisition)<a class="headerlink" href="#pematangan-lingkungan-akumulasi-data-data-acquisition" title="Link to this heading">#</a></h2>
+<p><strong>a. Instalasi Library OpenEO</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">openeo</span>
@@ -434,35 +427,25 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>^C
-</pre></div>
-</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting openeo
   Using cached openeo-0.50.0-py3-none-any.whl.metadata (8.9 kB)
 Requirement already satisfied: requests&gt;=2.26.0 in c:\users\fathul amin\appdata\local\programs\python\python312\lib\site-packages (from openeo) (2.32.5)
 Requirement already satisfied: urllib3&gt;=1.9.0 in c:\users\fathul amin\appdata\local\programs\python\python312\lib\site-packages (from openeo) (2.6.3)
-Collecting shapely&gt;=1.6.4 (from openeo)
-  Using cached shapely-2.1.2-cp312-cp312-win_amd64.whl.metadata (7.1 kB)
+Requirement already satisfied: shapely&gt;=1.6.4 in c:\users\fathul amin\appdata\local\programs\python\python312\lib\site-packages (from openeo) (2.1.2)
 Requirement already satisfied: numpy&gt;=1.17.0 in c:\users\fathul amin\appdata\roaming\python\python312\site-packages (from openeo) (2.4.6)
 Collecting xarray&lt;2025.01.2,&gt;=0.12.3 (from openeo)
   Using cached xarray-2025.1.1-py3-none-any.whl.metadata (11 kB)
-Collecting pandas&lt;3.0.0,&gt;0.20.0 (from openeo)
-  Using cached pandas-2.3.3-cp312-cp312-win_amd64.whl.metadata (19 kB)
-Collecting pystac&gt;=1.5.0 (from openeo)
-  Using cached pystac-1.14.3-py3-none-any.whl.metadata (4.7 kB)
+Requirement already satisfied: pandas&lt;3.0.0,&gt;0.20.0 in c:\users\fathul amin\appdata\local\programs\python\python312\lib\site-packages (from openeo) (2.3.3)
+Requirement already satisfied: pystac&gt;=1.5.0 in c:\users\fathul amin\appdata\local\programs\python\python312\lib\site-packages (from openeo) (1.14.3)
 Collecting deprecated&gt;=1.2.12 (from openeo)
   Using cached deprecated-1.3.1-py2.py3-none-any.whl.metadata (5.9 kB)
-Collecting oschmod&gt;=0.3.12 (from openeo)
-  Using cached oschmod-0.3.12-py2.py3-none-any.whl.metadata (10.0 kB)
+Requirement already satisfied: oschmod&gt;=0.3.12 in c:\users\fathul amin\appdata\local\programs\python\python312\lib\site-packages (from openeo) (0.3.12)
 Collecting geopandas&gt;=0.14 (from openeo)
   Using cached geopandas-1.1.3-py3-none-any.whl.metadata (2.3 kB)
-Collecting wrapt&lt;3,&gt;=1.10 (from deprecated&gt;=1.2.12-&gt;openeo)
-  Using cached wrapt-2.2.1-cp312-cp312-win_amd64.whl.metadata (7.6 kB)
-Collecting pyogrio&gt;=0.7.2 (from geopandas&gt;=0.14-&gt;openeo)
-  Using cached pyogrio-0.12.1-cp312-cp312-win_amd64.whl.metadata (6.0 kB)
+Requirement already satisfied: wrapt&lt;3,&gt;=1.10 in c:\users\fathul amin\appdata\local\programs\python\python312\lib\site-packages (from deprecated&gt;=1.2.12-&gt;openeo) (2.2.1)
+Requirement already satisfied: pyogrio&gt;=0.7.2 in c:\users\fathul amin\appdata\local\programs\python\python312\lib\site-packages (from geopandas&gt;=0.14-&gt;openeo) (0.12.1)
 Requirement already satisfied: packaging in c:\users\fathul amin\appdata\local\programs\python\python312\lib\site-packages (from geopandas&gt;=0.14-&gt;openeo) (26.1)
-Collecting pyproj&gt;=3.5.0 (from geopandas&gt;=0.14-&gt;openeo)
-  Using cached pyproj-3.7.2-cp312-cp312-win_amd64.whl.metadata (31 kB)
+Requirement already satisfied: pyproj&gt;=3.5.0 in c:\users\fathul amin\appdata\local\programs\python\python312\lib\site-packages (from geopandas&gt;=0.14-&gt;openeo) (3.7.2)
 Requirement already satisfied: pywin32 in c:\users\fathul amin\appdata\roaming\python\python312\site-packages (from oschmod&gt;=0.3.12-&gt;openeo) (309)
 Requirement already satisfied: python-dateutil&gt;=2.8.2 in c:\users\fathul amin\appdata\roaming\python\python312\site-packages (from pandas&lt;3.0.0,&gt;0.20.0-&gt;openeo) (2.9.0.post0)
 Requirement already satisfied: pytz&gt;=2020.1 in c:\users\fathul amin\appdata\local\programs\python\python312\lib\site-packages (from pandas&lt;3.0.0,&gt;0.20.0-&gt;openeo) (2026.2)
@@ -474,91 +457,24 @@ Requirement already satisfied: six&gt;=1.5 in c:\users\fathul amin\appdata\roami
 Using cached openeo-0.50.0-py3-none-any.whl (345 kB)
 Using cached deprecated-1.3.1-py2.py3-none-any.whl (11 kB)
 Using cached geopandas-1.1.3-py3-none-any.whl (342 kB)
-Using cached oschmod-0.3.12-py2.py3-none-any.whl (14 kB)
-Using cached pandas-2.3.3-cp312-cp312-win_amd64.whl (11.0 MB)
-Using cached pystac-1.14.3-py3-none-any.whl (208 kB)
-Using cached shapely-2.1.2-cp312-cp312-win_amd64.whl (1.7 MB)
 Using cached xarray-2025.1.1-py3-none-any.whl (1.2 MB)
-Downloading pyogrio-0.12.1-cp312-cp312-win_amd64.whl (22.9 MB)
-   ---------------------------------------- 0.0/22.9 MB ? eta -:--:--
-    --------------------------------------- 0.5/22.9 MB 5.6 MB/s eta 0:00:05
-   - -------------------------------------- 0.8/22.9 MB 3.4 MB/s eta 0:00:07
-   --- ------------------------------------ 1.8/22.9 MB 3.1 MB/s eta 0:00:07
-   ----- ---------------------------------- 2.9/22.9 MB 3.6 MB/s eta 0:00:06
-   ------ --------------------------------- 3.9/22.9 MB 3.9 MB/s eta 0:00:05
-   -------- ------------------------------- 4.7/22.9 MB 4.1 MB/s eta 0:00:05
-   --------- ------------------------------ 5.5/22.9 MB 3.9 MB/s eta 0:00:05
-   ---------- ----------------------------- 6.0/22.9 MB 3.8 MB/s eta 0:00:05
-   ---------- ----------------------------- 6.3/22.9 MB 3.4 MB/s eta 0:00:05
-   ---------- ----------------------------- 6.3/22.9 MB 3.4 MB/s eta 0:00:05
-   ----------- ---------------------------- 6.8/22.9 MB 3.0 MB/s eta 0:00:06
-   ------------- -------------------------- 7.6/22.9 MB 3.1 MB/s eta 0:00:05
-   ------------- -------------------------- 7.9/22.9 MB 3.1 MB/s eta 0:00:05
-   -------------- ------------------------- 8.1/22.9 MB 2.9 MB/s eta 0:00:06
-   --------------- ------------------------ 8.7/22.9 MB 2.8 MB/s eta 0:00:06
-   ---------------- ----------------------- 9.2/22.9 MB 2.9 MB/s eta 0:00:05
-   ---------------- ----------------------- 9.7/22.9 MB 2.8 MB/s eta 0:00:05
-   ------------------ --------------------- 10.7/22.9 MB 2.9 MB/s eta 0:00:05
-   ------------------- -------------------- 11.3/22.9 MB 2.9 MB/s eta 0:00:04
-   --------------------- ------------------ 12.3/22.9 MB 3.0 MB/s eta 0:00:04
-   ---------------------- ----------------- 12.8/22.9 MB 3.0 MB/s eta 0:00:04
-   ----------------------- ---------------- 13.6/22.9 MB 3.0 MB/s eta 0:00:04
-   ------------------------- -------------- 14.4/22.9 MB 3.0 MB/s eta 0:00:03
-   -------------------------- ------------- 15.2/22.9 MB 3.1 MB/s eta 0:00:03
-   --------------------------- ------------ 16.0/22.9 MB 3.1 MB/s eta 0:00:03
-   ---------------------------- ----------- 16.3/22.9 MB 3.0 MB/s eta 0:00:03
-   ----------------------------- ---------- 17.0/22.9 MB 3.0 MB/s eta 0:00:02
-   ------------------------------ --------- 17.3/22.9 MB 3.0 MB/s eta 0:00:02
-   ------------------------------- -------- 18.1/22.9 MB 3.0 MB/s eta 0:00:02
-   --------------------------------- ------ 19.1/22.9 MB 3.1 MB/s eta 0:00:02
-   ---------------------------------- ----- 19.7/22.9 MB 3.0 MB/s eta 0:00:02
-   ----------------------------------- ---- 20.2/22.9 MB 3.0 MB/s eta 0:00:01
-   ------------------------------------ --- 20.7/22.9 MB 3.0 MB/s eta 0:00:01
-   ------------------------------------ --- 21.0/22.9 MB 3.0 MB/s eta 0:00:01
-   ------------------------------------- -- 21.5/22.9 MB 3.0 MB/s eta 0:00:01
-   -------------------------------------- - 22.0/22.9 MB 2.9 MB/s eta 0:00:01
-   ---------------------------------------  22.5/22.9 MB 2.9 MB/s eta 0:00:01
-   ---------------------------------------- 22.9/22.9 MB 2.9 MB/s eta 0:00:00
-Downloading pyproj-3.7.2-cp312-cp312-win_amd64.whl (6.3 MB)
-   ---------------------------------------- 0.0/6.3 MB ? eta -:--:--
-   ---------------------------------------- 0.0/6.3 MB ? eta -:--:--
-   ---------------------------------------- 0.0/6.3 MB ? eta -:--:--
-   - -------------------------------------- 0.3/6.3 MB ? eta -:--:--
-   - -------------------------------------- 0.3/6.3 MB ? eta -:--:--
-   - -------------------------------------- 0.3/6.3 MB ? eta -:--:--
-   - -------------------------------------- 0.3/6.3 MB ? eta -:--:--
-   - -------------------------------------- 0.3/6.3 MB ? eta -:--:--
-   - -------------------------------------- 0.3/6.3 MB ? eta -:--:--
-   --- ------------------------------------ 0.5/6.3 MB 190.7 kB/s eta 0:00:31
-   ------ --------------------------------- 1.0/6.3 MB 493.7 kB/s eta 0:00:11
-   --------- ------------------------------ 1.6/6.3 MB 755.9 kB/s eta 0:00:07
-   ------------- -------------------------- 2.1/6.3 MB 876.7 kB/s eta 0:00:05
-   -------------- ------------------------- 2.4/6.3 MB 925.9 kB/s eta 0:00:05
-   ------------------- -------------------- 3.1/6.3 MB 1.1 MB/s eta 0:00:03
-   --------------------- ------------------ 3.4/6.3 MB 1.2 MB/s eta 0:00:03
-   -------------------------- ------------- 4.2/6.3 MB 1.3 MB/s eta 0:00:02
-   ----------------------------- ---------- 4.7/6.3 MB 1.4 MB/s eta 0:00:02
-   ------------------------------- -------- 5.0/6.3 MB 1.4 MB/s eta 0:00:01
-   ---------------------------------- ----- 5.5/6.3 MB 1.5 MB/s eta 0:00:01
-   -------------------------------------- - 6.0/6.3 MB 1.5 MB/s eta 0:00:01
-   ---------------------------------------- 6.3/6.3 MB 1.5 MB/s eta 0:00:00
-Downloading wrapt-2.2.1-cp312-cp312-win_amd64.whl (80 kB)
-Installing collected packages: wrapt, shapely, pyproj, pyogrio, oschmod, pystac, pandas, deprecated, xarray, geopandas, openeo
-  Attempting uninstall: pandas
-    Found existing installation: pandas 3.0.1
-    Uninstalling pandas-3.0.1:
-      Successfully uninstalled pandas-3.0.1
+Installing collected packages: deprecated, xarray, geopandas, openeo
+Successfully installed deprecated-1.3.1 geopandas-1.1.3 openeo-0.50.0 xarray-2025.1.1
+Note: you may need to restart the kernel to use updated packages.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Note: you may need to restart the kernel to use updated packages.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: Ignoring invalid distribution ~andas (C:\Users\Fathul Amin\AppData\Local\Programs\Python\Python312\Lib\site-packages)
+WARNING: Ignoring invalid distribution ~andas (C:\Users\Fathul Amin\AppData\Local\Programs\Python\Python312\Lib\site-packages)
+WARNING: Ignoring invalid distribution ~andas (C:\Users\Fathul Amin\AppData\Local\Programs\Python\Python312\Lib\site-packages)
+
+[notice] A new release of pip is available: 24.2 -&gt; 26.1.2
+[notice] To update, run: C:\Users\Fathul Amin\AppData\Local\Programs\Python\Python312\python.exe -m pip install --upgrade pip
 </pre></div>
 </div>
 </div>
 </div>
 <p>Kode di atas digunakan untuk menginstal library OpenEO ke dalam lingkungan Python atau Google Colab. Library OpenEO berfungsi sebagai antarmuka yang memungkinkan pengguna mengakses, memproses, dan menganalisis data penginderaan jauh dari berbagai penyedia data satelit, termasuk Copernicus Data Space Ecosystem. Instalasi ini diperlukan agar seluruh fungsi OpenEO dapat digunakan pada tahap pengambilan dan pengolahan data satelit.</p>
-</section>
-<section id="import-library-openeo">
-<h2>2. Import Library OpenEO<a class="headerlink" href="#import-library-openeo" title="Link to this heading">#</a></h2>
+<p><strong>b. Import Library OpenEO</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">openeo</span>
@@ -567,9 +483,7 @@ Installing collected packages: wrapt, shapely, pyproj, pyogrio, oschmod, pystac,
 </div>
 </div>
 <p>Kode tersebut digunakan untuk memanggil library OpenEO yang telah diinstal sebelumnya ke dalam program Python. Dengan melakukan import, seluruh fungsi dan metode yang tersedia pada library OpenEO dapat digunakan untuk membangun koneksi ke server, mengambil data satelit, serta melakukan berbagai proses pengolahan data geospasial.</p>
-</section>
-<section id="koneksi-dan-autentikasi-ke-copernicus-data-space-ecosystem">
-<h2>3. Koneksi dan Autentikasi ke Copernicus Data Space Ecosystem<a class="headerlink" href="#koneksi-dan-autentikasi-ke-copernicus-data-space-ecosystem" title="Link to this heading">#</a></h2>
+<p><strong>c. Koneksi dan Autentikasi ke Copernicus Data Space Ecosystem</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">connection</span> <span class="o">=</span> <span class="n">openeo</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;openeo.dataspace.copernicus.eu&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">authenticate_oidc</span><span class="p">()</span>
@@ -577,7 +491,45 @@ Installing collected packages: wrapt, shapely, pyproj, pyogrio, oschmod, pystac,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html">Visit <a href="https://identity.dataspace.copernicus.eu/auth/realms/CDSE/device?user_code=CAEB-DLME" title="Authenticate at https://identity.dataspace.copernicus.eu/auth/realms/CDSE/device?user_code=CAEB-DLME" target="_blank" rel="noopener noreferrer">https://identity.dataspace.copernicus.eu/auth/realms/CDSE/device?user_code=CAEB-DLME</a> <a href="#" onclick="navigator.clipboard.writeText('https://identity.dataspace.copernicus.eu/auth/realms/CDSE/device?user_code=CAEB-DLME');return false;" title="Copy authentication URL to clipboard">&#128203;</a> to authenticate.</div><div class="output text_html">✅ Authorized successfully</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Authenticated using device code flow.
+<div class="output text_html">Visit <a href="https://identity.dataspace.copernicus.eu/auth/realms/CDSE/device?user_code=ETOK-ZEMI" title="Authenticate at https://identity.dataspace.copernicus.eu/auth/realms/CDSE/device?user_code=ETOK-ZEMI" target="_blank" rel="noopener noreferrer">https://identity.dataspace.copernicus.eu/auth/realms/CDSE/device?user_code=ETOK-ZEMI</a> <a href="#" onclick="navigator.clipboard.writeText('https://identity.dataspace.copernicus.eu/auth/realms/CDSE/device?user_code=ETOK-ZEMI');return false;" title="Copy authentication URL to clipboard">&#128203;</a> to authenticate.</div><div class="output text_html"><code>[###################################--]</code> ⌛ Authorization pending</div><div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">connection</span> <span class="o">=</span> <span class="n">openeo</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;openeo.dataspace.copernicus.eu&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">authenticate_oidc</span><span class="p">()</span>
+
+<span class="nn">File ~\AppData\Local\Programs\Python\Python312\Lib\site-packages\openeo\rest\connection.py:689,</span> in <span class="ni">Connection.authenticate_oidc</span><span class="nt">(self, provider_id, client_id, client_secret, store_refresh_token, use_pkce, display, max_poll_time)</span>
+<span class="g g-Whitespace">    </span><span class="mi">685</span> <span class="n">_log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Trying device code flow.&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">686</span> <span class="n">authenticator</span> <span class="o">=</span> <span class="n">OidcDeviceAuthenticator</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">687</span>     <span class="n">client_info</span><span class="o">=</span><span class="n">client_info</span><span class="p">,</span> <span class="n">use_pkce</span><span class="o">=</span><span class="n">use_pkce</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="n">display</span><span class="p">,</span> <span class="n">max_poll_time</span><span class="o">=</span><span class="n">max_poll_time</span>
+<span class="g g-Whitespace">    </span><span class="mi">688</span> <span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">689</span> <span class="n">con</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_authenticate_oidc</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">690</span>     <span class="n">authenticator</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">691</span>     <span class="n">provider_id</span><span class="o">=</span><span class="n">provider_id</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">692</span>     <span class="n">store_refresh_token</span><span class="o">=</span><span class="n">store_refresh_token</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">693</span>     <span class="c1"># TODO: expose `auto_renew_from_refresh_token` directly as option instead of reusing `store_refresh_token` arg?</span>
+<span class="g g-Whitespace">    </span><span class="mi">694</span>     <span class="n">auto_renew_from_refresh_token</span><span class="o">=</span><span class="n">store_refresh_token</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">695</span> <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">696</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Authenticated using device code flow.&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">697</span> <span class="k">return</span> <span class="n">con</span>
+
+<span class="nn">File ~\AppData\Local\Programs\Python\Python312\Lib\site-packages\openeo\rest\connection.py:405,</span> in <span class="ni">Connection._authenticate_oidc</span><span class="nt">(self, authenticator, provider_id, store_refresh_token, auto_renew_from_refresh_token, fallback_refresh_token, oidc_auth_renewer)</span>
+<span class="g g-Whitespace">    </span><span class="mi">401</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">402</span><span class="sd"> Authenticate through OIDC and set up bearer token (based on OIDC access_token) for further requests.</span>
+<span class="g g-Whitespace">    </span><span class="mi">403</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">404</span> <span class="n">request_refresh_token</span> <span class="o">=</span> <span class="n">store_refresh_token</span> <span class="ow">or</span> <span class="p">(</span><span class="ow">not</span> <span class="n">oidc_auth_renewer</span> <span class="ow">and</span> <span class="n">auto_renew_from_refresh_token</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">405</span> <span class="n">tokens</span> <span class="o">=</span> <span class="n">authenticator</span><span class="o">.</span><span class="n">get_tokens</span><span class="p">(</span><span class="n">request_refresh_token</span><span class="o">=</span><span class="n">request_refresh_token</span><span class="p">)</span>
+<span class="nn">    406 _log.info(&quot;Obtained tokens: {t}&quot;.format(t=[k for k, v</span> in <span class="ni">tokens._asdict().items</span><span class="nt">() if v]))</span>
+<span class="g g-Whitespace">    </span><span class="mi">408</span> <span class="n">refresh_token</span> <span class="o">=</span> <span class="n">tokens</span><span class="o">.</span><span class="n">refresh_token</span> <span class="ow">or</span> <span class="n">fallback_refresh_token</span>
+
+<span class="nn">File ~\AppData\Local\Programs\Python\Python312\Lib\site-packages\openeo\rest\auth\oidc.py:928,</span> in <span class="ni">OidcDeviceAuthenticator.get_tokens</span><span class="nt">(self, request_refresh_token)</span>
+<span class="g g-Whitespace">    </span><span class="mi">926</span> <span class="k">while</span> <span class="n">elapsed</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_max_poll_time</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">927</span>     <span class="n">poll_ui</span><span class="o">.</span><span class="n">show_progress</span><span class="p">()</span>
+<span class="ne">--&gt; </span><span class="mi">928</span>     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">sleep</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">930</span>     <span class="k">if</span> <span class="n">elapsed</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="n">next_poll</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">931</span>         <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">932</span>             <span class="sa">f</span><span class="s2">&quot;Doing </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">grant_type</span><span class="si">!r}</span><span class="s2"> token request </span><span class="si">{</span><span class="n">token_endpoint</span><span class="si">!r}</span><span class="s2"> with post data fields </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">post_data</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="si">!r}</span><span class="s2"> (client_id </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">client_id</span><span class="si">!r}</span><span class="s2">)&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">933</span>         <span class="p">)</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
 </div>
 </div>
@@ -585,6 +537,7 @@ Installing collected packages: wrapt, shapely, pyproj, pyogrio, oschmod, pystac,
 <p>Kode di atas digunakan untuk membuat koneksi ke server OpenEO yang tersedia pada Copernicus Data Space Ecosystem. Fungsi openeo.connect() berfungsi menghubungkan program Python dengan layanan OpenEO yang menyediakan berbagai koleksi data satelit, termasuk Sentinel-5P.</p>
 <p>Selanjutnya, fungsi authenticate_oidc() digunakan untuk melakukan proses autentikasi menggunakan akun Copernicus yang dimiliki pengguna. Proses autentikasi ini diperlukan agar pengguna memperoleh hak akses untuk menjalankan proses pengambilan dan pengolahan data satelit pada server OpenEO.</p>
 <p>Setelah autentikasi berhasil dilakukan, objek koneksi akan disimpan pada variabel connection. Variabel ini kemudian digunakan pada tahap berikutnya untuk mengakses koleksi data satelit Sentinel-5P dan melakukan berbagai proses analisis data.</p>
+<p><strong>d. Penarikan Data Satelit Sentinel-5P Berbasis Batasan Geometri (AOI)</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aoi</span> <span class="o">=</span> <span class="p">{</span>
@@ -662,8 +615,9 @@ Installing collected packages: wrapt, shapely, pyproj, pyogrio, oschmod, pystac,
 </div>
 </div>
 </section>
-<section id="mengatasi-missing-value-menggunakan-interpolasi-linear">
-<h2>4. Mengatasi Missing Value Menggunakan Interpolasi Linear<a class="headerlink" href="#mengatasi-missing-value-menggunakan-interpolasi-linear" title="Link to this heading">#</a></h2>
+<section id="pra-pemrosesan-data-data-preprocessing">
+<h2>3. Pra-Pemrosesan Data (Data Preprocessing)<a class="headerlink" href="#pra-pemrosesan-data-data-preprocessing" title="Link to this heading">#</a></h2>
+<p><strong>a. Deteksi dan Penanganan Nilai Hilang (Missing Value) via Interpolasi Linear</strong></p>
 <p>Pertama, baca data CSV dan cek apakah terdapat nilai kosong pada kolom NO2.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -713,9 +667,7 @@ dtype: int64
 </div>
 </div>
 <p>Metode Interpolasi Linear digunakan untuk mengisi nilai yang hilang berdasarkan nilai sebelum dan sesudahnya. Karena data NO₂ merupakan data time series harian, metode ini cocok digunakan untuk mempertahankan pola perubahan data secara bertahap.</p>
-</section>
-<section id="pengecekan-kelengkapan-data-harian">
-<h2>5. Pengecekan Kelengkapan Data Harian<a class="headerlink" href="#pengecekan-kelengkapan-data-harian" title="Link to this heading">#</a></h2>
+<p><strong>b. Verifikasi Kelengkapan Kronologis Tanggal Harian</strong></p>
 <p>Setelah mengatasi missing value, dilakukan pengecekan apakah terdapat tanggal yang hilang pada data time series harian.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -740,9 +692,7 @@ DatetimeIndex([], dtype=&#39;datetime64[ns, UTC]&#39;, freq=&#39;D&#39;)
 </div>
 </div>
 <p>Hasil tersebut menunjukkan bahwa seluruh data harian tersedia secara lengkap dan tidak terdapat tanggal yang hilang selama periode pengamatan. Oleh karena itu tidak diperlukan proses interpolasi tambahan untuk mengisi tanggal yang hilang.</p>
-</section>
-<section id="deteksi-outlier-menggunakan-metode-iqr">
-<h2>6. Deteksi Outlier Menggunakan Metode IQR<a class="headerlink" href="#deteksi-outlier-menggunakan-metode-iqr" title="Link to this heading">#</a></h2>
+<p><strong>c. Identifikasi Outlier Menggunakan Metode Interquartile Range (IQR)</strong></p>
 <p>Setelah memastikan data lengkap, dilakukan deteksi outlier menggunakan metode Interquartile Range (IQR).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -780,9 +730,7 @@ DatetimeIndex([], dtype=&#39;datetime64[ns, UTC]&#39;, freq=&#39;D&#39;)
 </div>
 </div>
 </div>
-</section>
-<section id="visualisasi-outlier">
-<h2>7. Visualisasi Outlier<a class="headerlink" href="#visualisasi-outlier" title="Link to this heading">#</a></h2>
+<p><strong>d. Visualisasi Sebaran Outlier Data Mentah</strong></p>
 <p>Untuk melihat posisi outlier pada data NO₂ digunakan visualisasi berikut.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -810,9 +758,7 @@ DatetimeIndex([], dtype=&#39;datetime64[ns, UTC]&#39;, freq=&#39;D&#39;)
 <img alt="_images/d1a662a60d3e8edd2885a45f543f54ff27b369a8d40848d07132d97c4e5da913.png" src="_images/d1a662a60d3e8edd2885a45f543f54ff27b369a8d40848d07132d97c4e5da913.png" />
 </div>
 </div>
-</section>
-<section id="menghapus-outlier-dan-mengisi-kembali-dengan-interpolasi-linear">
-<h2>8. Menghapus Outlier dan Mengisi Kembali dengan Interpolasi Linear<a class="headerlink" href="#menghapus-outlier-dan-mengisi-kembali-dengan-interpolasi-linear" title="Link to this heading">#</a></h2>
+<p><strong>e. Pembersihan Outlier dan Rekonstruksi Data dengan Interpolasi Kembali</strong></p>
 <p>Karena data merupakan time series, outlier tidak langsung dihapus, melainkan diubah menjadi NaN kemudian diisi kembali menggunakan interpolasi linear.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -850,9 +796,7 @@ Missing setelah interpolasi: 0
 </div>
 </div>
 </div>
-</section>
-<section id="visualisasi-setelah-outlier-removal">
-<h2>9. Visualisasi Setelah Outlier Removal<a class="headerlink" href="#visualisasi-setelah-outlier-removal" title="Link to this heading">#</a></h2>
+<p><strong>f. Visualisasi Hasil Akhir Dataset Setelah Pembersihan (Outlier Removed)</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
@@ -879,9 +823,7 @@ Missing setelah interpolasi: 0
 <img alt="_images/632c158af4eeb0d09ce71cd9377c1a69b1807047ea1aa3a29e65e158f212c0ed.png" src="_images/632c158af4eeb0d09ce71cd9377c1a69b1807047ea1aa3a29e65e158f212c0ed.png" />
 </div>
 </div>
-</section>
-<section id="menyimpan-dataset-bersih">
-<h2>10. Menyimpan Dataset Bersih<a class="headerlink" href="#menyimpan-dataset-bersih" title="Link to this heading">#</a></h2>
+<p><strong>g. Menyimpan Dataset Bersih</strong></p>
 <p>Dataset yang telah dibersihkan akan digunakan pada tahap pemodelan.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -924,9 +866,15 @@ None
 <p><strong>Kesimpulan Tahap Preprocessing</strong></p>
 <p>Berdasarkan hasil preprocessing, data NO₂ wilayah Sampang tidak memiliki tanggal yang hilang sehingga tidak diperlukan interpolasi untuk melengkapi rentang waktu. Selanjutnya dilakukan deteksi outlier menggunakan metode IQR. Data yang teridentifikasi sebagai outlier diubah menjadi nilai kosong dan diisi kembali menggunakan Interpolasi Linear sehingga diperoleh dataset yang lebih bersih dan siap digunakan pada tahap normalisasi, transformasi data time series menjadi supervised learning, serta pemodelan menggunakan KNN Regression.</p>
 </section>
-<section id="modeling-menggunakan-knn-regression">
-<h2>11. Modeling Menggunakan KNN Regression<a class="headerlink" href="#modeling-menggunakan-knn-regression" title="Link to this heading">#</a></h2>
-<p><strong>a. Normalisasi Data (Scaling) &amp; Pengurutan Kronologis</strong></p>
+<section id="tahap-pemodelan-menggunakan-knn-regression">
+<h2>4. Tahap Pemodelan Menggunakan KNN Regression<a class="headerlink" href="#tahap-pemodelan-menggunakan-knn-regression" title="Link to this heading">#</a></h2>
+<p>Pada tahap ini, dilakukan pemodelan prediksi kadar <span class="math notranslate nohighlight">\(NO_2\)</span> di wilayah Sampang menggunakan algoritma KNN Regression. Sebelum masuk ke tahap pelatihan model, bagian ini menjelaskan batasan wilayah pengambilan data serta proses penyiapan data.</p>
+<p><strong>a. Cakupan Wilayah Penelitian</strong></p>
+<p>Data kadar <span class="math notranslate nohighlight">\(NO_2\)</span> harian yang digunakan dalam penelitian ini diperoleh melalui ekstraksi data satelit Google Earth Engine (GEE). Pembatasan wilayah kajian (<em>bounding box</em>) di Kabupaten Sampang dilakukan dengan menentukan koordinat poligon area melalui situs <em><a class="reference external" href="http://geojson.io">geojson.io</a></em> :</p>
+<p><img alt="alt text" src="_images/dataNO2.png" /></p>
+<p><strong>Ket Gambar</strong> Batas Koordinat Poligon Area Penelitian di Wilayah Sampang via <a class="reference external" href="http://Geojson.io">Geojson.io</a>.</p>
+<p>Berdasarkan ruang lingkup poligon pada gambar diatas, koordinat tersebut melingkupi area Kabupaten Sampang guna memastikan fluktuasi harian kadar polutan yang terekam benar-benar mewakili karakteristik spasial wilayah tersebut secara objektif.</p>
+<p><strong>b. Normalisasi Data (Scaling) &amp; Pengurutan Kronologis</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">MinMaxScaler</span>
@@ -953,7 +901,7 @@ None
 </div>
 </div>
 </div>
-<p><strong>b. Pembuatan Struktur Data Supervised (Lagging Fitur)</strong></p>
+<p><strong>c. Pembuatan Struktur Data Supervised (Lagging Fitur)</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">create_supervised_features</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">n_lag</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
@@ -985,7 +933,7 @@ None
 </div>
 </div>
 </div>
-<p><strong>c. Pelatihan Model KNN &amp; Evaluasi Metrics (RMSE, R², MAPE)</strong></p>
+<p><strong>d. Pelatihan Model KNN &amp; Evaluasi Metrics (RMSE, R², MAPE)</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.neighbors</span><span class="w"> </span><span class="kn">import</span> <span class="n">KNeighborsRegressor</span>
@@ -1049,7 +997,7 @@ MAPE: 47.0757%
 </div>
 </div>
 </div>
-<p><strong>d. Visualisasi dan Analisis Perbandingan Skenario</strong></p>
+<p><strong>e. Visualisasi dan Analisis Perbandingan Skenario</strong></p>
 <p>Pada tahap ini, hasil pengujian dari ketiga skenario <em>lag</em> (4 hari, 10 hari, dan 30 hari) divisualisasikan ke dalam bentuk grafik <em>time series</em>.</p>
 <p>Untuk mengatasi fluktuasi harian kadar <span class="math notranslate nohighlight">\(NO_2\)</span> yang sangat rapat dan menghindari grafik yang saling menumpuk acak (<em>zigzag</em>), diterapkan teknik pemulusan tren berbasis rata-rata bergerak mingguan (<em>7-Day Moving Average</em>). Data asli harian ditampilkan dengan garis tipis transparan, sedangkan garis tebal di depannya menunjukkan arah tren data agar pergerakan model lebih mudah dibaca dan dibandingkan secara objektif.</p>
 <p><em>Grafik Prediksi Skenario 4 Hari Sebelumnya</em></p>
@@ -1176,17 +1124,9 @@ MAPE: 47.0757%
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#latar-belakang">Latar belakang</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instalasi-library-openeo">1. Instalasi Library OpenEO</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-library-openeo">2. Import Library OpenEO</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#koneksi-dan-autentikasi-ke-copernicus-data-space-ecosystem">3. Koneksi dan Autentikasi ke Copernicus Data Space Ecosystem</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mengatasi-missing-value-menggunakan-interpolasi-linear">4. Mengatasi Missing Value Menggunakan Interpolasi Linear</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pengecekan-kelengkapan-data-harian">5. Pengecekan Kelengkapan Data Harian</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deteksi-outlier-menggunakan-metode-iqr">6. Deteksi Outlier Menggunakan Metode IQR</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-outlier">7. Visualisasi Outlier</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menghapus-outlier-dan-mengisi-kembali-dengan-interpolasi-linear">8. Menghapus Outlier dan Mengisi Kembali dengan Interpolasi Linear</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-setelah-outlier-removal">9. Visualisasi Setelah Outlier Removal</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menyimpan-dataset-bersih">10. Menyimpan Dataset Bersih</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-menggunakan-knn-regression">11. Modeling Menggunakan KNN Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pematangan-lingkungan-akumulasi-data-data-acquisition">2. Pematangan Lingkungan &amp; Akumulasi Data (Data Acquisition)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pra-pemrosesan-data-data-preprocessing">3. Pra-Pemrosesan Data (Data Preprocessing)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tahap-pemodelan-menggunakan-knn-regression">4. Tahap Pemodelan Menggunakan KNN Regression</a></li>
 </ul>
   </nav></div>
 
