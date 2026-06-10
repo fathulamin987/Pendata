@@ -39,6 +39,6 @@ Here is a preview of the cell contents:
 -------------------
 ['import matplotlib.pyplot as plt', 'from sklearn.inspection import PartialDependenceDisplay', '', '# Mengambil model LightGBM dari forecaster', "if 'regressor' in vars(forecaster):"]
 ...
-['', 'plt.tight_layout()', '', '# Menampilkan hasil grafik PDP', 'fig']
+["    ax.set_ylabel('Prediksi Demand (MW)')", '    ax.grid(True, alpha=0.3)', '', 'plt.tight_layout()', 'plt.show()']
 -------------------
 
