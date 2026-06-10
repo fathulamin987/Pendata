@@ -989,8 +989,8 @@ Regressor parameters:
     &#39;random_state&#39;: 42, &#39;reg_alpha&#39;: 0.0, &#39;reg_lambda&#39;: 0.0, &#39;subsample&#39;: 1.0,
     &#39;subsample_for_bin&#39;: 200000, &#39;subsample_freq&#39;: 0, &#39;verbose&#39;: -1} 
 fit_kwargs: {} 
-Creation date: 2026-06-10 16:23:13 
-Last fit date: 2026-06-10 16:23:16 
+Creation date: 2026-06-10 16:41:31 
+Last fit date: 2026-06-10 16:41:34 
 Skforecast version: 0.15.1 
 Python version: 3.12.6 
 Forecaster id: None 
@@ -1408,7 +1408,7 @@ $<span class="math notranslate nohighlight">\(
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/301c219e60472ef850a4274145c63dafd374cb6055166c84c5a2c53d8c514502.png" src="_images/301c219e60472ef850a4274145c63dafd374cb6055166c84c5a2c53d8c514502.png" />
+<img alt="_images/7612520142698e057fe5aa894417a67551fd4116bb357f44e87bebfc8f6afa85.png" src="_images/7612520142698e057fe5aa894417a67551fd4116bb357f44e87bebfc8f6afa85.png" />
 </div>
 </div>
 <p><strong>Cara membaca Beeswarm Plot:</strong></p>
@@ -1459,11 +1459,7 @@ $<span class="math notranslate nohighlight">\(
 <p>Semakin besar penurunan performa → semakin penting fitur tersebut.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.inspection</span><span class="w"> </span><span class="kn">import</span> <span class="n">permutation_importance</span>
-
-<span class="c1"># Ekstraksi Model Regressor Internal Secara Aman (Bypass Versi)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mengambil model LightGBM dari forecaster</span>
 <span class="k">if</span> <span class="s1">&#39;regressor&#39;</span> <span class="ow">in</span> <span class="nb">vars</span><span class="p">(</span><span class="n">forecaster</span><span class="p">):</span>
     <span class="n">internal_model</span> <span class="o">=</span> <span class="n">forecaster</span><span class="o">.</span><span class="n">regressor</span>
 <span class="k">elif</span> <span class="s1">&#39;_regressor&#39;</span> <span class="ow">in</span> <span class="nb">vars</span><span class="p">(</span><span class="n">forecaster</span><span class="p">):</span>
@@ -1472,23 +1468,29 @@ $<span class="math notranslate nohighlight">\(
     <span class="n">internal_model</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">vars</span><span class="p">(</span><span class="n">forecaster</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="s1">&#39;Regressor&#39;</span> <span class="ow">in</span> <span class="nb">type</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 
 
-<span class="c1"># Permutation Importance</span>
+<span class="c1"># Mengambil sampel data training agar proses lebih cepat</span>
+<span class="n">sample_size</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">))</span>
+<span class="n">X_sample_perm</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">sample_size</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">y_sample_perm</span> <span class="o">=</span> <span class="n">y_train</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">X_sample_perm</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
+
+
+<span class="c1"># Menghitung Permutation Importance</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">permutation_importance</span><span class="p">(</span>
-    <span class="n">estimator</span>    <span class="o">=</span> <span class="n">internal_model</span><span class="p">,</span>  <span class="c1"># Menggunakan internal_model hasil ekstraksi</span>
-    <span class="n">X</span>            <span class="o">=</span> <span class="n">X_train</span><span class="p">,</span>
-    <span class="n">y</span>            <span class="o">=</span> <span class="n">y_train</span><span class="p">,</span>
-    <span class="n">n_repeats</span>    <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="n">estimator</span>    <span class="o">=</span> <span class="n">internal_model</span><span class="p">,</span>
+    <span class="n">X</span>            <span class="o">=</span> <span class="n">X_sample_perm</span><span class="p">,</span>
+    <span class="n">y</span>            <span class="o">=</span> <span class="n">y_sample_perm</span><span class="p">,</span>
+    <span class="n">n_repeats</span>    <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
     <span class="n">random_state</span> <span class="o">=</span> <span class="mi">42</span><span class="p">,</span>
     <span class="n">n_jobs</span>       <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
 <span class="p">)</span>
 
 <span class="n">perm_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
-    <span class="s1">&#39;feature&#39;</span>           <span class="p">:</span> <span class="n">X_train</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span>
+    <span class="s1">&#39;feature&#39;</span>           <span class="p">:</span> <span class="n">X_sample_perm</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span>
     <span class="s1">&#39;importance_mean&#39;</span>   <span class="p">:</span> <span class="n">result</span><span class="o">.</span><span class="n">importances_mean</span><span class="p">,</span>
     <span class="s1">&#39;importance_std&#39;</span>    <span class="p">:</span> <span class="n">result</span><span class="o">.</span><span class="n">importances_std</span>
 <span class="p">})</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;importance_mean&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-<span class="c1"># Plot</span>
+<span class="c1"># Membuat visualisasi hasil Permutation Importance</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
 <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#e74c3c&#39;</span> <span class="k">if</span> <span class="s1">&#39;lag&#39;</span> <span class="ow">in</span> <span class="n">f</span> <span class="k">else</span> <span class="s1">&#39;#2ecc71&#39;</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">perm_df</span><span class="p">[</span><span class="s1">&#39;feature&#39;</span><span class="p">]]</span>
 
@@ -1500,129 +1502,20 @@ $<span class="math notranslate nohighlight">\(
     <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span>
     <span class="n">capsize</span><span class="o">=</span><span class="mi">3</span>
 <span class="p">)</span>
+
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Penurunan Score (MSE) saat fitur diacak&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Permutation Importance</span><span class="se">\n</span><span class="s1">(Merah = Lag | Hijau = Exogenous)&#39;</span><span class="p">,</span> 
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Permutation Importance</span><span class="se">\n</span><span class="s1">(Merah = Lag | Hijau = Exogenous)&#39;</span><span class="p">,</span>
              <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">16</span><span class="p">],</span> <span class="n">line</span> <span class="mi">15</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span>     <span class="n">internal_model</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">vars</span><span class="p">(</span><span class="n">forecaster</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="s1">&#39;Regressor&#39;</span> <span class="ow">in</span> <span class="nb">type</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
-<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="c1"># Permutation Importance</span>
-<span class="ne">---&gt; </span><span class="mi">15</span> <span class="n">result</span> <span class="o">=</span> <span class="n">permutation_importance</span><span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">16</span>     <span class="n">estimator</span>    <span class="o">=</span> <span class="n">internal_model</span><span class="p">,</span>  <span class="c1"># Menggunakan internal_model hasil ekstraksi</span>
-<span class="g g-Whitespace">     </span><span class="mi">17</span>     <span class="n">X</span>            <span class="o">=</span> <span class="n">X_train</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">18</span>     <span class="n">y</span>            <span class="o">=</span> <span class="n">y_train</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">19</span>     <span class="n">n_repeats</span>    <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">20</span>     <span class="n">random_state</span> <span class="o">=</span> <span class="mi">42</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">21</span>     <span class="n">n_jobs</span>       <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
-<span class="g g-Whitespace">     </span><span class="mi">22</span> <span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">24</span> <span class="n">perm_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
-<span class="g g-Whitespace">     </span><span class="mi">25</span>     <span class="s1">&#39;feature&#39;</span>           <span class="p">:</span> <span class="n">X_train</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">26</span>     <span class="s1">&#39;importance_mean&#39;</span>   <span class="p">:</span> <span class="n">result</span><span class="o">.</span><span class="n">importances_mean</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">27</span>     <span class="s1">&#39;importance_std&#39;</span>    <span class="p">:</span> <span class="n">result</span><span class="o">.</span><span class="n">importances_std</span>
-<span class="g g-Whitespace">     </span><span class="mi">28</span> <span class="p">})</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;importance_mean&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">30</span> <span class="c1"># Plot</span>
-
-<span class="nn">File ~\AppData\Roaming\Python\Python312\site-packages\sklearn\utils\_param_validation.py:218,</span> in <span class="ni">validate_params.&lt;locals&gt;.decorator.&lt;locals&gt;.wrapper</span><span class="nt">(*args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">212</span> <span class="k">try</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">213</span>     <span class="k">with</span> <span class="n">config_context</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">214</span>         <span class="n">skip_parameter_validation</span><span class="o">=</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">215</span>             <span class="n">prefer_skip_nested_validation</span> <span class="ow">or</span> <span class="n">global_skip_validation</span>
-<span class="g g-Whitespace">    </span><span class="mi">216</span>         <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">217</span>     <span class="p">):</span>
-<span class="ne">--&gt; </span><span class="mi">218</span>         <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">219</span> <span class="k">except</span> <span class="n">InvalidParameterError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">220</span>     <span class="c1"># When the function is just a wrapper around an estimator, we allow</span>
-<span class="g g-Whitespace">    </span><span class="mi">221</span>     <span class="c1"># the function to delegate validation to the estimator, but we replace</span>
-<span class="g g-Whitespace">    </span><span class="mi">222</span>     <span class="c1"># the name of the estimator by the name of the function in the error</span>
-<span class="g g-Whitespace">    </span><span class="mi">223</span>     <span class="c1"># message to avoid confusion.</span>
-<span class="g g-Whitespace">    </span><span class="mi">224</span>     <span class="n">msg</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">225</span>         <span class="sa">r</span><span class="s2">&quot;parameter of \w+ must be&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">226</span>         <span class="sa">f</span><span class="s2">&quot;parameter of </span><span class="si">{</span><span class="n">func</span><span class="o">.</span><span class="vm">__qualname__</span><span class="si">}</span><span class="s2"> must be&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">227</span>         <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">),</span>
-<span class="g g-Whitespace">    </span><span class="mi">228</span>     <span class="p">)</span>
-
-<span class="nn">File ~\AppData\Roaming\Python\Python312\site-packages\sklearn\inspection\_permutation_importance.py:288,</span> in <span class="ni">permutation_importance</span><span class="nt">(estimator, X, y, scoring, n_repeats, n_jobs, random_state, sample_weight, max_samples)</span>
-<span class="g g-Whitespace">    </span><span class="mi">285</span> <span class="n">scorer</span> <span class="o">=</span> <span class="n">check_scoring</span><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="n">scoring</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">286</span> <span class="n">baseline_score</span> <span class="o">=</span> <span class="n">_weights_scorer</span><span class="p">(</span><span class="n">scorer</span><span class="p">,</span> <span class="n">estimator</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sample_weight</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">288</span> <span class="n">scores</span> <span class="o">=</span> <span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">)(</span>
-<span class="g g-Whitespace">    </span><span class="mi">289</span>     <span class="n">delayed</span><span class="p">(</span><span class="n">_calculate_permutation_scores</span><span class="p">)(</span>
-<span class="g g-Whitespace">    </span><span class="mi">290</span>         <span class="n">estimator</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">291</span>         <span class="n">X</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">292</span>         <span class="n">y</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">293</span>         <span class="n">sample_weight</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">294</span>         <span class="n">col_idx</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">295</span>         <span class="n">random_seed</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">296</span>         <span class="n">n_repeats</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">297</span>         <span class="n">scorer</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">298</span>         <span class="n">max_samples</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">299</span>     <span class="p">)</span>
-<span class="nn">    300     for col_idx</span> in <span class="ni">range</span><span class="nt">(X.shape[1])</span>
-<span class="g g-Whitespace">    </span><span class="mi">301</span> <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">303</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">baseline_score</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">304</span>     <span class="k">return</span> <span class="p">{</span>
-<span class="g g-Whitespace">    </span><span class="mi">305</span>         <span class="n">name</span><span class="p">:</span> <span class="n">_create_importances_bunch</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">306</span>             <span class="n">baseline_score</span><span class="p">[</span><span class="n">name</span><span class="p">],</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>    <span class="mi">310</span>         <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">baseline_score</span>
-<span class="g g-Whitespace">    </span><span class="mi">311</span>     <span class="p">}</span>
-
-<span class="nn">File ~\AppData\Roaming\Python\Python312\site-packages\sklearn\utils\parallel.py:91,</span> in <span class="ni">Parallel.__call__</span><span class="nt">(self, iterable)</span>
-<span class="g g-Whitespace">     </span><span class="mi">79</span> <span class="n">warning_filters</span> <span class="o">=</span> <span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">80</span>     <span class="n">filters_func</span><span class="p">()</span> <span class="k">if</span> <span class="n">filters_func</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">warnings</span><span class="o">.</span><span class="n">filters</span>
-<span class="g g-Whitespace">     </span><span class="mi">81</span> <span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">83</span> <span class="n">iterable_with_config_and_warning_filters</span> <span class="o">=</span> <span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">84</span>     <span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">85</span>         <span class="n">_with_config_and_warning_filters</span><span class="p">(</span><span class="n">delayed_func</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">warning_filters</span><span class="p">),</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>     <span class="mi">89</span>     <span class="k">for</span> <span class="n">delayed_func</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span> <span class="ow">in</span> <span class="n">iterable</span>
-<span class="g g-Whitespace">     </span><span class="mi">90</span> <span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">91</span> <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__call__</span><span class="p">(</span><span class="n">iterable_with_config_and_warning_filters</span><span class="p">)</span>
-
-<span class="nn">File ~\AppData\Roaming\Python\Python312\site-packages\joblib\parallel.py:2072,</span> in <span class="ni">Parallel.__call__</span><span class="nt">(self, iterable)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2066</span> <span class="c1"># The first item from the output is blank, but it makes the interpreter</span>
-<span class="g g-Whitespace">   </span><span class="mi">2067</span> <span class="c1"># progress until it enters the Try/Except block of the generator and</span>
-<span class="g g-Whitespace">   </span><span class="mi">2068</span> <span class="c1"># reaches the first `yield` statement. This starts the asynchronous</span>
-<span class="g g-Whitespace">   </span><span class="mi">2069</span> <span class="c1"># dispatch of the tasks to the workers.</span>
-<span class="g g-Whitespace">   </span><span class="mi">2070</span> <span class="nb">next</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">2072</span> <span class="k">return</span> <span class="n">output</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_generator</span> <span class="k">else</span> <span class="nb">list</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
-
-<span class="nn">File ~\AppData\Roaming\Python\Python312\site-packages\joblib\parallel.py:1682,</span> in <span class="ni">Parallel._get_outputs</span><span class="nt">(self, iterator, pre_dispatch)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1679</span>     <span class="k">yield</span>
-<span class="g g-Whitespace">   </span><span class="mi">1681</span>     <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_backend</span><span class="o">.</span><span class="n">retrieval_context</span><span class="p">():</span>
-<span class="ne">-&gt; </span><span class="mi">1682</span>         <span class="k">yield from</span> <span class="bp">self</span><span class="o">.</span><span class="n">_retrieve</span><span class="p">()</span>
-<span class="g g-Whitespace">   </span><span class="mi">1684</span> <span class="k">except</span> <span class="ne">GeneratorExit</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1685</span>     <span class="c1"># The generator has been garbage collected before being fully</span>
-<span class="g g-Whitespace">   </span><span class="mi">1686</span>     <span class="c1"># consumed. This aborts the remaining tasks if possible and warn</span>
-<span class="g g-Whitespace">   </span><span class="mi">1687</span>     <span class="c1"># the user if necessary.</span>
-<span class="g g-Whitespace">   </span><span class="mi">1688</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_exception</span> <span class="o">=</span> <span class="kc">True</span>
-
-<span class="nn">File ~\AppData\Roaming\Python\Python312\site-packages\joblib\parallel.py:1800,</span> in <span class="ni">Parallel._retrieve</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1789</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_ordered</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1790</span>     <span class="c1"># Case ordered: wait for completion (or error) of the next job</span>
-<span class="g g-Whitespace">   </span><span class="mi">1791</span>     <span class="c1"># that have been dispatched and not retrieved yet. If no job</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>   <span class="mi">1795</span>     <span class="c1"># control only have to be done on the amount of time the next</span>
-<span class="g g-Whitespace">   </span><span class="mi">1796</span>     <span class="c1"># dispatched job is pending.</span>
-<span class="g g-Whitespace">   </span><span class="mi">1797</span>     <span class="k">if</span> <span class="p">(</span><span class="n">nb_jobs</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1798</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_jobs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_status</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">)</span> <span class="o">==</span> <span class="n">TASK_PENDING</span>
-<span class="g g-Whitespace">   </span><span class="mi">1799</span>     <span class="p">):</span>
-<span class="ne">-&gt; </span><span class="mi">1800</span>         <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1801</span>         <span class="k">continue</span>
-<span class="g g-Whitespace">   </span><span class="mi">1803</span> <span class="k">elif</span> <span class="n">nb_jobs</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1804</span>     <span class="c1"># Case unordered: jobs are added to the list of jobs to</span>
-<span class="g g-Whitespace">   </span><span class="mi">1805</span>     <span class="c1"># retrieve `self._jobs` only once completed or in error, which</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>   <span class="mi">1811</span>     <span class="c1"># timeouts before any other dispatched job has completed and</span>
-<span class="g g-Whitespace">   </span><span class="mi">1812</span>     <span class="c1"># been added to `self._jobs` to be retrieved.</span>
-
-<span class="ne">KeyboardInterrupt</span>: 
-</pre></div>
-</div>
+<img alt="_images/4a1ea6ab9f6b0263b9b452b38e2ca77c7708a6d32bcfdd88d13d7a6f16a2a220.png" src="_images/4a1ea6ab9f6b0263b9b452b38e2ca77c7708a6d32bcfdd88d13d7a6f16a2a220.png" />
 </div>
 </div>
 </section>
@@ -1639,7 +1532,7 @@ $<span class="math notranslate nohighlight">\(
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.inspection</span><span class="w"> </span><span class="kn">import</span> <span class="n">PartialDependenceDisplay</span>
 
-<span class="c1"># Mengambil model regressor dari forecaster</span>
+<span class="c1"># Mengambil model LightGBM dari forecaster</span>
 <span class="k">if</span> <span class="s1">&#39;regressor&#39;</span> <span class="ow">in</span> <span class="nb">vars</span><span class="p">(</span><span class="n">forecaster</span><span class="p">):</span>
     <span class="n">internal_model</span> <span class="o">=</span> <span class="n">forecaster</span><span class="o">.</span><span class="n">regressor</span>
 <span class="k">elif</span> <span class="s1">&#39;_regressor&#39;</span> <span class="ow">in</span> <span class="nb">vars</span><span class="p">(</span><span class="n">forecaster</span><span class="p">):</span>
@@ -1647,28 +1540,31 @@ $<span class="math notranslate nohighlight">\(
 <span class="k">else</span><span class="p">:</span>
     <span class="n">internal_model</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">vars</span><span class="p">(</span><span class="n">forecaster</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="s1">&#39;Regressor&#39;</span> <span class="ow">in</span> <span class="nb">type</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 
-<span class="c1"># Mengubah seluruh fitur menjadi float64 agar kompatibel dengan PDP</span>
+<span class="c1"># Menyiapkan data dan memilih fitur yang akan dianalisis</span>
 <span class="n">X_train_float</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float64&#39;</span><span class="p">)</span>
 
-<span class="c1"># Fitur yang akan dianalisis menggunakan Partial Dependence Plot</span>
 <span class="n">top_features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;lag_1&#39;</span><span class="p">,</span> <span class="s1">&#39;lag_24&#39;</span><span class="p">,</span> <span class="s1">&#39;hour&#39;</span><span class="p">,</span> <span class="s1">&#39;dayofweek&#39;</span><span class="p">]</span>
 <span class="n">feature_indices</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">X_train_float</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">top_features</span><span class="p">]</span>
 
+<span class="c1"># Membuat visualisasi Partial Dependence Plot (PDP)</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
 
-<span class="c1"># Membuat grafik PDP untuk melihat pengaruh masing-masing fitur terhadap prediksi</span>
 <span class="n">PartialDependenceDisplay</span><span class="o">.</span><span class="n">from_estimator</span><span class="p">(</span>
     <span class="n">estimator</span>    <span class="o">=</span> <span class="n">internal_model</span><span class="p">,</span>
     <span class="n">X</span>            <span class="o">=</span> <span class="n">X_train_float</span><span class="p">,</span>
     <span class="n">features</span>     <span class="o">=</span> <span class="n">feature_indices</span><span class="p">,</span>
     <span class="n">feature_names</span><span class="o">=</span><span class="n">X_train_float</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
     <span class="n">ax</span>           <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span>
-    <span class="n">grid_resolution</span><span class="o">=</span><span class="mi">50</span>
+    <span class="n">grid_resolution</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="c1"># Judul grafik</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Partial Dependence Plot (PDP)</span><span class="se">\n</span><span class="s1">Hubungan fitur vs prediksi konsumsi listrik&#39;</span><span class="p">,</span> 
-             <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.01</span><span class="p">)</span>
+<span class="c1"># Menambahkan judul dan mempercantik tampilan grafik</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span>
+    <span class="s1">&#39;Partial Dependence Plot (PDP)</span><span class="se">\n</span><span class="s1">Hubungan fitur vs prediksi konsumsi listrik&#39;</span><span class="p">,</span>
+    <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
+    <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="mf">0.98</span>
+<span class="p">)</span>
 
 <span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axes</span><span class="o">.</span><span class="n">ravel</span><span class="p">():</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Prediksi Demand (MW)&#39;</span><span class="p">)</span>
@@ -1678,11 +1574,6 @@ $<span class="math notranslate nohighlight">\(
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/490c509b0e3910c0387b344e8c5bc410da5c5c7e9920b68a590242baee4b9413.png" src="_images/490c509b0e3910c0387b344e8c5bc410da5c5c7e9920b68a590242baee4b9413.png" />
-<img alt="_images/490c509b0e3910c0387b344e8c5bc410da5c5c7e9920b68a590242baee4b9413.png" src="_images/490c509b0e3910c0387b344e8c5bc410da5c5c7e9920b68a590242baee4b9413.png" />
-<img alt="_images/6c8552d7cbd329318f5e0802d3aa66555d1bd1aac1b4739860375ccc15439f8e.png" src="_images/6c8552d7cbd329318f5e0802d3aa66555d1bd1aac1b4739860375ccc15439f8e.png" />
 </div>
 </div>
 </section>

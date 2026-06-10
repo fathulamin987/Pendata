@@ -37,8 +37,8 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-['import pandas as pd', 'import matplotlib.pyplot as plt', 'from sklearn.inspection import permutation_importance', '', '# Ekstraksi Model Regressor Internal Secara Aman (Bypass Versi)']
+['import matplotlib.pyplot as plt', 'from sklearn.inspection import PartialDependenceDisplay', '', '# Mengambil model LightGBM dari forecaster', "if 'regressor' in vars(forecaster):"]
 ...
-["             fontsize=13, fontweight='bold')", 'ax.invert_yaxis()', "ax.grid(axis='x', alpha=0.3)", 'plt.tight_layout()', 'plt.show()']
+["    ax.set_ylabel('Prediksi Demand (MW)')", '    ax.grid(True, alpha=0.3)', '', 'plt.tight_layout()', 'plt.show()']
 -------------------
 
