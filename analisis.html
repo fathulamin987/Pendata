@@ -989,8 +989,8 @@ Regressor parameters:
     &#39;random_state&#39;: 42, &#39;reg_alpha&#39;: 0.0, &#39;reg_lambda&#39;: 0.0, &#39;subsample&#39;: 1.0,
     &#39;subsample_for_bin&#39;: 200000, &#39;subsample_freq&#39;: 0, &#39;verbose&#39;: -1} 
 fit_kwargs: {} 
-Creation date: 2026-06-10 16:41:31 
-Last fit date: 2026-06-10 16:41:34 
+Creation date: 2026-06-10 16:52:58 
+Last fit date: 2026-06-10 16:53:01 
 Skforecast version: 0.15.1 
 Python version: 3.12.6 
 Forecaster id: None 
@@ -1408,7 +1408,7 @@ $<span class="math notranslate nohighlight">\(
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/7612520142698e057fe5aa894417a67551fd4116bb357f44e87bebfc8f6afa85.png" src="_images/7612520142698e057fe5aa894417a67551fd4116bb357f44e87bebfc8f6afa85.png" />
+<img alt="_images/11de409cdeed1acf70e85c4d172bd6f02c52c24df82a6320396a243454914db1.png" src="_images/11de409cdeed1acf70e85c4d172bd6f02c52c24df82a6320396a243454914db1.png" />
 </div>
 </div>
 <p><strong>Cara membaca Beeswarm Plot:</strong></p>
@@ -1542,14 +1542,13 @@ $<span class="math notranslate nohighlight">\(
 
 <span class="c1"># Menyiapkan data dan memilih fitur yang akan dianalisis</span>
 <span class="n">X_train_float</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float64&#39;</span><span class="p">)</span>
-
 <span class="n">top_features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;lag_1&#39;</span><span class="p">,</span> <span class="s1">&#39;lag_24&#39;</span><span class="p">,</span> <span class="s1">&#39;hour&#39;</span><span class="p">,</span> <span class="s1">&#39;dayofweek&#39;</span><span class="p">]</span>
 <span class="n">feature_indices</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">X_train_float</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">top_features</span><span class="p">]</span>
 
 <span class="c1"># Membuat visualisasi Partial Dependence Plot (PDP)</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
 
-<span class="n">PartialDependenceDisplay</span><span class="o">.</span><span class="n">from_estimator</span><span class="p">(</span>
+<span class="n">display</span> <span class="o">=</span> <span class="n">PartialDependenceDisplay</span><span class="o">.</span><span class="n">from_estimator</span><span class="p">(</span>
     <span class="n">estimator</span>    <span class="o">=</span> <span class="n">internal_model</span><span class="p">,</span>
     <span class="n">X</span>            <span class="o">=</span> <span class="n">X_train_float</span><span class="p">,</span>
     <span class="n">features</span>     <span class="o">=</span> <span class="n">feature_indices</span><span class="p">,</span>
@@ -1571,7 +1570,9 @@ $<span class="math notranslate nohighlight">\(
     <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Menampilkan hasil grafik PDP</span>
+<span class="n">fig</span>
 </pre></div>
 </div>
 </div>
