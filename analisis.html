@@ -989,8 +989,8 @@ Regressor parameters:
     &#39;random_state&#39;: 42, &#39;reg_alpha&#39;: 0.0, &#39;reg_lambda&#39;: 0.0, &#39;subsample&#39;: 1.0,
     &#39;subsample_for_bin&#39;: 200000, &#39;subsample_freq&#39;: 0, &#39;verbose&#39;: -1} 
 fit_kwargs: {} 
-Creation date: 2026-06-10 17:03:25 
-Last fit date: 2026-06-10 17:03:28 
+Creation date: 2026-06-10 17:09:48 
+Last fit date: 2026-06-10 17:09:51 
 Skforecast version: 0.15.1 
 Python version: 3.12.6 
 Forecaster id: None 
@@ -1408,7 +1408,7 @@ $<span class="math notranslate nohighlight">\(
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/8c2a19afe14299a9771ee53b1d70ca2a133fee2a5eaf8960415cc5165ee34c54.png" src="_images/8c2a19afe14299a9771ee53b1d70ca2a133fee2a5eaf8960415cc5165ee34c54.png" />
+<img alt="_images/ce37b0e0dc6c4a2bb9d5d45aad16d8be7184d26d97e2fd5835e3aab45afba5a1.png" src="_images/ce37b0e0dc6c4a2bb9d5d45aad16d8be7184d26d97e2fd5835e3aab45afba5a1.png" />
 </div>
 </div>
 <p><strong>Cara membaca Beeswarm Plot:</strong></p>
@@ -1529,10 +1529,7 @@ $<span class="math notranslate nohighlight">\(
 <p>Di mana <span class="math notranslate nohighlight">\(X_{\setminus j}\)</span> adalah semua fitur selain <span class="math notranslate nohighlight">\(x_j\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.inspection</span><span class="w"> </span><span class="kn">import</span> <span class="n">PartialDependenceDisplay</span>
-
-<span class="c1"># Mengambil model LightGBM dari forecaster</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mengambil model LightGBM dari forecaster</span>
 <span class="k">if</span> <span class="s1">&#39;regressor&#39;</span> <span class="ow">in</span> <span class="nb">vars</span><span class="p">(</span><span class="n">forecaster</span><span class="p">):</span>
     <span class="n">internal_model</span> <span class="o">=</span> <span class="n">forecaster</span><span class="o">.</span><span class="n">regressor</span>
 <span class="k">elif</span> <span class="s1">&#39;_regressor&#39;</span> <span class="ow">in</span> <span class="nb">vars</span><span class="p">(</span><span class="n">forecaster</span><span class="p">):</span>
@@ -1540,8 +1537,12 @@ $<span class="math notranslate nohighlight">\(
 <span class="k">else</span><span class="p">:</span>
     <span class="n">internal_model</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">vars</span><span class="p">(</span><span class="n">forecaster</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="s1">&#39;Regressor&#39;</span> <span class="ow">in</span> <span class="nb">type</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 
-<span class="c1"># Menyiapkan data dan memilih fitur yang akan dianalisis</span>
+<span class="c1"># Menyiapkan sampel data dan memilih fitur yang akan dianalisis</span>
 <span class="n">X_train_float</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float64&#39;</span><span class="p">)</span>
+
+<span class="n">sample_size</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_train_float</span><span class="p">))</span>
+<span class="n">X_sample_pdp</span> <span class="o">=</span> <span class="n">X_train_float</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">sample_size</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
 <span class="n">top_features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;lag_1&#39;</span><span class="p">,</span> <span class="s1">&#39;lag_24&#39;</span><span class="p">,</span> <span class="s1">&#39;hour&#39;</span><span class="p">,</span> <span class="s1">&#39;dayofweek&#39;</span><span class="p">]</span>
 
 <span class="c1"># Membuat visualisasi Partial Dependence Plot (PDP)</span>
@@ -1551,9 +1552,9 @@ $<span class="math notranslate nohighlight">\(
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">feature</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">top_features</span><span class="p">):</span>
     <span class="n">PartialDependenceDisplay</span><span class="o">.</span><span class="n">from_estimator</span><span class="p">(</span>
         <span class="n">estimator</span>    <span class="o">=</span> <span class="n">internal_model</span><span class="p">,</span>
-        <span class="n">X</span>            <span class="o">=</span> <span class="n">X_train_float</span><span class="p">,</span>
+        <span class="n">X</span>            <span class="o">=</span> <span class="n">X_sample_pdp</span><span class="p">,</span>
         <span class="n">features</span>     <span class="o">=</span> <span class="p">[</span><span class="n">feature</span><span class="p">],</span>
-        <span class="n">feature_names</span><span class="o">=</span><span class="n">X_train_float</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+        <span class="n">feature_names</span><span class="o">=</span><span class="n">X_sample_pdp</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
         <span class="n">ax</span>           <span class="o">=</span> <span class="n">axes_flat</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
         <span class="n">grid_resolution</span><span class="o">=</span><span class="mi">50</span>
     <span class="p">)</span>
@@ -1576,236 +1577,7 @@ $<span class="math notranslate nohighlight">\(
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">17</span><span class="p">],</span> <span class="n">line</span> <span class="mi">21</span>
-<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="n">axes_flat</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">20</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">feature</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">top_features</span><span class="p">):</span>
-<span class="ne">---&gt; </span><span class="mi">21</span>     <span class="n">PartialDependenceDisplay</span><span class="o">.</span><span class="n">from_estimator</span><span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">22</span>         <span class="n">estimator</span>    <span class="o">=</span> <span class="n">internal_model</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">23</span>         <span class="n">X</span>            <span class="o">=</span> <span class="n">X_train_float</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">24</span>         <span class="n">features</span>     <span class="o">=</span> <span class="p">[</span><span class="n">feature</span><span class="p">],</span>
-<span class="g g-Whitespace">     </span><span class="mi">25</span>         <span class="n">feature_names</span><span class="o">=</span><span class="n">X_train_float</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
-<span class="g g-Whitespace">     </span><span class="mi">26</span>         <span class="n">ax</span>           <span class="o">=</span> <span class="n">axes_flat</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
-<span class="g g-Whitespace">     </span><span class="mi">27</span>         <span class="n">grid_resolution</span><span class="o">=</span><span class="mi">50</span>
-<span class="g g-Whitespace">     </span><span class="mi">28</span>     <span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">30</span> <span class="c1"># Menambahkan judul dan mempercantik tampilan grafik</span>
-<span class="g g-Whitespace">     </span><span class="mi">31</span> <span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">32</span>     <span class="s1">&#39;Partial Dependence Plot (PDP)</span><span class="se">\n</span><span class="s1">Hubungan fitur vs prediksi konsumsi listrik&#39;</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">33</span>     <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">34</span>     <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">35</span>     <span class="n">y</span><span class="o">=</span><span class="mf">0.98</span>
-<span class="g g-Whitespace">     </span><span class="mi">36</span> <span class="p">)</span>
-
-<span class="nn">File ~\AppData\Roaming\Python\Python312\site-packages\sklearn\inspection\_plot\partial_dependence.py:720,</span> in <span class="ni">PartialDependenceDisplay.from_estimator</span><span class="nt">(cls, estimator, X, features, sample_weight, categorical_features, feature_names, target, response_method, n_cols, grid_resolution, percentiles, custom_values, method, n_jobs, verbose, line_kw, ice_lines_kw, pd_line_kw, contour_kw, ax, kind, centered, subsample, random_state)</span>
-<span class="g g-Whitespace">    </span><span class="mi">714</span>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">715</span>             <span class="sa">f</span><span class="s2">&quot;When a floating-point, subsample=</span><span class="si">{</span><span class="n">subsample</span><span class="si">}</span><span class="s2"> should be in &quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">716</span>             <span class="s2">&quot;the (0, 1) range.&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">717</span>         <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">719</span> <span class="c1"># compute predictions and/or averaged predictions</span>
-<span class="ne">--&gt; </span><span class="mi">720</span> <span class="n">pd_results</span> <span class="o">=</span> <span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)(</span>
-<span class="g g-Whitespace">    </span><span class="mi">721</span>     <span class="n">delayed</span><span class="p">(</span><span class="n">partial_dependence</span><span class="p">)(</span>
-<span class="g g-Whitespace">    </span><span class="mi">722</span>         <span class="n">estimator</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">723</span>         <span class="n">X</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">724</span>         <span class="n">fxs</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">725</span>         <span class="n">sample_weight</span><span class="o">=</span><span class="n">sample_weight</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">726</span>         <span class="n">feature_names</span><span class="o">=</span><span class="n">feature_names</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">727</span>         <span class="n">categorical_features</span><span class="o">=</span><span class="n">categorical_features</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">728</span>         <span class="n">response_method</span><span class="o">=</span><span class="n">response_method</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">729</span>         <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">730</span>         <span class="n">grid_resolution</span><span class="o">=</span><span class="n">grid_resolution</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">731</span>         <span class="n">percentiles</span><span class="o">=</span><span class="n">percentiles</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">732</span>         <span class="n">kind</span><span class="o">=</span><span class="n">kind_plot</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">733</span>         <span class="n">custom_values</span><span class="o">=</span><span class="n">custom_values</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">734</span>     <span class="p">)</span>
-<span class="nn">    735     for kind_plot, fxs</span> in <span class="ni">zip</span><span class="nt">(kind_, features)</span>
-<span class="g g-Whitespace">    </span><span class="mi">736</span> <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">738</span> <span class="c1"># For multioutput regression, we can only check the validity of target</span>
-<span class="g g-Whitespace">    </span><span class="mi">739</span> <span class="c1"># now that we have the predictions.</span>
-<span class="g g-Whitespace">    </span><span class="mi">740</span> <span class="c1"># Also note: as multiclass-multioutput classifiers are not supported,</span>
-<span class="g g-Whitespace">    </span><span class="mi">741</span> <span class="c1"># multiclass and multioutput scenario are mutually exclusive. So there is</span>
-<span class="g g-Whitespace">    </span><span class="mi">742</span> <span class="c1"># no risk of overwriting target_idx here.</span>
-<span class="g g-Whitespace">    </span><span class="mi">743</span> <span class="n">pd_result</span> <span class="o">=</span> <span class="n">pd_results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># checking the first result is enough</span>
-
-<span class="nn">File ~\AppData\Roaming\Python\Python312\site-packages\sklearn\utils\parallel.py:91,</span> in <span class="ni">Parallel.__call__</span><span class="nt">(self, iterable)</span>
-<span class="g g-Whitespace">     </span><span class="mi">79</span> <span class="n">warning_filters</span> <span class="o">=</span> <span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">80</span>     <span class="n">filters_func</span><span class="p">()</span> <span class="k">if</span> <span class="n">filters_func</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">warnings</span><span class="o">.</span><span class="n">filters</span>
-<span class="g g-Whitespace">     </span><span class="mi">81</span> <span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">83</span> <span class="n">iterable_with_config_and_warning_filters</span> <span class="o">=</span> <span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">84</span>     <span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">85</span>         <span class="n">_with_config_and_warning_filters</span><span class="p">(</span><span class="n">delayed_func</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">warning_filters</span><span class="p">),</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>     <span class="mi">89</span>     <span class="k">for</span> <span class="n">delayed_func</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span> <span class="ow">in</span> <span class="n">iterable</span>
-<span class="g g-Whitespace">     </span><span class="mi">90</span> <span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">91</span> <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__call__</span><span class="p">(</span><span class="n">iterable_with_config_and_warning_filters</span><span class="p">)</span>
-
-<span class="nn">File ~\AppData\Roaming\Python\Python312\site-packages\joblib\parallel.py:1986,</span> in <span class="ni">Parallel.__call__</span><span class="nt">(self, iterable)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1984</span>     <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_sequential_output</span><span class="p">(</span><span class="n">iterable</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1985</span>     <span class="nb">next</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">1986</span>     <span class="k">return</span> <span class="n">output</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_generator</span> <span class="k">else</span> <span class="nb">list</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1988</span> <span class="c1"># Let&#39;s create an ID that uniquely identifies the current call. If the</span>
-<span class="g g-Whitespace">   </span><span class="mi">1989</span> <span class="c1"># call is interrupted early and that the same instance is immediately</span>
-<span class="g g-Whitespace">   </span><span class="mi">1990</span> <span class="c1"># reused, this id will be used to prevent workers that were</span>
-<span class="g g-Whitespace">   </span><span class="mi">1991</span> <span class="c1"># concurrently finalizing a task from the previous call to run the</span>
-<span class="g g-Whitespace">   </span><span class="mi">1992</span> <span class="c1"># callback.</span>
-<span class="g g-Whitespace">   </span><span class="mi">1993</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lock</span><span class="p">:</span>
-
-<span class="nn">File ~\AppData\Roaming\Python\Python312\site-packages\joblib\parallel.py:1914,</span> in <span class="ni">Parallel._get_sequential_output</span><span class="nt">(self, iterable)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1912</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_dispatched_batches</span> <span class="o">+=</span> <span class="mi">1</span>
-<span class="g g-Whitespace">   </span><span class="mi">1913</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_dispatched_tasks</span> <span class="o">+=</span> <span class="mi">1</span>
-<span class="ne">-&gt; </span><span class="mi">1914</span> <span class="n">res</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1915</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_completed_tasks</span> <span class="o">+=</span> <span class="mi">1</span>
-<span class="g g-Whitespace">   </span><span class="mi">1916</span> <span class="bp">self</span><span class="o">.</span><span class="n">print_progress</span><span class="p">()</span>
-
-<span class="nn">File ~\AppData\Roaming\Python\Python312\site-packages\sklearn\utils\parallel.py:184,</span> in <span class="ni">_FuncWrapper.__call__</span><span class="nt">(self, *args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">180</span>                 <span class="n">this_warning_filter_dict</span><span class="p">[</span><span class="n">special_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">this_value</span><span class="o">.</span><span class="n">pattern</span>
-<span class="g g-Whitespace">    </span><span class="mi">182</span>         <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="o">**</span><span class="n">this_warning_filter_dict</span><span class="p">,</span> <span class="n">append</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">184</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-<span class="nn">File ~\AppData\Roaming\Python\Python312\site-packages\sklearn\utils\_param_validation.py:218,</span> in <span class="ni">validate_params.&lt;locals&gt;.decorator.&lt;locals&gt;.wrapper</span><span class="nt">(*args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">212</span> <span class="k">try</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">213</span>     <span class="k">with</span> <span class="n">config_context</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">214</span>         <span class="n">skip_parameter_validation</span><span class="o">=</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">215</span>             <span class="n">prefer_skip_nested_validation</span> <span class="ow">or</span> <span class="n">global_skip_validation</span>
-<span class="g g-Whitespace">    </span><span class="mi">216</span>         <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">217</span>     <span class="p">):</span>
-<span class="ne">--&gt; </span><span class="mi">218</span>         <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">219</span> <span class="k">except</span> <span class="n">InvalidParameterError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">220</span>     <span class="c1"># When the function is just a wrapper around an estimator, we allow</span>
-<span class="g g-Whitespace">    </span><span class="mi">221</span>     <span class="c1"># the function to delegate validation to the estimator, but we replace</span>
-<span class="g g-Whitespace">    </span><span class="mi">222</span>     <span class="c1"># the name of the estimator by the name of the function in the error</span>
-<span class="g g-Whitespace">    </span><span class="mi">223</span>     <span class="c1"># message to avoid confusion.</span>
-<span class="g g-Whitespace">    </span><span class="mi">224</span>     <span class="n">msg</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">225</span>         <span class="sa">r</span><span class="s2">&quot;parameter of \w+ must be&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">226</span>         <span class="sa">f</span><span class="s2">&quot;parameter of </span><span class="si">{</span><span class="n">func</span><span class="o">.</span><span class="vm">__qualname__</span><span class="si">}</span><span class="s2"> must be&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">227</span>         <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">),</span>
-<span class="g g-Whitespace">    </span><span class="mi">228</span>     <span class="p">)</span>
-
-<span class="nn">File ~\AppData\Roaming\Python\Python312\site-packages\sklearn\inspection\_partial_dependence.py:744,</span> in <span class="ni">partial_dependence</span><span class="nt">(estimator, X, features, sample_weight, categorical_features, feature_names, response_method, percentiles, grid_resolution, custom_values, method, kind)</span>
-<span class="g g-Whitespace">    </span><span class="mi">735</span> <span class="n">grid</span><span class="p">,</span> <span class="n">values</span> <span class="o">=</span> <span class="n">_grid_from_X</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">736</span>     <span class="n">X_subset</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">737</span>     <span class="n">percentiles</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>    <span class="mi">740</span>     <span class="n">custom_values_for_X_subset</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">741</span> <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">743</span> <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;brute&quot;</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">744</span>     <span class="n">averaged_predictions</span><span class="p">,</span> <span class="n">predictions</span> <span class="o">=</span> <span class="n">_partial_dependence_brute</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">745</span>         <span class="n">estimator</span><span class="p">,</span> <span class="n">grid</span><span class="p">,</span> <span class="n">features_indices</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">response_method</span><span class="p">,</span> <span class="n">sample_weight</span>
-<span class="g g-Whitespace">    </span><span class="mi">746</span>     <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">748</span>     <span class="c1"># reshape predictions to</span>
-<span class="g g-Whitespace">    </span><span class="mi">749</span>     <span class="c1"># (n_outputs, n_instances, n_values_feature_0, n_values_feature_1, ...)</span>
-<span class="g g-Whitespace">    </span><span class="mi">750</span>     <span class="n">predictions</span> <span class="o">=</span> <span class="n">predictions</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">751</span>         <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">*</span><span class="p">[</span><span class="n">val</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">values</span><span class="p">]</span>
-<span class="g g-Whitespace">    </span><span class="mi">752</span>     <span class="p">)</span>
-
-<span class="nn">File ~\AppData\Roaming\Python\Python312\site-packages\sklearn\inspection\_partial_dependence.py:312,</span> in <span class="ni">_partial_dependence_brute</span><span class="nt">(est, grid, features, X, response_method, sample_weight)</span>
-<span class="g g-Whitespace">    </span><span class="mi">304</span>     <span class="n">_safe_assign</span><span class="p">(</span><span class="n">X_eval</span><span class="p">,</span> <span class="n">new_values</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">column_indexer</span><span class="o">=</span><span class="n">variable</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">306</span> <span class="c1"># Note: predictions is of shape</span>
-<span class="g g-Whitespace">    </span><span class="mi">307</span> <span class="c1"># (n_points,) for non-multioutput regressors</span>
-<span class="g g-Whitespace">    </span><span class="mi">308</span> <span class="c1"># (n_points, n_tasks) for multioutput regressors</span>
-<span class="nn">    309 # (n_points, 1) for the regressors</span> in <span class="ni">cross_decomposition </span><span class="nt">(I think)</span>
-<span class="g g-Whitespace">    </span><span class="mi">310</span> <span class="c1"># (n_points, 1) for binary classification (positive class already selected)</span>
-<span class="g g-Whitespace">    </span><span class="mi">311</span> <span class="c1"># (n_points, n_classes) for multiclass classification</span>
-<span class="ne">--&gt; </span><span class="mi">312</span> <span class="n">pred</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">_get_response_values</span><span class="p">(</span><span class="n">est</span><span class="p">,</span> <span class="n">X_eval</span><span class="p">,</span> <span class="n">response_method</span><span class="o">=</span><span class="n">response_method</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">314</span> <span class="n">predictions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pred</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">315</span> <span class="c1"># average over samples</span>
-
-<span class="nn">File ~\AppData\Roaming\Python\Python312\site-packages\sklearn\utils\_response.py:232,</span> in <span class="ni">_get_response_values</span><span class="nt">(estimator, X, response_method, pos_label, return_response_method_used)</span>
-<span class="g g-Whitespace">    </span><span class="mi">225</span>         <span class="n">y_pred</span> <span class="o">=</span> <span class="n">_process_decision_function</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">226</span>             <span class="n">y_pred</span><span class="o">=</span><span class="n">y_pred</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">227</span>             <span class="n">target_type</span><span class="o">=</span><span class="n">target_type</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">228</span>             <span class="n">classes</span><span class="o">=</span><span class="n">classes</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">229</span>             <span class="n">pos_label</span><span class="o">=</span><span class="n">pos_label</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">230</span>         <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">231</span> <span class="k">else</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">232</span>     <span class="n">y_pred</span><span class="p">,</span> <span class="n">pos_label</span> <span class="o">=</span> <span class="n">prediction_method</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="kc">None</span>
-<span class="g g-Whitespace">    </span><span class="mi">234</span> <span class="k">if</span> <span class="n">return_response_method_used</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">235</span>     <span class="k">return</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">pos_label</span><span class="p">,</span> <span class="n">prediction_method</span><span class="o">.</span><span class="vm">__name__</span>
-
-<span class="nn">File ~\AppData\Roaming\Python\Python312\site-packages\lightgbm\sklearn.py:1144,</span> in <span class="ni">LGBMModel.predict</span><span class="nt">(self, X, raw_score, start_iteration, num_iteration, pred_leaf, pred_contrib, validate_features, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1141</span> <span class="n">predict_params</span> <span class="o">=</span> <span class="n">_choose_param_value</span><span class="p">(</span><span class="s2">&quot;num_threads&quot;</span><span class="p">,</span> <span class="n">predict_params</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_jobs</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1142</span> <span class="n">predict_params</span><span class="p">[</span><span class="s2">&quot;num_threads&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process_n_jobs</span><span class="p">(</span><span class="n">predict_params</span><span class="p">[</span><span class="s2">&quot;num_threads&quot;</span><span class="p">])</span>
-<span class="ne">-&gt; </span><span class="mi">1144</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Booster</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span>  <span class="c1"># type: ignore[union-attr]</span>
-<span class="g g-Whitespace">   </span><span class="mi">1145</span>     <span class="n">X</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1146</span>     <span class="n">raw_score</span><span class="o">=</span><span class="n">raw_score</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1147</span>     <span class="n">start_iteration</span><span class="o">=</span><span class="n">start_iteration</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1148</span>     <span class="n">num_iteration</span><span class="o">=</span><span class="n">num_iteration</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1149</span>     <span class="n">pred_leaf</span><span class="o">=</span><span class="n">pred_leaf</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1150</span>     <span class="n">pred_contrib</span><span class="o">=</span><span class="n">pred_contrib</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1151</span>     <span class="n">validate_features</span><span class="o">=</span><span class="n">validate_features</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1152</span>     <span class="o">**</span><span class="n">predict_params</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1153</span> <span class="p">)</span>
-
-<span class="nn">File ~\AppData\Roaming\Python\Python312\site-packages\lightgbm\basic.py:4767,</span> in <span class="ni">Booster.predict</span><span class="nt">(self, data, start_iteration, num_iteration, raw_score, pred_leaf, pred_contrib, data_has_header, validate_features, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">4765</span>     <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">4766</span>         <span class="n">num_iteration</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
-<span class="ne">-&gt; </span><span class="mi">4767</span> <span class="k">return</span> <span class="n">predictor</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">4768</span>     <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">4769</span>     <span class="n">start_iteration</span><span class="o">=</span><span class="n">start_iteration</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">4770</span>     <span class="n">num_iteration</span><span class="o">=</span><span class="n">num_iteration</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">4771</span>     <span class="n">raw_score</span><span class="o">=</span><span class="n">raw_score</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">4772</span>     <span class="n">pred_leaf</span><span class="o">=</span><span class="n">pred_leaf</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">4773</span>     <span class="n">pred_contrib</span><span class="o">=</span><span class="n">pred_contrib</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">4774</span>     <span class="n">data_has_header</span><span class="o">=</span><span class="n">data_has_header</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">4775</span>     <span class="n">validate_features</span><span class="o">=</span><span class="n">validate_features</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">4776</span> <span class="p">)</span>
-
-<span class="nn">File ~\AppData\Roaming\Python\Python312\site-packages\lightgbm\basic.py:1204,</span> in <span class="ni">_InnerPredictor.predict</span><span class="nt">(self, data, start_iteration, num_iteration, raw_score, pred_leaf, pred_contrib, data_has_header, validate_features)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1197</span>     <span class="n">preds</span><span class="p">,</span> <span class="n">nrow</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__pred_for_csc</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1198</span>         <span class="n">csc</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1199</span>         <span class="n">start_iteration</span><span class="o">=</span><span class="n">start_iteration</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1200</span>         <span class="n">num_iteration</span><span class="o">=</span><span class="n">num_iteration</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1201</span>         <span class="n">predict_type</span><span class="o">=</span><span class="n">predict_type</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1202</span>     <span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1203</span> <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
-<span class="ne">-&gt; </span><span class="mi">1204</span>     <span class="n">preds</span><span class="p">,</span> <span class="n">nrow</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__pred_for_np2d</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1205</span>         <span class="n">mat</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1206</span>         <span class="n">start_iteration</span><span class="o">=</span><span class="n">start_iteration</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1207</span>         <span class="n">num_iteration</span><span class="o">=</span><span class="n">num_iteration</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1208</span>         <span class="n">predict_type</span><span class="o">=</span><span class="n">predict_type</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1209</span>     <span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1210</span> <span class="k">elif</span> <span class="n">_is_pyarrow_table</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">1211</span>     <span class="n">preds</span><span class="p">,</span> <span class="n">nrow</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__pred_for_pyarrow_table</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1212</span>         <span class="n">table</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1213</span>         <span class="n">start_iteration</span><span class="o">=</span><span class="n">start_iteration</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1214</span>         <span class="n">num_iteration</span><span class="o">=</span><span class="n">num_iteration</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1215</span>         <span class="n">predict_type</span><span class="o">=</span><span class="n">predict_type</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1216</span>     <span class="p">)</span>
-
-<span class="nn">File ~\AppData\Roaming\Python\Python312\site-packages\lightgbm\basic.py:1361,</span> in <span class="ni">_InnerPredictor.__pred_for_np2d</span><span class="nt">(self, mat, start_iteration, num_iteration, predict_type)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1359</span>     <span class="k">return</span> <span class="n">preds</span><span class="p">,</span> <span class="n">nrow</span>
-<span class="g g-Whitespace">   </span><span class="mi">1360</span> <span class="k">else</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1361</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__inner_predict_np2d</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1362</span>         <span class="n">mat</span><span class="o">=</span><span class="n">mat</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1363</span>         <span class="n">start_iteration</span><span class="o">=</span><span class="n">start_iteration</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1364</span>         <span class="n">num_iteration</span><span class="o">=</span><span class="n">num_iteration</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1365</span>         <span class="n">predict_type</span><span class="o">=</span><span class="n">predict_type</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1366</span>         <span class="n">preds</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1367</span>     <span class="p">)</span>
-
-<span class="nn">File ~\AppData\Roaming\Python\Python312\site-packages\lightgbm\basic.py:1308,</span> in <span class="ni">_InnerPredictor.__inner_predict_np2d</span><span class="nt">(self, mat, start_iteration, num_iteration, predict_type, preds)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1305</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Wrong length of pre-allocated predict array&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1306</span> <span class="n">out_num_preds</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int64</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1307</span> <span class="n">_safe_call</span><span class="p">(</span>
-<span class="ne">-&gt; </span><span class="mi">1308</span>     <span class="n">_LIB</span><span class="o">.</span><span class="n">LGBM_BoosterPredictForMat</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1309</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1310</span>         <span class="n">ptr_data</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1311</span>         <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">(</span><span class="n">type_ptr_data</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1312</span>         <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span><span class="p">(</span><span class="n">mat</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1313</span>         <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span><span class="p">(</span><span class="n">mat</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1314</span>         <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">(</span><span class="n">layout</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1315</span>         <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">(</span><span class="n">predict_type</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1316</span>         <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">(</span><span class="n">start_iteration</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1317</span>         <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">(</span><span class="n">num_iteration</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1318</span>         <span class="n">_c_str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pred_parameter</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1319</span>         <span class="n">ctypes</span><span class="o">.</span><span class="n">byref</span><span class="p">(</span><span class="n">out_num_preds</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1320</span>         <span class="n">preds</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data_as</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">)),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1321</span>     <span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1322</span> <span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1323</span> <span class="k">if</span> <span class="n">n_preds</span> <span class="o">!=</span> <span class="n">out_num_preds</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1324</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Wrong length for predict results&quot;</span><span class="p">)</span>
-
-<span class="ne">KeyboardInterrupt</span>: 
-</pre></div>
-</div>
+<img alt="_images/80b1bd857b9c7056a95392521593295ac768755936814453bf6295896b621c53.png" src="_images/80b1bd857b9c7056a95392521593295ac768755936814453bf6295896b621c53.png" />
 </div>
 </div>
 </section>
