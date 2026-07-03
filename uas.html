@@ -1,0 +1,819 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>UAS Analisis &#8212; Penambangan Data A</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=1ae7504c"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'uas';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Skforecast - Model Explainability" href="analisis.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/Amin.png" class="logo__image only-light" alt="Penambangan Data A - Home"/>
+    <script>document.write(`<img src="_static/Amin.png" class="logo__image only-dark" alt="Penambangan Data A - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    My Intro
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="pertemuan1.html">Pengantar Data Mining</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pertemuan2.html">Memahami Data</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="pertemuan3.html">Data understanding</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="pertemuan4.html">Mengukur Jarak Iris</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dataCampur.html">Mengukur Jarak Campuran</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="Tugas.html">Tugas</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="MengisiMissing.html">Mengisi Missing Value</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Normalisasi.html">Materi Normalisasi</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="uts.html">UTS Penambangan Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="naive.html">Analisis Data Naive Bayes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tree.html">Decission Tree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="randomforest.html">Random Forest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="regresi.html">Analisa Regresi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NO2.html">Peramalan kadar <span class="math notranslate nohighlight">\(NO2\)</span> di daerah Sampang Madura</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analisis.html">Skforecast - Model Explainability</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">UAS Analisis</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fuas.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/uas.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>UAS Analisis</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alur-metode">1. Alur Metode</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-file">a. File</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-distributions">b. Distributions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-tree">c. Tree</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-tree-viewer">d. Tree Viewer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#e-widget-confusion-matrix">e. Widget Confusion Matrix</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-test-and-score">f. Test and Score</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struktur-dataset-asli-data-understanding">2. Struktur Dataset Asli &amp; Data Understanding</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-kolom-identitas-pendukung">a. Kolom Identitas &amp; Pendukung</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-fitur-perilaku-mahasiswa-kolom-130">b. Fitur Perilaku Mahasiswa (Kolom 1–30)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-distribusi-kelas-variabel-target-grade">c. Distribusi Kelas Variabel Target (GRADE)</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="uas-analisis">
+<h1>UAS Analisis<a class="headerlink" href="#uas-analisis" title="Link to this heading">#</a></h1>
+<p>Analisis Komparatif Performa Mahasiswa Berdasarkan Pola Perilaku dan Sosio-Ekonomi Menggunakan Orange Data Mining</p>
+<p>Dataset yang digunakan pada eksperimen ini bersumber dari <strong>UCI Machine Learning Repository</strong>, dengan judul <em>“Higher Education Students Performance Evaluation”</em> : <a class="reference external" href="https://archive.ics.uci.edu/dataset/856/higher+education+students+performance+evaluation">https://archive.ics.uci.edu/dataset/856/higher+education+students+performance+evaluation</a></p>
+<p><strong>Ringkasan dataset :</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Keterangan</p></th>
+<th class="head"><p>Detail</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Nama Dataset</p></td>
+<td><p>Higher Education Students Performance Evaluation</p></td>
+</tr>
+<tr class="row-odd"><td><p>Jumlah Sampel (Instances)</p></td>
+<td><p>145</p></td>
+</tr>
+<tr class="row-even"><td><p>Jumlah Fitur (Features)</p></td>
+<td><p>31</p></td>
+</tr>
+<tr class="row-odd"><td><p>Nilai Kosong (Missing Values)</p></td>
+<td><p>Tidak ada</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="alur-metode">
+<h2>1. Alur Metode<a class="headerlink" href="#alur-metode" title="Link to this heading">#</a></h2>
+<p>Dalam lembar kerja Orange, dibangun sebuah arsitektur alur kerja (<em>workflow</em>) data mining yang terdiri dari beberapa komponen sebagai berikut :</p>
+<p><img alt="alt text" src="_images/workflow1.png" /></p>
+<section id="a-file">
+<h3>a. File<a class="headerlink" href="#a-file" title="Link to this heading">#</a></h3>
+<p>Proses utama untuk memuat dataset mentah <code class="docutils literal notranslate"><span class="pre">data.csv</span></code>. Pada widget ini dilakukan pengaturan krusial:</p>
+<ul class="simple">
+<li><p>Stundent ID &amp; Course ID sebagai <em>meta</em></p></li>
+<li><p>Kolom 1–30 sebagai <em>features</em></p></li>
+<li><p>Mengubah variabel  <strong>GRADE</strong> menjadi target dan tipenya <em>categorical</em></p></li>
+</ul>
+<p><img alt="alt text" src="_images/file.png" /></p>
+</section>
+<section id="b-distributions">
+<h3>b. Distributions<a class="headerlink" href="#b-distributions" title="Link to this heading">#</a></h3>
+<p>Alat visualisasi untuk melihat grafik batang sebaran frekuensi data mahasiswa pada masing-masing tingkatan nilai <strong>GRADE</strong>.</p>
+<p>Berdasarkan grafik distribusi, jumlah data pada setiap kategori GRADE tidak tersebar secara merata. Kelas Grade 1 memiliki frekuensi tertinggi, yaitu sebanyak 35 mahasiswa, sedangkan Grade 0 merupakan kelas dengan jumlah data paling sedikit, yaitu 8 mahasiswa. Perbedaan jumlah data antar kelas ini menunjukkan adanya ketidakseimbangan kelas (class imbalance) yang perlu diperhatikan karena dapat memengaruhi proses pembentukan dan evaluasi model klasifikasi.</p>
+<p><img alt="alt text" src="_images/distributions.png" /></p>
+</section>
+<section id="c-tree">
+<h3>c. Tree<a class="headerlink" href="#c-tree" title="Link to this heading">#</a></h3>
+<p>Berfungsi sebagai algoritma pengklasifikasi tunggal dalam eksperimen ini yang melatih data kuesioner untuk membentuk aturan keputusan (If-Then) berdasarkan pemotongan cabang pohon keputusan otomatis.</p>
+<p>Algoritma pelatih berbasis pohon keputusan. Parameter internalnya diatur secara ketat:</p>
+<ul class="simple">
+<li><p>Bangun pohon biner</p></li>
+<li><p>Jumlah minimum data pada setiap simpul daun adalah 2.</p></li>
+<li><p>Subset yang memiliki kurang dari 5 data tidak akan dibagi lagi.
+Pengaturan ini digunakan untuk menghasilkan aturan logika klasifikasi berbentuk cabang <em>If-Then</em>.</p></li>
+</ul>
+<p><img alt="alt text" src="_images/tree.png" /></p>
+</section>
+<section id="d-tree-viewer">
+<h3>d. Tree Viewer<a class="headerlink" href="#d-tree-viewer" title="Link to this heading">#</a></h3>
+<p>Tree View digunakan untuk menampilkan proses pengambilan keputusan model Decision Tree dalam bentuk pohon. Setiap node berisi aturan pembagian data berdasarkan suatu atribut, sedangkan cabang menunjukkan hasil dari aturan tersebut. Node yang berwarna merupakan hasil akhir (leaf) yang menunjukkan kelas Grade yang diprediksi oleh model. Setiap warna mewakili kelas Grade yang berbeda, sehingga memudahkan dalam membedakan hasil prediksi. Semakin pekat warna pada node, semakin tinggi tingkat dominasi atau keyakinan model terhadap kelas tersebut. Dengan adanya visualisasi ini, proses klasifikasi dapat dipahami dengan lebih mudah karena terlihat bagaimana model membentuk aturan hingga menghasilkan prediksi performa mahasiswa berdasarkan pola perilaku dan faktor sosio-ekonomi.</p>
+<p><img alt="alt text" src="_images/treeview.png" /></p>
+</section>
+<section id="e-widget-confusion-matrix">
+<h3>e. Widget Confusion Matrix<a class="headerlink" href="#e-widget-confusion-matrix" title="Link to this heading">#</a></h3>
+<p>Berdasarkan Confusion Matrix, baris menunjukkan kelas sebenarnya (Actual), sedangkan kolom menunjukkan hasil prediksi model (Predicted). Nilai yang berada pada garis diagonal dengan warna biru menunjukkan prediksi yang benar, sedangkan nilai di luar diagonal dengan warna merah menunjukkan prediksi yang salah. Semakin pekat warna pada suatu kotak, semakin banyak jumlah data pada kotak tersebut. Pada gambar terlihat bahwa masih banyak kotak berwarna merah dibandingkan biru, sehingga menunjukkan bahwa model Decision Tree masih sering melakukan kesalahan dalam mengklasifikasikan data. Hal ini sejalan dengan nilai akurasi (CA) yang hanya mencapai 0.228%, sehingga kemampuan model dalam memprediksi kelas masih tergolong rendah.</p>
+<p><img alt="alt text" src="_images/confusion1.png" /></p>
+</section>
+<section id="f-test-and-score">
+<h3>f. Test and Score<a class="headerlink" href="#f-test-and-score" title="Link to this heading">#</a></h3>
+<p>Berdasarkan hasil pengujian, model Decision Tree memperoleh nilai Classification Accuracy (CA) sebesar 0.228 Artinya, model hanya mampu memprediksi dengan benar sekitar 22,8% dari seluruh data yang diuji. Nilai ini menunjukkan bahwa tingkat ketepatan model masih rendah, sehingga hasil prediksi yang diberikan belum cukup baik.</p>
+<p><img alt="alt text" src="_images/T%26S.png" /></p>
+</section>
+</section>
+<section id="struktur-dataset-asli-data-understanding">
+<h2>2. Struktur Dataset Asli &amp; Data Understanding<a class="headerlink" href="#struktur-dataset-asli-data-understanding" title="Link to this heading">#</a></h2>
+<p>Dataset asli memiliki total <strong>33 kolom</strong> dengan <strong>145 data sampel</strong> (baris). Berikut detail isi setiap kolom berdasarkan kamus data riset akademis (<em>Student Performance Dataset</em>).</p>
+<section id="a-kolom-identitas-pendukung">
+<h3>a. Kolom Identitas &amp; Pendukung<a class="headerlink" href="#a-kolom-identitas-pendukung" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Kolom</p></th>
+<th class="head"><p>Keterangan</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>STUDENT ID</strong> (Meta)</p></td>
+<td><p>Identitas anonim mahasiswa (STUDENT1, STUDENT2, dst.). Hanya sebagai label pengenal, tidak masuk perhitungan matematika model.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>COURSE ID</strong> (Feature)</p></td>
+<td><p>Kode angka pengelompokan mata kuliah yang sedang diambil mahasiswa.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="b-fitur-perilaku-mahasiswa-kolom-130">
+<h3>b. Fitur Perilaku Mahasiswa (Kolom 1–30)<a class="headerlink" href="#b-fitur-perilaku-mahasiswa-kolom-130" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>No.</p></th>
+<th class="head"><p>Nama Kolom</p></th>
+<th class="head"><p>Keterangan</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Umur</p></td>
+<td><p>1 = 18–22 tahun, 2 = 23–26 tahun, 3 = &gt;26 tahun</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Jenis Kelamin</p></td>
+<td><p>1 = Perempuan, 2 = Laki-laki</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>Asal Sekolah Menengah</p></td>
+<td><p>1 = Swasta, 2 = Negeri, 3 = Lainnya</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>Jenis Beasiswa</p></td>
+<td><p>1 = Tidak ada, 2 = 25%, 3 = 50%, 4 = 75%, 5 = Full (100%)</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>Status Kerja Sampingan</p></td>
+<td><p>1 = Ya (Kuliah sambil kerja), 2 = Tidak</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>Kegiatan Seni/Olahraga Rutin</p></td>
+<td><p>1 = Ya, 2 = Tidak</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>Status Pernikahan Mahasiswa</p></td>
+<td><p>1 = Menikah, 2 = Belum Menikah</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>Total Pendapatan Orang Tua per Bulan</p></td>
+<td><p>1 = Rendah, 2 = Menengah, 3 = Tinggi</p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>Tingkat Pendidikan Ayah</p></td>
+<td><p>1 = SD, 2 = SMP, 3 = SMA, 4 = S1, 5 = Pascasarjana (S2/S3)</p></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>Tingkat Pendidikan Ibu</p></td>
+<td><p>1 = SD, 2 = SMP, 3 = SMA, 4 = S1, 5 = Pascasarjana (S2/S3)</p></td>
+</tr>
+<tr class="row-even"><td><p>11</p></td>
+<td><p>Jumlah Saudara Kandung</p></td>
+<td><p>Angka jumlah anak dalam keluarga (1, 2, 3, 4, dst.)</p></td>
+</tr>
+<tr class="row-odd"><td><p>12</p></td>
+<td><p>Status Pernikahan Orang Tua</p></td>
+<td><p>1 = Menikah/Bersama, 2 = Cerai/Berpisah</p></td>
+</tr>
+<tr class="row-even"><td><p>13</p></td>
+<td><p>Sektor Pekerjaan Orang Tua</p></td>
+<td><p>Pengelompokan jenis pekerjaan orang tua (skala kode 1–5)</p></td>
+</tr>
+<tr class="row-odd"><td><p>14</p></td>
+<td><p>Jenis Tempat Tinggal</p></td>
+<td><p>1 = Asrama Kampus, 2 = Rumah Sendiri, 3 = Kos/Kontrakan, 4 = Lainnya</p></td>
+</tr>
+<tr class="row-even"><td><p>15</p></td>
+<td><p>Alasan Memilih Jurusan Kuliah</p></td>
+<td><p>1 = Minat Sendiri, 2 = Keinginan Orang Tua, 3 = Prospek Kerja, 4 = Lainnya</p></td>
+</tr>
+<tr class="row-odd"><td><p>16</p></td>
+<td><p>Waktu Belajar Mandiri per Minggu</p></td>
+<td><p>1 = &lt;5 jam, 2 = 6–10 jam, 3 = 11–20 jam, 4 = &gt;20 jam</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>17</strong></p></td>
+<td><p><strong>Frekuensi Membaca Buku/Artikel Non-Kuliah</strong></p></td>
+<td><p>1 = Jarang/Tidak Pernah, 2 = Kadang-kadang, 3 = Sering —  <em>(Root Node pada Tree)</em></p></td>
+</tr>
+<tr class="row-odd"><td><p>18</p></td>
+<td><p>Frekuensi Membaca Buku/Materi Kuliah Wajib</p></td>
+<td><p>1 = Jarang, 2 = Kadang-kadang, 3 = Sering</p></td>
+</tr>
+<tr class="row-even"><td><p>19</p></td>
+<td><p>Kehadiran di Seminar/Disiplin Ilmu Tambahan</p></td>
+<td><p>1 = Ya, 2 = Tidak</p></td>
+</tr>
+<tr class="row-odd"><td><p>20</p></td>
+<td><p>Dampak Tugas Kelompok pada Pemahaman Kuliah</p></td>
+<td><p>1 = Positif, 2 = Negatif, 3 = Biasa saja</p></td>
+</tr>
+<tr class="row-even"><td><p>21</p></td>
+<td><p>Tingkat Kehadiran di Kelas</p></td>
+<td><p>1 = Selalu Hadir (&gt;90%), 2 = Kadang Absen (70–90%), 3 = Sering Bolos (&lt;70%)</p></td>
+</tr>
+<tr class="row-odd"><td><p>22</p></td>
+<td><p>Metode Persiapan Sebelum Ujian 1</p></td>
+<td><p>1 = Belajar mencicil jauh hari, 2 = Sistem Kebut Semalam (SKS)</p></td>
+</tr>
+<tr class="row-even"><td><p>23</p></td>
+<td><p>Metode Persiapan Sebelum Ujian 2</p></td>
+<td><p>1 = Belajar teratur tiap hari, 2 = Hanya belajar jika besok ada ujian</p></td>
+</tr>
+<tr class="row-odd"><td><p>24</p></td>
+<td><p>Keaktifan Mendengarkan Penjelasan Dosen</p></td>
+<td><p>1 = Sangat Memperhatikan, 2 = Kadang Kurang Fokus/Main HP</p></td>
+</tr>
+<tr class="row-even"><td><p>25</p></td>
+<td><p>Kebiasaan Mencatat Materi Kuliah</p></td>
+<td><p>1 = Selalu Mencatat, 2 = Kadang-kadang, 3 = Tidak Pernah</p></td>
+</tr>
+<tr class="row-odd"><td><p>26</p></td>
+<td><p>Keaktifan Berdiskusi / Bertanya di Kelas</p></td>
+<td><p>1 = Sering Berpartisipasi Aktif, 2 = Pasif/Pendengar Saja</p></td>
+</tr>
+<tr class="row-even"><td><p>27</p></td>
+<td><p>Kondisi Kesehatan Fisik Saat Kuliah</p></td>
+<td><p>1 = Baik/Sangat Baik, 2 = Kurang Baik</p></td>
+</tr>
+<tr class="row-odd"><td><p>28</p></td>
+<td><p>Target IPK Semester Ini</p></td>
+<td><p>Skala target pencapaian akademik pribadi (1–5)</p></td>
+</tr>
+<tr class="row-even"><td><p>29</p></td>
+<td><p>Rata-rata IPK di Semester Lalu</p></td>
+<td><p>Rentang nilai indeks prestasi kumulatif sebelumnya</p></td>
+</tr>
+<tr class="row-odd"><td><p>30</p></td>
+<td><p>Status Hubungan Asmara</p></td>
+<td><p>1 = Memiliki Pacar/Pasangan, 2 = Lajang/Single</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="c-distribusi-kelas-variabel-target-grade">
+<h3>c. Distribusi Kelas Variabel Target (GRADE)<a class="headerlink" href="#c-distribusi-kelas-variabel-target-grade" title="Link to this heading">#</a></h3>
+<p>Berdasarkan visualisasi grafik batang pada widget <strong>Distributions</strong>, sebaran data asli adalah sebagai berikut:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>GRADE</p></th>
+<th class="head"><p>Jumlah Mahasiswa</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>35</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>24</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>21</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>17</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>17</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>13</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>10</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>8</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="analisis.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Skforecast - Model Explainability</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alur-metode">1. Alur Metode</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-file">a. File</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-distributions">b. Distributions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-tree">c. Tree</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-tree-viewer">d. Tree Viewer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#e-widget-confusion-matrix">e. Widget Confusion Matrix</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-test-and-score">f. Test and Score</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struktur-dataset-asli-data-understanding">2. Struktur Dataset Asli &amp; Data Understanding</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-kolom-identitas-pendukung">a. Kolom Identitas &amp; Pendukung</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-fitur-perilaku-mahasiswa-kolom-130">b. Fitur Perilaku Mahasiswa (Kolom 1–30)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-distribusi-kelas-variabel-target-grade">c. Distribusi Kelas Variabel Target (GRADE)</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Fathul Amin - 240411100217
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

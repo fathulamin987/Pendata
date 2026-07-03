@@ -1,4 +1,17 @@
 Traceback (most recent call last):
+  File "C:\Users\Fathul Amin\AppData\Local\Programs\Python\Python312\Lib\site-packages\nbclient\client.py", line 782, in _async_poll_for_reply
+    msg = await ensure_async(self.kc.shell_channel.get_msg(timeout=new_timeout))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fathul Amin\AppData\Roaming\Python\Python312\site-packages\jupyter_core\utils\__init__.py", line 198, in ensure_async
+    result = await obj
+             ^^^^^^^^^
+  File "C:\Users\Fathul Amin\AppData\Roaming\Python\Python312\site-packages\jupyter_client\channels.py", line 313, in get_msg
+    raise Empty
+_queue.Empty
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
   File "C:\Users\Fathul Amin\AppData\Local\Programs\Python\Python312\Lib\site-packages\jupyter_cache\executors\utils.py", line 58, in single_nb_execution
     executenb(
   File "C:\Users\Fathul Amin\AppData\Local\Programs\Python\Python312\Lib\site-packages\nbclient\client.py", line 1323, in execute
@@ -12,75 +25,21 @@ Traceback (most recent call last):
            ^^^^^^^^^^^^^^^
   File "C:\Users\Fathul Amin\AppData\Local\Programs\Python\Python312\Lib\site-packages\nbclient\client.py", line 709, in async_execute
     await self.async_execute_cell(
-  File "C:\Users\Fathul Amin\AppData\Local\Programs\Python\Python312\Lib\site-packages\nbclient\client.py", line 1062, in async_execute_cell
-    await self._check_raise_for_error(cell, cell_index, exec_reply)
-  File "C:\Users\Fathul Amin\AppData\Local\Programs\Python\Python312\Lib\site-packages\nbclient\client.py", line 918, in _check_raise_for_error
-    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
-nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
-------------------
-import matplotlib.pyplot as plt
-from sklearn.inspection import PartialDependenceDisplay
+  File "C:\Users\Fathul Amin\AppData\Local\Programs\Python\Python312\Lib\site-packages\nbclient\client.py", line 1005, in async_execute_cell
+    exec_reply = await self.task_poll_for_reply
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fathul Amin\AppData\Local\Programs\Python\Python312\Lib\site-packages\nbclient\client.py", line 806, in _async_poll_for_reply
+    error_on_timeout_execute_reply = await self._async_handle_timeout(timeout, cell)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Fathul Amin\AppData\Local\Programs\Python\Python312\Lib\site-packages\nbclient\client.py", line 856, in _async_handle_timeout
+    raise CellTimeoutError.error_from_timeout_and_cell(
+nbclient.exceptions.CellTimeoutError: A cell timed out while it was being executed, after 30 seconds.
+The message was: Cell execution timed out.
+Here is a preview of the cell contents:
+-------------------
+# Memuat dataset konsumsi listrik
+data = fetch_dataset(name='vic_electricity', raw=True)
 
-# Mengambil model LightGBM dari forecaster
-if 'regressor' in vars(forecaster):
-    internal_model = forecaster.regressor
-elif '_regressor' in vars(forecaster):
-    internal_model = forecaster._regressor
-else:
-    internal_model = [v for k, v in vars(forecaster).items() if 'Regressor' in type(v).__name__][0]
-
-# Menggunakan data bersih dan sampling untuk PDP
-X_train_float = X_train_clean.astype('float64')
-sample_size = min(1000, len(X_train_float))
-X_sample_pdp = X_train_float.sample(n=sample_size, random_state=42)
-
-# Fitur yang dianalisis
-top_features = ['lag_1', 'lag_7', 'hour', 'dayofweek']
-
-# Membuat grafik PDP 2x2
-fig, axes = plt.subplots(2, 2, figsize=(13, 8))
-axes_flat = axes.ravel()
-
-for i, feature in enumerate(top_features):
-    PartialDependenceDisplay.from_estimator(
-        estimator=internal_model,
-        X=X_sample_pdp,
-        features=[feature],
-        feature_names=X_sample_pdp.columns.tolist(),
-        ax=axes_flat[i],
-        grid_resolution=50
-    )
-
-    # Menghapus legenda kosong
-    if axes_flat[i].legend_:
-        axes_flat[i].legend_.set_visible(False)
-
-# Judul utama grafik
-fig.suptitle(
-    'Partial Dependence Plot (PDP)\nHubungan fitur terhadap prediksi konsumsi listrik',
-    fontsize=13,
-    fontweight='bold',
-    y=0.98
-)
-
-# Styling grafik
-for ax in axes_flat:
-    ax.set_ylabel('Prediksi Demand (MW)')
-    ax.grid(True, alpha=0.3)
-
-plt.tight_layout()
-plt.show()
-------------------
-
-
-[31m---------------------------------------------------------------------------[39m
-[31mNameError[39m                                 Traceback (most recent call last)
-[36mCell[39m[36m [39m[32mIn[20][39m[32m, line 13[39m
-[32m     10[39m     internal_model = [v [38;5;28;01mfor[39;00m k, v [38;5;129;01min[39;00m [38;5;28mvars[39m(forecaster).items() [38;5;28;01mif[39;00m [33m'[39m[33mRegressor[39m[33m'[39m [38;5;129;01min[39;00m [38;5;28mtype[39m(v).[34m__name__[39m][[32m0[39m]
-[32m     12[39m [38;5;66;03m# Menggunakan data bersih dan sampling untuk PDP[39;00m
-[32m---> [39m[32m13[39m X_train_float = [43mX_train_clean[49m.astype([33m'[39m[33mfloat64[39m[33m'[39m)
-[32m     14[39m sample_size = [38;5;28mmin[39m([32m1000[39m, [38;5;28mlen[39m(X_train_float))
-[32m     15[39m X_sample_pdp = X_train_float.sample(n=sample_size, random_state=[32m42[39m)
-
-[31mNameError[39m: name 'X_train_clean' is not defined
+data.head(10)
+-------------------
 
