@@ -399,7 +399,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-distributions">b. Distributions</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-tree">c. Tree</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-tree-viewer">d. Tree Viewer</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#e-widget-confusion-matrix">e. Widget Confusion Matrix</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#e-confusion-matrix">e. Confusion Matrix</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-test-and-score">f. Test and Score</a></li>
 </ul>
 </li>
@@ -484,8 +484,8 @@ Pengaturan ini digunakan untuk menghasilkan aturan logika klasifikasi berbentuk 
 <p>Tree View digunakan untuk menampilkan proses pengambilan keputusan model Decision Tree dalam bentuk pohon. Setiap node berisi aturan pembagian data berdasarkan suatu atribut, sedangkan cabang menunjukkan hasil dari aturan tersebut. Node yang berwarna merupakan hasil akhir (leaf) yang menunjukkan kelas Grade yang diprediksi oleh model. Setiap warna mewakili kelas Grade yang berbeda, sehingga memudahkan dalam membedakan hasil prediksi. Semakin pekat warna pada node, semakin tinggi tingkat dominasi atau keyakinan model terhadap kelas tersebut. Dengan adanya visualisasi ini, proses klasifikasi dapat dipahami dengan lebih mudah karena terlihat bagaimana model membentuk aturan hingga menghasilkan prediksi performa mahasiswa berdasarkan pola perilaku dan faktor sosio-ekonomi.</p>
 <p><img alt="alt text" src="_images/treeview.png" /></p>
 </section>
-<section id="e-widget-confusion-matrix">
-<h3>e. Widget Confusion Matrix<a class="headerlink" href="#e-widget-confusion-matrix" title="Link to this heading">#</a></h3>
+<section id="e-confusion-matrix">
+<h3>e. Confusion Matrix<a class="headerlink" href="#e-confusion-matrix" title="Link to this heading">#</a></h3>
 <p>Berdasarkan Confusion Matrix, baris menunjukkan kelas sebenarnya (Actual), sedangkan kolom menunjukkan hasil prediksi model (Predicted). Nilai yang berada pada garis diagonal dengan warna biru menunjukkan prediksi yang benar, sedangkan nilai di luar diagonal dengan warna merah menunjukkan prediksi yang salah. Semakin pekat warna pada suatu kotak, semakin banyak jumlah data pada kotak tersebut. Pada gambar terlihat bahwa masih banyak kotak berwarna merah dibandingkan biru, sehingga menunjukkan bahwa model Decision Tree masih sering melakukan kesalahan dalam mengklasifikasikan data. Hal ini sejalan dengan nilai akurasi (CA) yang hanya mencapai 0.228%, sehingga kemampuan model dalam memprediksi kelas masih tergolong rendah.</p>
 <p><img alt="alt text" src="_images/confusion1.png" /></p>
 </section>
@@ -752,7 +752,7 @@ Pengaturan ini digunakan untuk menghasilkan aturan logika klasifikasi berbentuk 
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-distributions">b. Distributions</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-tree">c. Tree</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-tree-viewer">d. Tree Viewer</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#e-widget-confusion-matrix">e. Widget Confusion Matrix</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#e-confusion-matrix">e. Confusion Matrix</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-test-and-score">f. Test and Score</a></li>
 </ul>
 </li>
