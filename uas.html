@@ -394,19 +394,16 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alur-metode">1. Alur Metode</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-file">a. File</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-distributions">b. Distributions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-tree">c. Tree</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-tree-viewer">d. Tree Viewer</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#e-confusion-matrix">e. Confusion Matrix</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-test-and-score">f. Test and Score</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struktur-dataset-asli-data-understanding">2. Struktur Dataset Asli &amp; Data Understanding</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-kolom-identitas-pendukung">a. Kolom Identitas &amp; Pendukung</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-fitur-perilaku-mahasiswa-kolom-130">b. Fitur Perilaku Mahasiswa (Kolom 1–30)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-distribusi-kelas-variabel-target-grade">c. Distribusi Kelas Variabel Target (GRADE)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alur-metode"><strong>1. Alur Metode</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-file"><strong>a. File</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-data-sampler"><strong>b. Data Sampler</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-distributions"><strong>c. Distributions</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-confusion-matrix"><strong>d. Confusion Matrix</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#e-test-and-score"><strong>e. Test and Score</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-tree"><strong>f. Tree</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#g-tree-viewer"><strong>g. Tree Viewer</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#h-save-model"><strong>h. Save Model</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-data-table"><strong>i. Data Table</strong></a></li>
 </ul>
 </li>
 </ul>
@@ -435,224 +432,28 @@ document.write(`
 <tr class="row-even"><td><p>Nama Dataset</p></td>
 <td><p>Higher Education Students Performance Evaluation</p></td>
 </tr>
-<tr class="row-odd"><td><p>Jumlah Sampel (Instances)</p></td>
-<td><p>145</p></td>
-</tr>
-<tr class="row-even"><td><p>Jumlah Fitur (Features)</p></td>
+<tr class="row-odd"><td><p>Jumlah Fitur (Features)</p></td>
 <td><p>31</p></td>
 </tr>
-<tr class="row-odd"><td><p>Nilai Kosong (Missing Values)</p></td>
+<tr class="row-even"><td><p>Jumlah Performa</p></td>
+<td><p>8 class ( 0 - 7 )</p></td>
+</tr>
+<tr class="row-odd"><td><p>Jumlah Data Keseluruhan</p></td>
+<td><p>145 Data</p></td>
+</tr>
+<tr class="row-even"><td><p>Data Training 80 %</p></td>
+<td><p>116 Data</p></td>
+</tr>
+<tr class="row-odd"><td><p>Data Testing 20 %</p></td>
+<td><p>29 Data</p></td>
+</tr>
+<tr class="row-even"><td><p>Nilai Kosong (Missing Values)</p></td>
 <td><p>Tidak ada</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<section id="alur-metode">
-<h2>1. Alur Metode<a class="headerlink" href="#alur-metode" title="Link to this heading">#</a></h2>
-<p>Dalam lembar kerja Orange, dibangun sebuah arsitektur alur kerja (<em>workflow</em>) data mining yang terdiri dari beberapa komponen sebagai berikut :</p>
-<p><img alt="alt text" src="_images/workflow1.png" /></p>
-<section id="a-file">
-<h3>a. File<a class="headerlink" href="#a-file" title="Link to this heading">#</a></h3>
-<p>Proses utama untuk memuat dataset mentah <code class="docutils literal notranslate"><span class="pre">data.csv</span></code>. Pada widget ini dilakukan pengaturan krusial:</p>
-<ul class="simple">
-<li><p>Stundent ID &amp; Course ID sebagai <em>meta</em></p></li>
-<li><p>Kolom 1–30 sebagai <em>features</em></p></li>
-<li><p>Mengubah variabel  <strong>GRADE</strong> menjadi target dan tipenya <em>categorical</em></p></li>
-</ul>
-<p><img alt="alt text" src="_images/file.png" /></p>
-</section>
-<section id="b-distributions">
-<h3>b. Distributions<a class="headerlink" href="#b-distributions" title="Link to this heading">#</a></h3>
-<p>Alat visualisasi untuk melihat grafik batang sebaran frekuensi data mahasiswa pada masing-masing tingkatan nilai <strong>GRADE</strong>.</p>
-<p>Berdasarkan grafik distribusi, jumlah data pada setiap kategori GRADE tidak tersebar secara merata. Kelas Grade 1 memiliki frekuensi tertinggi, yaitu sebanyak 35 mahasiswa, sedangkan Grade 0 merupakan kelas dengan jumlah data paling sedikit, yaitu 8 mahasiswa. Perbedaan jumlah data antar kelas ini menunjukkan adanya ketidakseimbangan kelas (class imbalance) yang perlu diperhatikan karena dapat memengaruhi proses pembentukan dan evaluasi model klasifikasi.</p>
-<p><img alt="alt text" src="_images/distributions.png" /></p>
-</section>
-<section id="c-tree">
-<h3>c. Tree<a class="headerlink" href="#c-tree" title="Link to this heading">#</a></h3>
-<p>Berfungsi sebagai algoritma pengklasifikasi tunggal dalam eksperimen ini yang melatih data kuesioner untuk membentuk aturan keputusan (If-Then) berdasarkan pemotongan cabang pohon keputusan otomatis.</p>
-<p>Algoritma pelatih berbasis pohon keputusan. Parameter internalnya diatur secara ketat:</p>
-<ul class="simple">
-<li><p>Bangun pohon biner</p></li>
-<li><p>Jumlah minimum data pada setiap simpul daun adalah 2.</p></li>
-<li><p>Subset yang memiliki kurang dari 5 data tidak akan dibagi lagi.
-Pengaturan ini digunakan untuk menghasilkan aturan logika klasifikasi berbentuk cabang <em>If-Then</em>.</p></li>
-</ul>
-<p><img alt="alt text" src="_images/tree.png" /></p>
-</section>
-<section id="d-tree-viewer">
-<h3>d. Tree Viewer<a class="headerlink" href="#d-tree-viewer" title="Link to this heading">#</a></h3>
-<p>Tree View digunakan untuk menampilkan proses pengambilan keputusan model Decision Tree dalam bentuk pohon. Setiap node berisi aturan pembagian data berdasarkan suatu atribut, sedangkan cabang menunjukkan hasil dari aturan tersebut. Node yang berwarna merupakan hasil akhir (leaf) yang menunjukkan kelas Grade yang diprediksi oleh model. Setiap warna mewakili kelas Grade yang berbeda, sehingga memudahkan dalam membedakan hasil prediksi. Semakin pekat warna pada node, semakin tinggi tingkat dominasi atau keyakinan model terhadap kelas tersebut. Dengan adanya visualisasi ini, proses klasifikasi dapat dipahami dengan lebih mudah karena terlihat bagaimana model membentuk aturan hingga menghasilkan prediksi performa mahasiswa berdasarkan pola perilaku dan faktor sosio-ekonomi.</p>
-<p><img alt="alt text" src="_images/treeview.png" /></p>
-</section>
-<section id="e-confusion-matrix">
-<h3>e. Confusion Matrix<a class="headerlink" href="#e-confusion-matrix" title="Link to this heading">#</a></h3>
-<p>Berdasarkan Confusion Matrix, baris menunjukkan kelas sebenarnya (Actual), sedangkan kolom menunjukkan hasil prediksi model (Predicted). Nilai yang berada pada garis diagonal dengan warna biru menunjukkan prediksi yang benar, sedangkan nilai di luar diagonal dengan warna merah menunjukkan prediksi yang salah. Semakin pekat warna pada suatu kotak, semakin banyak jumlah data pada kotak tersebut. Pada gambar terlihat bahwa masih banyak kotak berwarna merah dibandingkan biru, sehingga menunjukkan bahwa model Decision Tree masih sering melakukan kesalahan dalam mengklasifikasikan data. Hal ini sejalan dengan nilai akurasi (CA) yang hanya mencapai 0.228%, sehingga kemampuan model dalam memprediksi kelas masih tergolong rendah.</p>
-<p><img alt="alt text" src="_images/confusion1.png" /></p>
-</section>
-<section id="f-test-and-score">
-<h3>f. Test and Score<a class="headerlink" href="#f-test-and-score" title="Link to this heading">#</a></h3>
-<p>Berdasarkan hasil pengujian, model Decision Tree memperoleh nilai Classification Accuracy (CA) sebesar 0.228 Artinya, model hanya mampu memprediksi dengan benar sekitar 22,8% dari seluruh data yang diuji. Nilai ini menunjukkan bahwa tingkat ketepatan model masih rendah, sehingga hasil prediksi yang diberikan belum cukup baik.</p>
-<p><img alt="alt text" src="_images/T%26S.png" /></p>
-</section>
-</section>
-<section id="struktur-dataset-asli-data-understanding">
-<h2>2. Struktur Dataset Asli &amp; Data Understanding<a class="headerlink" href="#struktur-dataset-asli-data-understanding" title="Link to this heading">#</a></h2>
-<p>Dataset asli memiliki total <strong>33 kolom</strong> dengan <strong>145 data sampel</strong> (baris). Berikut detail isi setiap kolom berdasarkan kamus data riset akademis (<em>Student Performance Dataset</em>).</p>
-<section id="a-kolom-identitas-pendukung">
-<h3>a. Kolom Identitas &amp; Pendukung<a class="headerlink" href="#a-kolom-identitas-pendukung" title="Link to this heading">#</a></h3>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Kolom</p></th>
-<th class="head"><p>Keterangan</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><strong>STUDENT ID</strong> (Meta)</p></td>
-<td><p>Identitas anonim mahasiswa (STUDENT1, STUDENT2, dst.). Hanya sebagai label pengenal, tidak masuk perhitungan matematika model.</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>COURSE ID</strong> (Feature)</p></td>
-<td><p>Kode angka pengelompokan mata kuliah yang sedang diambil mahasiswa.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<section id="b-fitur-perilaku-mahasiswa-kolom-130">
-<h3>b. Fitur Perilaku Mahasiswa (Kolom 1–30)<a class="headerlink" href="#b-fitur-perilaku-mahasiswa-kolom-130" title="Link to this heading">#</a></h3>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>No.</p></th>
-<th class="head"><p>Nama Kolom</p></th>
-<th class="head"><p>Keterangan</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>1</p></td>
-<td><p>Umur</p></td>
-<td><p>1 = 18–22 tahun, 2 = 23–26 tahun, 3 = &gt;26 tahun</p></td>
-</tr>
-<tr class="row-odd"><td><p>2</p></td>
-<td><p>Jenis Kelamin</p></td>
-<td><p>1 = Perempuan, 2 = Laki-laki</p></td>
-</tr>
-<tr class="row-even"><td><p>3</p></td>
-<td><p>Asal Sekolah Menengah</p></td>
-<td><p>1 = Swasta, 2 = Negeri, 3 = Lainnya</p></td>
-</tr>
-<tr class="row-odd"><td><p>4</p></td>
-<td><p>Jenis Beasiswa</p></td>
-<td><p>1 = Tidak ada, 2 = 25%, 3 = 50%, 4 = 75%, 5 = Full (100%)</p></td>
-</tr>
-<tr class="row-even"><td><p>5</p></td>
-<td><p>Status Kerja Sampingan</p></td>
-<td><p>1 = Ya (Kuliah sambil kerja), 2 = Tidak</p></td>
-</tr>
-<tr class="row-odd"><td><p>6</p></td>
-<td><p>Kegiatan Seni/Olahraga Rutin</p></td>
-<td><p>1 = Ya, 2 = Tidak</p></td>
-</tr>
-<tr class="row-even"><td><p>7</p></td>
-<td><p>Status Pernikahan Mahasiswa</p></td>
-<td><p>1 = Menikah, 2 = Belum Menikah</p></td>
-</tr>
-<tr class="row-odd"><td><p>8</p></td>
-<td><p>Total Pendapatan Orang Tua per Bulan</p></td>
-<td><p>1 = Rendah, 2 = Menengah, 3 = Tinggi</p></td>
-</tr>
-<tr class="row-even"><td><p>9</p></td>
-<td><p>Tingkat Pendidikan Ayah</p></td>
-<td><p>1 = SD, 2 = SMP, 3 = SMA, 4 = S1, 5 = Pascasarjana (S2/S3)</p></td>
-</tr>
-<tr class="row-odd"><td><p>10</p></td>
-<td><p>Tingkat Pendidikan Ibu</p></td>
-<td><p>1 = SD, 2 = SMP, 3 = SMA, 4 = S1, 5 = Pascasarjana (S2/S3)</p></td>
-</tr>
-<tr class="row-even"><td><p>11</p></td>
-<td><p>Jumlah Saudara Kandung</p></td>
-<td><p>Angka jumlah anak dalam keluarga (1, 2, 3, 4, dst.)</p></td>
-</tr>
-<tr class="row-odd"><td><p>12</p></td>
-<td><p>Status Pernikahan Orang Tua</p></td>
-<td><p>1 = Menikah/Bersama, 2 = Cerai/Berpisah</p></td>
-</tr>
-<tr class="row-even"><td><p>13</p></td>
-<td><p>Sektor Pekerjaan Orang Tua</p></td>
-<td><p>Pengelompokan jenis pekerjaan orang tua (skala kode 1–5)</p></td>
-</tr>
-<tr class="row-odd"><td><p>14</p></td>
-<td><p>Jenis Tempat Tinggal</p></td>
-<td><p>1 = Asrama Kampus, 2 = Rumah Sendiri, 3 = Kos/Kontrakan, 4 = Lainnya</p></td>
-</tr>
-<tr class="row-even"><td><p>15</p></td>
-<td><p>Alasan Memilih Jurusan Kuliah</p></td>
-<td><p>1 = Minat Sendiri, 2 = Keinginan Orang Tua, 3 = Prospek Kerja, 4 = Lainnya</p></td>
-</tr>
-<tr class="row-odd"><td><p>16</p></td>
-<td><p>Waktu Belajar Mandiri per Minggu</p></td>
-<td><p>1 = &lt;5 jam, 2 = 6–10 jam, 3 = 11–20 jam, 4 = &gt;20 jam</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>17</strong></p></td>
-<td><p><strong>Frekuensi Membaca Buku/Artikel Non-Kuliah</strong></p></td>
-<td><p>1 = Jarang/Tidak Pernah, 2 = Kadang-kadang, 3 = Sering —  <em>(Root Node pada Tree)</em></p></td>
-</tr>
-<tr class="row-odd"><td><p>18</p></td>
-<td><p>Frekuensi Membaca Buku/Materi Kuliah Wajib</p></td>
-<td><p>1 = Jarang, 2 = Kadang-kadang, 3 = Sering</p></td>
-</tr>
-<tr class="row-even"><td><p>19</p></td>
-<td><p>Kehadiran di Seminar/Disiplin Ilmu Tambahan</p></td>
-<td><p>1 = Ya, 2 = Tidak</p></td>
-</tr>
-<tr class="row-odd"><td><p>20</p></td>
-<td><p>Dampak Tugas Kelompok pada Pemahaman Kuliah</p></td>
-<td><p>1 = Positif, 2 = Negatif, 3 = Biasa saja</p></td>
-</tr>
-<tr class="row-even"><td><p>21</p></td>
-<td><p>Tingkat Kehadiran di Kelas</p></td>
-<td><p>1 = Selalu Hadir (&gt;90%), 2 = Kadang Absen (70–90%), 3 = Sering Bolos (&lt;70%)</p></td>
-</tr>
-<tr class="row-odd"><td><p>22</p></td>
-<td><p>Metode Persiapan Sebelum Ujian 1</p></td>
-<td><p>1 = Belajar mencicil jauh hari, 2 = Sistem Kebut Semalam (SKS)</p></td>
-</tr>
-<tr class="row-even"><td><p>23</p></td>
-<td><p>Metode Persiapan Sebelum Ujian 2</p></td>
-<td><p>1 = Belajar teratur tiap hari, 2 = Hanya belajar jika besok ada ujian</p></td>
-</tr>
-<tr class="row-odd"><td><p>24</p></td>
-<td><p>Keaktifan Mendengarkan Penjelasan Dosen</p></td>
-<td><p>1 = Sangat Memperhatikan, 2 = Kadang Kurang Fokus/Main HP</p></td>
-</tr>
-<tr class="row-even"><td><p>25</p></td>
-<td><p>Kebiasaan Mencatat Materi Kuliah</p></td>
-<td><p>1 = Selalu Mencatat, 2 = Kadang-kadang, 3 = Tidak Pernah</p></td>
-</tr>
-<tr class="row-odd"><td><p>26</p></td>
-<td><p>Keaktifan Berdiskusi / Bertanya di Kelas</p></td>
-<td><p>1 = Sering Berpartisipasi Aktif, 2 = Pasif/Pendengar Saja</p></td>
-</tr>
-<tr class="row-even"><td><p>27</p></td>
-<td><p>Kondisi Kesehatan Fisik Saat Kuliah</p></td>
-<td><p>1 = Baik/Sangat Baik, 2 = Kurang Baik</p></td>
-</tr>
-<tr class="row-odd"><td><p>28</p></td>
-<td><p>Target IPK Semester Ini</p></td>
-<td><p>Skala target pencapaian akademik pribadi (1–5)</p></td>
-</tr>
-<tr class="row-even"><td><p>29</p></td>
-<td><p>Rata-rata IPK di Semester Lalu</p></td>
-<td><p>Rentang nilai indeks prestasi kumulatif sebelumnya</p></td>
-</tr>
-<tr class="row-odd"><td><p>30</p></td>
-<td><p>Status Hubungan Asmara</p></td>
-<td><p>1 = Memiliki Pacar/Pasangan, 2 = Lajang/Single</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<section id="c-distribusi-kelas-variabel-target-grade">
-<h3>c. Distribusi Kelas Variabel Target (GRADE)<a class="headerlink" href="#c-distribusi-kelas-variabel-target-grade" title="Link to this heading">#</a></h3>
+<p><strong>Distribusi Kelas Variabel Target (GRADE)</strong></p>
 <p>Berdasarkan visualisasi grafik batang pada widget <strong>Distributions</strong>, sebaran data asli adalah sebagai berikut:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -688,6 +489,89 @@ Pengaturan ini digunakan untuk menghasilkan aturan logika klasifikasi berbentuk 
 </tbody>
 </table>
 </div>
+<section id="alur-metode">
+<h2><strong>1. Alur Metode</strong><a class="headerlink" href="#alur-metode" title="Link to this heading">#</a></h2>
+<p>Dalam lembar kerja Orange, dibangun sebuah arsitektur alur kerja (<em>workflow</em>) data mining yang terdiri dari beberapa komponen sebagai berikut :</p>
+<p><img alt="alt text" src="_images/workflow1.png" /></p>
+<p>Gambar di atas menunjukkan alur kerja klasifikasi menggunakan algoritma <strong>Decision Tree</strong> pada Orange. Proses dimulai dari <strong>File</strong> untuk memuat dataset, kemudian <strong>Data Sampler</strong> membagi data menjadi <strong>80% data training</strong> dan <strong>20% data training</strong>. Data training digunakan untuk membangun model pada widget <strong>Tree</strong>, sedangkan proses evaluasi dilakukan melalui <strong>Test and Score</strong> menggunakan data training dan data testing. Hasil evaluasi ditampilkan pada <strong>Confusion Matrix</strong>, struktur pohon keputusan divisualisasikan melalui <strong>Tree Viewer</strong>, model disimpan menggunakan <strong>Save Model</strong>, sedangkan <strong>Data Table</strong> dan <strong>Distributions</strong> digunakan untuk melihat isi serta distribusi data.</p>
+<section id="a-file">
+<h3><strong>a. File</strong><a class="headerlink" href="#a-file" title="Link to this heading">#</a></h3>
+<p>Proses utama untuk memuat dataset mentah <em>data.csv</em>.</p>
+<p>berfungsi untuk mengimpor atau memuat dataset ke dalam Orange sebagai sumber data utama. Dataset yang dipilih dapat berasal dari berbagai format file, seperti CSV, Excel. Setelah data berhasil dimuat, widget ini akan meneruskan dataset ke widget berikutnya untuk dilakukan proses analisis, pelatihan model, maupun evaluasi.</p>
+<p><img alt="alt text" src="_images/file.png" /></p>
+</section>
+<section id="b-data-sampler">
+<h3><strong>b. Data Sampler</strong><a class="headerlink" href="#b-data-sampler" title="Link to this heading">#</a></h3>
+<p>berfungsi untuk membagi dataset menjadi (<em>training data</em>) dan (<em>testing data</em>). Pada penelitian ini digunakan metode <strong>Fixed Proportion of Data</strong> dengan proporsi <strong>80% data training</strong> dan <strong>20% data testing</strong>. Pembagian dilakukan secara <strong>deterministik (Replicable)</strong> sehingga hasil pembagian data akan tetap sama setiap kali proses dijalankan.</p>
+<p><img alt="alt text" src="_images/datasampler.png" /></p>
+<p>Dataset yang berjumlah <em>145 data</em> dibagi menjadi <em>116 data training (80%)</em> dan <em>29 data testing (20%)</em> menggunakan widget <em>Data Sampler</em>. Data traiming digunakan untuk proses pelatihan model, sedangkan data testing digunakan untuk pengujian dan evaluasi model.</p>
+</section>
+<section id="c-distributions">
+<h3><strong>c. Distributions</strong><a class="headerlink" href="#c-distributions" title="Link to this heading">#</a></h3>
+<p>digunakan untuk menampilkan distribusi atau frekuensi data pada setiap atribut dalam dataset. Visualisasi ini membantu mengetahui jumlah data pada masing-masing kategori sehingga karakteristik data dapat dipahami sebelum dilakukan proses klasifikasi.</p>
+<p><img alt="alt text" src="_images/distributions.png" /></p>
+<p>Berdasarkan hasil distribusi atribut <em>GRADE</em>, terlihat bahwa jumlah data pada setiap kategori tidak sama. Kategori <em>GRADE 1</em> memiliki jumlah data terbanyak, sedangkan <em>GRADE 0</em> memiliki jumlah data paling sedikit. Informasi ini memberikan gambaran mengenai sebaran data yang akan digunakan dalam proses pelatihan dan pengujian model Decision Tree.</p>
+</section>
+<section id="d-confusion-matrix">
+<h3><strong>d. Confusion Matrix</strong><a class="headerlink" href="#d-confusion-matrix" title="Link to this heading">#</a></h3>
+<p>Digunakan untuk menampilkan hasil evaluasi model klasifikasi dalam bentuk matriks perbandingan antara kelas aktual dan kelas hasil prediksi. Matriks ini memudahkan analisis terhadap jumlah prediksi yang benar maupun salah pada setiap kelas sehingga performa model Decision Tree dapat diketahui.</p>
+<p><strong>Data training 80% :</strong></p>
+<p><img alt="alt text" src="_images/confusiontraining.png" /></p>
+<p>Confusion Matrix pada <em>116 data training</em> menunjukkan hasil prediksi model terhadap data yang digunakan selama proses pelatihan. Sebagian besar data berhasil diklasifikasikan dengan benar yang ditunjukkan oleh nilai pada diagonal utama, sedangkan nilai di luar diagonal menunjukkan kesalahan klasifikasi.</p>
+<p><strong>Data testing 20% :</strong></p>
+<p><img alt="alt text" src="_images/confusiontesting.png" /></p>
+<p>Confusion Matrix pada <em>29 data testing</em> menunjukkan hasil evaluasi model terhadap data yang belum pernah digunakan dalam proses pelatihan. Nilai pada diagonal utama menunjukkan prediksi yang benar, sedangkan nilai di luar diagonal menunjukkan kesalahan klasifikasi. Hasil ini digunakan sebagai acuan utama dalam menilai performa model Decision Tree.</p>
+</section>
+<section id="e-test-and-score">
+<h3><strong>e. Test and Score</strong><a class="headerlink" href="#e-test-and-score" title="Link to this heading">#</a></h3>
+<p>Digunakan untuk mengevaluasi performa model Decision Tree berdasarkan beberapa metrik, yaitu AUC (Area Under Curve), CA (Classification Accuracy), F1-Score, Precision, Recall, dan MCC (Matthews Correlation Coefficient). Pada penelitian ini, evaluasi dilakukan pada data training dan data testing untuk membandingkan kemampuan model dalam melakukan klasifikasi.</p>
+<p><strong>Data Training 116 Data :</strong></p>
+<p><img alt="alt text" src="_images/t%26straining.png" /></p>
+<p>Hasil evaluasi pada 116 data training menunjukkan bahwa model Decision Tree memperoleh nilai <em>AUC sebesar 0,982</em>, <em>Accuracy (CA) sebesar 0,793</em>, <em>F1-Score sebesar 0,794</em>, <em>Precision sebesar 0,817</em>, <em>Recall sebesar 0,793</em>, dan <em>MCC sebesar 0,760</em>. Nilai tersebut menunjukkan bahwa model memiliki performa yang baik pada data latih.</p>
+<p><strong>Data Testing 29 Data :</strong></p>
+<p><img alt="alt text" src="_images/t%26stesting.png" /></p>
+<p>Hasil evaluasi pada 29 testing menunjukkan bahwa model Decision Tree memperoleh nilai <em>AUC sebesar 0,521</em>, <em>Accuracy (CA) sebesar 0,172</em>, <em>F1-Score sebesar 0,179</em>, <em>Precision sebesar 0,198</em>, <em>Recall sebesar 0,172</em>, dan <em>MCC sebesar 0,022</em>. Nilai tersebut menunjukkan bahwa performa model pada data uji masih rendah sehingga kemampuan model dalam menggeneralisasi data baru belum optimal.</p>
+<p>Berikut merupakan hasil evaluasi akurasi (<em>Classification Accuracy/CA</em>) model <strong>Decision Tree</strong> pada data training dan data testing :</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Data</p></th>
+<th class="head"><p>Akurasi (CA)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Training (116)</p></td>
+<td><p>0.793 (79,3%)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Testing (29)</p></td>
+<td><p>0.172 (17,2%)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="f-tree">
+<h3><strong>f. Tree</strong><a class="headerlink" href="#f-tree" title="Link to this heading">#</a></h3>
+<p>Berfungsi untuk membangun model klasifikasi menggunakan algoritma <em>Decision Tree</em> berdasarkan data latih (<em>training data</em>). Pada penelitian ini, model dibangun dengan parameter <em>binary tree</em>, <strong>minimum 2 data pada setiap leaf</strong>, <strong>minimum 5 data untuk dilakukan pemisahan</strong>, <strong>kedalaman maksimum pohon 100</strong>, serta <strong>berhenti ketika mayoritas kelas mencapai 95%</strong>.</p>
+<p><img alt="alt text" src="_images/tre.png" /></p>
+<p>Pengaturan parameter pada widget <em>Tree</em> yang digunakan untuk membangun model Decision Tree. Parameter tersebut mengatur proses pembentukan pohon keputusan agar menghasilkan model klasifikasi yang sesuai dengan data training.</p>
+</section>
+<section id="g-tree-viewer">
+<h3><strong>g. Tree Viewer</strong><a class="headerlink" href="#g-tree-viewer" title="Link to this heading">#</a></h3>
+<p>Digunakan untuk menampilkan struktur pohon keputusan (<em>Decision Tree</em>) yang dihasilkan dari proses pelatihan model. Visualisasi ini memperlihatkan aturan-aturan klasifikasi berdasarkan atribut yang digunakan hingga menghasilkan keputusan pada setiap kelas.</p>
+<p><img alt="alt text" src="_images/pohonkeputusan.png" /></p>
+<p>Gambar struktur pohon keputusan (<em>Decision Tree</em>) yang terbentuk dari <em>116 data training</em>. Setiap simpul node merepresentasikan atribut yang digunakan sebagai dasar pemisahan data, sedangkan setiap cabang menunjukkan aturan keputusan hingga menghasilkan kelas prediksi pada simpul akhir <em>leaf node</em>.</p>
+</section>
+<section id="h-save-model">
+<h3><strong>h. Save Model</strong><a class="headerlink" href="#h-save-model" title="Link to this heading">#</a></h3>
+<p>Berfungsi untuk menyimpan model <em>Decision Tree</em> yang telah selesai dilatih. Model yang disimpan dapat digunakan kembali untuk proses prediksi atau pengujian tanpa perlu melakukan pelatihan ulang.</p>
+<p><img alt="alt text" src="_images/savemodel.png" /></p>
+<p>Proses penyimpanan model <em>Decision Tree</em> menggunakan widget <em>Save Model</em>. Model yang telah dilatih disimpan sehingga dapat digunakan kembali pada analisis atau pengujian selanjutnya.</p>
+</section>
+<section id="i-data-table">
+<h3><strong>i. Data Table</strong><a class="headerlink" href="#i-data-table" title="Link to this heading">#</a></h3>
+<p>Berfungsi untuk menampilkan data dalam bentuk tabel sehingga pengguna dapat melihat isi dataset secara langsung. Pada penelitian ini, <em>Data Table</em> menampilkan <em>116 data training</em> hasil pembagian menggunakan <em>Data Sampler</em> yang akan digunakan dalam proses pelatihan model Decision Tree.</p>
+<p><img alt="alt text" src="_images/datatable.png" /></p>
+<p>tampilan <strong>Data Table</strong> yang berisi <strong>116 data training</strong>. Data ditampilkan dalam bentuk tabel beserta atribut-atributnya sehingga memudahkan proses pemeriksaan dan verifikasi data sebelum dilakukan pelatihan model.</p>
 </section>
 </section>
 </section>
@@ -747,19 +631,16 @@ Pengaturan ini digunakan untuk menghasilkan aturan logika klasifikasi berbentuk 
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alur-metode">1. Alur Metode</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-file">a. File</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-distributions">b. Distributions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-tree">c. Tree</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-tree-viewer">d. Tree Viewer</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#e-confusion-matrix">e. Confusion Matrix</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-test-and-score">f. Test and Score</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struktur-dataset-asli-data-understanding">2. Struktur Dataset Asli &amp; Data Understanding</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-kolom-identitas-pendukung">a. Kolom Identitas &amp; Pendukung</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-fitur-perilaku-mahasiswa-kolom-130">b. Fitur Perilaku Mahasiswa (Kolom 1–30)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-distribusi-kelas-variabel-target-grade">c. Distribusi Kelas Variabel Target (GRADE)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alur-metode"><strong>1. Alur Metode</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-file"><strong>a. File</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-data-sampler"><strong>b. Data Sampler</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-distributions"><strong>c. Distributions</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-confusion-matrix"><strong>d. Confusion Matrix</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#e-test-and-score"><strong>e. Test and Score</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-tree"><strong>f. Tree</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#g-tree-viewer"><strong>g. Tree Viewer</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#h-save-model"><strong>h. Save Model</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-data-table"><strong>i. Data Table</strong></a></li>
 </ul>
 </li>
 </ul>
